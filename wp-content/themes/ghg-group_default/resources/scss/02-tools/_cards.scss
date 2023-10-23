@@ -1,0 +1,31 @@
+@use "../01-settings/abstracts" as abstract;
+@use "../01-settings/measurements" as measurement;
+@use "../01-settings/colors" as color;
+@use "./articles" as article;
+@use "./breakpoints" as breakpoint;
+@use "./typography" as typography;
+@use "./positioning" as position;
+@use "./images-and-icons" as image;
+@use "./grid" as grid;
+
+@mixin card-animation {
+  transition: abstract.$global-transition;
+  &--dynamic {
+    opacity: 0;
+    transform: translate3d(0, 50%, 0);
+
+    &:hover {
+      transform: inherit;
+    }
+  }
+  &--animate {
+    opacity: 0;
+    transform: translate3d(0, 50%, 0);
+
+    &:hover {
+      transform: inherit;
+    }
+  }
+}
+
+

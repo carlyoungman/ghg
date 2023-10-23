@@ -1,0 +1,17 @@
+@use "../../01-settings/colors" as color;
+@use "../../02-tools/typography" as typography;
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/container" as container;
+
+p {
+	@include typography.base-settings;
+	@include spacing.paragraph-spacing;
+
+	a {
+		text-decoration: underline;
+
+		&:hover {
+			color: color.$c-pearl;
+		}
+	}
+}

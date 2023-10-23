@@ -1,0 +1,20 @@
+@use "../../01-settings/colors" as color;
+@use "../../01-settings/measurements" as measurement;
+
+
+embed,
+iframe,
+object {
+	max-width: 100%;
+}
+
+img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+figcaption {
+	margin: calc(#{measurement.$universal-space} / 2) 0 0 0;
+	color: color.$c-pearl;
+}

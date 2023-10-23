@@ -1,0 +1,65 @@
+.vh {
+	@include media-breakpoint-up(lg) {
+		&.vh--25 {
+			height: auto;
+			min-height: 25vh;
+		}
+		&.vh--33 {
+			height: auto;
+			min-height: 33vh;
+		}
+		&.vh--50 {
+			height: auto;
+			min-height: 50vh;
+		}
+		&.vh--75 {
+			height: auto;
+			min-height: 75vh;
+		}
+		&.vh--100 {
+			height: auto;
+			min-height: 100vh;
+		}
+	}
+	min-height: auto;
+}
+
+.container-fluid {
+	&.container--max {
+		max-width: $container-max-sm;
+	}
+	&.container--max-lg {
+		max-width: $container-max-lg;
+	}
+}
+
+.accent {
+	position: relative;
+	&:after {
+		position: absolute;
+		content: "";
+        width: 12.6rem;
+        height: 12.6rem;
+		@include media-breakpoint-up(md) {
+			width: 22rem;
+			height: 22rem;
+		}
+		clip-path: polygon(0 0, 100% 0, 100% 100%);
+		background: $colour-light;
+	}
+	&--top-right {
+		@extend .accent;
+		&:after {
+			top: -0.1rem;
+			right: -0.1rem;
+		}
+	}
+	&--bottom-left {
+		@extend .accent;
+		&:after {
+			bottom: -0.1rem;
+			left: -0.1rem;
+			transform: rotate(180deg);
+		}
+	}
+}

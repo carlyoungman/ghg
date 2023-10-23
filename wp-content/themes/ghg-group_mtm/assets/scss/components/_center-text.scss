@@ -1,0 +1,16 @@
+.center-text {
+    .content__wrap {
+        max-width: 70.6rem;
+    }
+    p {
+		margin-bottom: 0;
+	}
+	&:has(.btn) {
+		p {
+			margin-bottom: 2.225em
+		}
+	}
+    .section__inner {
+        margin-bottom: 2rem;
+    }
+}

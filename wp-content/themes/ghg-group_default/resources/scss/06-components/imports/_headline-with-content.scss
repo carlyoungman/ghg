@@ -1,0 +1,49 @@
+@use "../../01-settings/colors" as color;
+@use "../../01-settings/measurements" as measurement;
+@use "../../02-tools/container" as container;
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/articles" as article;
+@use "../../02-tools/breakpoints" as breakpoint;
+@use "../../02-tools/buttons" as button;
+@use "../../02-tools/typography" as typography;
+@use "../../02-tools/positioning" as position;
+@use "../../02-tools/grid" as grid;
+@use "../../02-tools/content" as content;
+
+
+.headline-with-content {
+	@include spacing.section-spacing;
+	@include content.display-settings;
+	color: color.$c-pearl;
+
+	&__inner {
+		@include container.standard-settings(true);
+	}
+
+	&__grid {
+		@include grid.standard-settings;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		@include breakpoint.large-screen-min {
+			grid-template-columns: 40% 1fr;
+		}
+
+
+		@include breakpoint.large-screen-min {
+			&:after {
+				content: "";
+				height: 100%;
+				width: 1px;
+				position: absolute;
+				background-color: color.$c-pearl;
+
+				left: 35%;
+
+			}
+		}
+	}
+	
+	&__headline {
+		max-width: 80%;
+		margin: 0;
+	}
+}

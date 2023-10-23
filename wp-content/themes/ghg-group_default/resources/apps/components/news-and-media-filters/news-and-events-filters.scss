@@ -1,0 +1,11 @@
+@use "./../../../../resources/scss/01-settings/abstracts" as abstract;
+@use "./../../../../resources/scss/01-settings/measurements" as measurement;
+@use "./../../../../resources/scss/01-settings/colors" as color;
+@use "./../../../../resources/scss/02-tools/spacing" as spacing;
+@use "./../../../../resources/scss/02-tools/container" as container;
+@use "./../../../../resources/scss/02-tools/filters" as filter;
+
+.news-and-events-filters {
+	@include filter.styling;
+	@include filter.has-headline;
+}

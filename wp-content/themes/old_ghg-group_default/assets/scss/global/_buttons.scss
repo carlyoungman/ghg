@@ -1,0 +1,22 @@
+.btn, button {
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    padding: 1.5rem 2rem;
+    text-decoration: none;
+    color: $colour-light;
+    background-color: $colour-dark;
+    &:hover {
+        color: $colour-accent;
+    }
+    &.btn--light {
+        background-color: $colour-accent;
+        color: $colour-dark;
+        &:hover {
+            color: $colour-accent;
+            background-color: $colour-dark;
+        }
+    }
+}

@@ -1,0 +1,6 @@
+@use "../../01-settings/typography" as typography;
+
+html {
+	font-size: typography.$font-reset;
+	scroll-behavior: smooth;
+}

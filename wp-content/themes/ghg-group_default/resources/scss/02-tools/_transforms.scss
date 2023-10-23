@@ -1,0 +1,15 @@
+@mixin rotate($deg) {
+	transform: rotate(#{$deg});
+}
+
+@mixin scale($scale) {
+	transform: scale($scale);
+}
+
+@mixin translate($x, $y) {
+	transform: translate($x, $y);
+}
+
+@mixin skew($x, $y) {
+	transform: skew(#{$x}deg, #{$y}deg);
+}

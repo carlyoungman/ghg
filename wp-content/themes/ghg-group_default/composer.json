@@ -1,0 +1,88 @@
+{
+	"name": "carlyoungman/ghg-group",
+	"type": "wordpress-theme",
+	"description": "Custom made theme for GHG-group",
+	"keywords": [
+		"WordPress",
+		"Themes"
+	],
+	"autoload": {
+		"psr-4": {
+			"BOILERPLATE_THEME\\": "./app"
+		}
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://wpackagist.org",
+			"only": [
+				"wpackagist-plugin/*",
+				"wpackagist-theme/*"
+			]
+		},
+		{
+			"type": "composer",
+			"url": "https://pivvenit.github.io/acf-composer-bridge/composer/v3/wordpress-plugin/"
+		}
+	],
+	"extra": {
+		"force-unix-separator": true,
+		"force-mu": {},
+		"installer-paths": {
+			"../../mu-plugins/{$name}/": [
+				"type:wordpress-muplugin"
+			],
+			"../../plugins/{$name}/": [
+				"type:wordpress-plugin"
+			],
+			"": [
+				"type:wordpress-theme"
+			]
+		}
+	},
+	"require": {
+		"php": ">=7.4",
+		"johnbillion/extended-cpts": "4.5.2",
+		"vlucas/phpdotenv": "5.*",
+		"stoutlogic/acf-builder": "1.11.1",
+		"advanced-custom-fields/advanced-custom-fields-pro": "*",
+		"wpackagist-plugin/duplicate-page": "*",
+		"wpackagist-plugin/post-types-order": "*",
+		"wpackagist-plugin/redirection": "*",
+		"wpackagist-plugin/regenerate-thumbnails": "*",
+		"wpackagist-plugin/svg-support": "*",
+		"wpackagist-plugin/query-monitor": "*",
+		"wpackagist-plugin/google-site-kit": "*",
+		"wpackagist-plugin/wordfence": "*"
+	},
+	"require-dev": {
+		"automattic/vipwpcs": "^2.2",
+		"roave/security-advisories": "dev-latest",
+		"squizlabs/php_codesniffer": "3.*",
+		"dealerdirect/phpcodesniffer-composer-installer": "*",
+		"phpcompatibility/phpcompatibility-wp": "*",
+		"wp-coding-standards/wpcs": "*",
+		"phpunit/phpunit": "^9",
+		"phpstan/phpstan": "^1.0",
+		"szepeviktor/phpstan-wordpress": "dev-master",
+		"phpstan/extension-installer": "^1.1",
+		"phpcompatibility/php-compatibility": "*"
+	},
+	"scripts": {
+		"lint": "./vendor/bin/phpcs --runtime-set testVersion 8.0- .",
+		"lint-fix": "./vendor/bin/phpcbf .",
+		"lint:phpcompat": "phpcs -ps --colors --report-width=80 --standard=phpcompat.xml .",
+		"make-pot": "wp i18n make-pot . ./languages/theme.pot",
+		"test:unit": "./vendor/bin/phpunit"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"phpstan/extension-installer": true,
+			"composer/installers": true,
+			"pivvenit/acf-pro-installer": true
+		}
+	}
+}

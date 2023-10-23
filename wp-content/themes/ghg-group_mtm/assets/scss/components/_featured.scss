@@ -1,0 +1,62 @@
+.featured {
+	position: relative;
+	+ section {
+		margin-top: 3.25rem;
+		@include media-breakpoint-up(md) {
+			margin-top: 6.5rem;
+		}
+	}
+	&.section--has-media {
+		@include media-breakpoint-down(md) {
+			padding-bottom: 0;
+		}
+	}
+}
+
+.featured__inner {
+	@media screen and (min-width: 2560px) {
+		position: relative;
+	}
+}
+
+.featured__media {
+	display: flex;
+	position: relative;
+	justify-content: flex-end;
+	max-width: 121rem;
+	@include media-breakpoint-up(md) {
+		position: absolute;
+		top: 0;
+		right: -1.5rem;
+		bottom: 0;
+	}
+	@include media-breakpoint-down(sm) {
+		padding-right: 0;
+		padding-left: 0;
+	}
+	@media screen and (min-width: 2560px) {
+		top: -6.5rem;
+		bottom: -6.5rem;
+		max-width: 100rem;
+	}
+	img,
+	video {
+		clip-path: polygon(0% 50%, 0% 100%, 100% 110%, 100% 0%); // 4 sides
+		@include media-breakpoint-up(md) {
+			clip-path: polygon(100% 0, 0% 100%, 100% 100%); // 3 sides
+		}
+		height: 100%;
+		object-fit: cover;
+	}
+}
+
+.featured__text {
+	padding-top: 6.5rem;
+	@include media-breakpoint-up(md) {
+		margin-bottom: 6.5rem;
+		padding-bottom: 6.5rem;
+	}
+	p {
+		max-width: 42.8rem;
+	}
+}

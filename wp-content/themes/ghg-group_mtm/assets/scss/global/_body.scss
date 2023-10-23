@@ -1,0 +1,104 @@
+html {
+	background-color: #eee;
+	scroll-behavior: smooth;
+	font-size: 62.5%;
+}
+
+body {
+	background: $colour-light;
+	font-weight: 300;
+	font-size: clamp(1.6rem, 4.2vw, 1.8rem);
+	line-height: 1.555;
+	font-family: $font-dm;
+	color: $colour-dark;
+	&.mobile--active {
+		overflow: hidden;
+	}
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	br {
+		display: none;
+	}
+}
+
+p {
+	margin-bottom: 2.225em;
+	line-height: 1.55;
+	@include media-breakpoint-down(sm) {
+		line-height: 1.625
+	}
+}
+
+main {
+	position: relative;
+	z-index: 5;
+	overflow: hidden;
+	background-color: $colour-light;
+	max-width: 288rem;
+	margin: 0 auto;
+}
+
+section {
+	padding: 3.25rem 1rem;
+	@include media-breakpoint-up(md) {
+		padding: 6.5rem 0;
+	}
+	&:not(.hero):first-of-type {
+		padding-top: 20rem;
+	}
+	&.section--media-full {
+		position: relative;
+		.section__background {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+	}
+	&.section--mid {
+		background-color: $colour-mid;
+		color: $colour-dark;
+	}
+	&.section--dark {
+		background-color: $colour-dark;
+		color: $colour-light;
+	}
+	&:first-child {
+		padding-top: 0;
+	}
+	&[data-anim] {
+	}
+	&[data-anim="true"] {
+	}
+	ul {
+		margin: 3rem 0;
+		line-height: 1;
+		list-style: disc;
+		padding-left: 2rem;
+		li {
+			margin-bottom: 2rem;
+		}
+	}
+}
+
+a {
+}
+
+img,
+video {
+	vertical-align: bottom;
+	width: 100%;
+}
+
+strong {
+	font-weight: bold;
+}
+
+::selection {
+	background-color: transparentize($colour-accent, 0.25);
+	color: $colour-light
+}

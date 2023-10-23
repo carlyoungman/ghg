@@ -1,0 +1,95 @@
+@use "../01-settings/measurements" as measurement;
+@use "./breakpoints" as breakpoint;
+
+@mixin block-spacing-margin() {
+	margin: measurement.$universal-space-3 0;
+	@include breakpoint.large-screen-min {
+		margin: measurement.$universal-space-7 0;
+	}
+}
+
+@mixin block-spacing-padding() {
+	padding: measurement.$universal-space-3 0;
+	@include breakpoint.large-screen-min {
+		padding: measurement.$universal-space-7 0;
+	}
+}
+
+@mixin block-overlay-spacing-padding() {
+	padding: measurement.$universal-space-2 measurement.$universal-space-2;
+	@include breakpoint.large-screen-min {
+		padding: measurement.$universal-space-7 measurement.$universal-space-7;
+	}
+}
+
+@mixin section-spacing() {
+	&:not(.has-background) {
+		@include block-spacing-margin;
+	}
+	&.has-background {
+		@include block-spacing-padding;
+	}
+}
+
+@mixin group-spacing() {
+	margin-top: measurement.$universal-space-2;
+	margin-bottom: measurement.$universal-space-2;
+	@include breakpoint.large-screen-min {
+		margin-top: measurement.$universal-space-3;
+		margin-bottom: measurement.$universal-space-3;
+	}
+}
+
+@mixin group-spacing-padding() {
+	padding-top: measurement.$universal-space-2;
+	padding-bottom: measurement.$universal-space-2;
+	@include breakpoint.large-screen-min {
+		padding-top: measurement.$universal-space-3;
+		padding-bottom: measurement.$universal-space-3;
+	}
+}
+
+
+@mixin spacing-bottom() {
+	margin-bottom: measurement.$universal-space-2;
+	@include breakpoint.large-screen-min {
+		margin-bottom: measurement.$universal-space-3;
+	}
+}
+
+@mixin spacing-top() {
+	margin-top: measurement.$universal-space-2;
+	@include breakpoint.large-screen-min {
+		margin-top: measurement.$universal-space-3;
+	}
+}
+
+@mixin padding-bottom() {
+	padding-bottom: measurement.$universal-space-2;
+	@include breakpoint.large-screen-min {
+		padding-bottom: measurement.$universal-space-3;
+	}
+}
+
+@mixin padding-top() {
+	padding-top: measurement.$universal-space-2;
+	@include breakpoint.large-screen-min {
+		padding-top: measurement.$universal-space-3;
+	}
+}
+
+@mixin paragraph-spacing {
+	margin: measurement.$universal-space 0;
+}
+
+@mixin headline-spacing {
+	margin: measurement.$universal-space-2 0;
+}
+
+@mixin list-spacing {
+	margin-bottom: measurement.$universal-space;
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+}
+

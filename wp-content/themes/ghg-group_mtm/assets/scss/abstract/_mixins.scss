@@ -1,0 +1,25 @@
+// Bootstrap breakpoints mixin 
+@import '../../../node_modules/bootstrap/scss/mixins/breakpoints';
+@import '../../../node_modules/bootstrap/scss/mixins/text-truncate';
+@import '../../../node_modules/bootstrap/scss/mixins/text-emphasis';
+@import '../../../node_modules/bootstrap/scss/mixins/hover';
+@import '../../../node_modules/bootstrap/scss/mixins/deprecate';
+@import '../../../node_modules/bootstrap/scss/mixins/text-hide';
+
+// Transition vendor mixin
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+// Mask icon
+@mixin icon($colour, $svg) {
+    mask-image: url($svg);
+    mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-color: $colour;
+}

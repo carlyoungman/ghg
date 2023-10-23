@@ -1,0 +1,8 @@
+@use "../../02-tools/typography" as typography;
+
+body {
+  @include typography.base-settings;
+	&.mobile--active {
+		overflow: hidden;
+	}
+}

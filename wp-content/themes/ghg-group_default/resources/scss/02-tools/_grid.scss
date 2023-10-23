@@ -1,0 +1,10 @@
+@use "../01-settings/measurements" as measurement;
+@use "./breakpoints" as breakpoint;
+
+@mixin standard-settings {
+	display: grid;
+	gap: measurement.$universal-space-2;
+	@include breakpoint.medium-screen-min {
+		gap: measurement.$universal-space-3;
+	}
+}

@@ -1,0 +1,16 @@
+@use "../01-settings/measurements" as measurement;
+@use "./breakpoints" as breakpoint;
+
+@mixin standard-settings($max-width: false) {
+  width: 100%;
+  margin: 0 auto;
+  z-index: 3;
+  position: relative;
+  padding: 0 measurement.$universal-space;
+  @include breakpoint.medium-screen-min {
+    padding: 0 measurement.$universal-space-2;
+  }
+  @if $max-width {
+    max-width: measurement.$section-standard-max-width;
+  }
+}

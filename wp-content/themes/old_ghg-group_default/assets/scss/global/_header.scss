@@ -1,0 +1,58 @@
+header {
+    padding-top: 5.7rem;
+    padding-bottom: 5.7rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    body.admin-bar & {
+        top: 3.2rem;
+    }
+    li.current-menu-item a,
+    a:not(.btn):hover {
+        color: $colour-accent;
+        &:after {
+            background-color: $colour-accent;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    a:not(.btn) {
+        color: $colour-light;
+        text-decoration: none;
+        @include transition(0.2s $ease-default color);
+        position: relative;
+        &:after {
+            content:'';
+            height: 0.1rem;
+            width: 100%;
+            left: 0;
+            right: 0;
+            top: calc(100% + 0.2rem);
+            position: absolute;
+            background-color: $colour-light;
+            @include transition(0.2s $ease-default);
+            opacity: 0;
+            transform: translateY(0.5rem)
+        }
+    }
+}
+
+
+.header__branding {
+    display: flex;
+    align-items: center;
+    a {
+        display: inline-flex;
+        &:after {
+            display: none;
+        }
+        &:hover svg path {
+            fill: $colour-accent
+        }
+    }
+    svg {
+        width: 17.6rem;
+    }
+}

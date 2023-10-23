@@ -1,0 +1,67 @@
+footer {
+	background-color: $colour-mid;
+	padding-top: 6rem;
+	padding-bottom: 3.5rem;
+	overflow: hidden;
+	font-size: 1.4rem;
+	@include media-breakpoint-up(md) {
+		padding-top: 9.5rem;
+		padding-bottom: 7rem;
+	}
+	a {
+		text-decoration: none;
+		&:after {
+			display: none;
+		}
+		&:hover {
+			color: $colour-accent;
+		}
+	}
+}
+
+.footer__branding {
+	display: flex;
+	justify-content: space-between;
+	@include media-breakpoint-down(sm) {
+		align-items: center;
+		> * {
+			flex-basis: 50%;
+		}
+	}
+	@include media-breakpoint-up(md) {
+		flex-direction: column;
+	}
+	svg {
+		margin-bottom: 4rem;
+		@include media-breakpoint-down(sm) {
+			width: 10rem;
+		}
+		path {
+			fill: $colour-dark;
+			&[stroke] {
+				stroke: $colour-dark;
+			}
+		}
+	}
+	.socials {
+		margin-bottom: 4rem;
+	}
+}
+
+.footer__navs {
+	line-height: 1;
+	li {
+		margin-bottom: 1.2rem;
+	}
+}
+
+.footer__legals {
+	margin-top: 6rem;
+	
+	p {
+		margin: 0;
+		@include media-breakpoint-down(sm) {
+			font-size: 1.2rem;
+		}
+	}
+}

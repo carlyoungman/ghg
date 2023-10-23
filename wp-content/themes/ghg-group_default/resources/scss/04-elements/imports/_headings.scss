@@ -1,0 +1,43 @@
+@use "../../02-tools/typography" as typography;
+@use "../../02-tools/spacing" as spacing;
+
+
+h1,
+.h1 {
+	@include typography.headline-h1;
+}
+
+h2,
+.h2 {
+	@include typography.headline-h2;
+}
+
+h3,
+.h3 {
+	@include typography.headline-h3;
+}
+
+h4,
+.h4 {
+	@include typography.headline-h4;
+}
+
+h5,
+.h5 {
+	@include typography.headline-h5;
+}
+
+h6,
+.h6 {
+	@include typography.headline-h6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@include typography.headline-settings;
+	@include spacing.headline-spacing;
+}

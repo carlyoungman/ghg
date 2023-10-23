@@ -1,0 +1,85 @@
+@use "../01-settings/breakpoints" as *;
+
+@mixin x-small-screen-min {
+	@media screen and (min-width: #{$x-small-screen}) {
+		@content;
+	}
+}
+
+@mixin small-screen-min {
+	@media screen and (min-width: #{$small-screen}) {
+		@content;
+	}
+}
+
+@mixin medium-screen-min {
+	@media screen and (min-width: #{$medium-screen-min}) {
+		@content;
+	}
+}
+
+@mixin large-screen-min {
+	@media screen and (min-width: #{$large-screen}) {
+		@content;
+	}
+}
+
+@mixin x-large-screen-min {
+	@media screen and (min-width: #{$x-large-screen}) {
+		@content;
+	}
+}
+
+@mixin xx-large-screen-min {
+	@media screen and (min-width: #{$xx-large-screen}) {
+		@content;
+	}
+}
+
+@mixin xxx-large-screen-min {
+	@media screen and (min-width: #{$xxx-large-screen}) {
+		@content;
+	}
+}
+
+@mixin x-small-screen-max {
+	@media screen and (max-width: #{$x-small-screen}) {
+		@content;
+	}
+}
+
+@mixin small-screen-max {
+	@media screen and (max-width: #{$small-screen}) {
+		@content;
+	}
+}
+
+@mixin medium-screen-max {
+	@media screen and (max-width: #{$medium-screen-min}) {
+		@content;
+	}
+}
+
+@mixin large-screen-max {
+	@media screen and (max-width: #{$large-screen}) {
+		@content;
+	}
+}
+
+@mixin x-large-screen-max {
+	@media screen and (max-width: #{$x-large-screen}) {
+		@content;
+	}
+}
+
+@mixin xx-large-screen-max {
+	@media screen and (max-width: #{$xx-large-screen}) {
+		@content;
+	}
+}
+
+@mixin xxx-large-screen-max {
+	@media screen and (max-width: #{$xxx-large-screen}) {
+		@content;
+	}
+}

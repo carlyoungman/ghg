@@ -1,0 +1,10 @@
+@use "measurements" as measurement;
+
+$icon-size: (
+        xs: calc(#{measurement.$universal-space} / 2),
+        s: measurement.$universal-space,
+        m: calc(#{measurement.$universal-space-3} / 2),
+        l: measurement.$universal-space-2,
+        xl: measurement.$universal-space-3,
+);
+

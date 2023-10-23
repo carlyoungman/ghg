@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700&display=swap');
+
+// Fonts
+$font-dm: 'DM Sans', 'Helvetica', 'Arial', sans-serif;
+$font-hepta: 'Hepta Slab', 'Helvetica', 'Arial', sans-serif;
+
+
+// Colours
+$colour-white: #fff;
+$colour-black: #000;
+$colour-dark: #141414; //dark coal
+$colour-mid: #C7C8CA; //steel grey
+$colour-light: #FAF5FA; //iron
+$colour-accent: #00B74F; //emerald
+
+
+// Easing
+$ease-default: cubic-bezier(.59,.08,.385,1);
+$ease-one: cubic-bezier(1, 0.01, 0.43, 0.95);
+$ease-two: cubic-bezier(0.4, -0.01, 0, 0.99);
+
+
+// Layout
+$container-max-lg: 127.8rem; // 1248px + 3rem padding
+$container-max-sm: 112rem; // 1090px + 3rem padding

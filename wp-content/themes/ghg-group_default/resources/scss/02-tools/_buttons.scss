@@ -1,0 +1,42 @@
+@use "../01-settings/abstracts" as abstract;
+@use "../01-settings/colors" as color;
+@use "../01-settings/measurements" as measurement;
+@use "../01-settings/typography" as typo;
+@use "./positioning" as position;
+@use "./typography" as typography;
+@use "./breakpoints" as breakpoint;
+@use "./spacing" as spacing;
+
+@mixin default-settings($background: color.$c-pearl, $color: color.$c-black) {
+	appearance: none !important;
+	cursor: pointer;
+	outline: 0 !important;
+	border: 0 !important;;
+	background: $background !important;
+	padding: measurement.$universal-space measurement.$universal-space-2 !important;;
+	color: $color !important;;
+	text-align: center !important;;
+	transition: abstract.$link-transition !important;;
+	display: inline-block !important;
+	border-radius: 0 !important;
+	@include breakpoint.medium-screen-min {
+		width: auto !important;
+	}
+	&:hover,
+	&:active,
+	&:focus {
+		@if $background ==  color.$c-pearl {
+			background: color.$c-gold !important;;
+		}
+
+	}
+}
+
+@mixin button-grid() {
+	display: flex;
+	grid-auto-columns: auto;
+	flex-wrap: wrap;
+	gap: measurement.$universal-space;
+	margin-top: measurement.$universal-space-2;
+}
+

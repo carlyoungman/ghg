@@ -1,0 +1,5 @@
+@use "../../02-tools/buttons" as button;
+
+.btn {
+	@include button.default-settings();
+}

@@ -1,0 +1,11 @@
+@use "../../01-settings/icons" as icon;
+@use "../../01-settings/colors" as color;
+
+.icon {
+	@each $name, $value in icon.$icon-size {
+		&.icon--#{$name} {
+			width: $value;
+			height: $value;
+		}
+	}
+}

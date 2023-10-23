@@ -1,0 +1,76 @@
+//@use "../../01-settings/abstracts" as abstract;
+@use "../../01-settings/colors" as color;
+@use "../../01-settings/measurements" as measurement;
+@use "../../02-tools/articles" as article;
+@use "../../02-tools/breakpoints" as breakpoint;
+@use "../../02-tools/images-and-icons" as images;
+@use "../../02-tools/grid" as grid;
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/buttons" as button;
+
+.card-group-listing {
+	&__grid {
+		@include grid.standard-settings;
+		align-items: center;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		@include breakpoint.medium-screen-min {
+			grid-template-columns: 40% 1fr;
+		}
+	}
+
+	&__image-wrap {
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: measurement.$universal-space-4 measurement.$universal-space-2 0 measurement.$universal-space-2;
+		@include breakpoint.large-screen-min {
+			padding: measurement.$universal-space-4 measurement.$universal-space-2;
+		}
+	}
+
+	&__image {
+		width: 18rem;
+		height: 9rem;
+		object-fit: contain;
+	}
+
+
+	&__article {
+		@include spacing.group-spacing-padding;
+		@include article.standard-settings;
+		max-width: measurement.$article-hero-max-width;
+		padding-left: measurement.$universal-space;
+		padding-right: measurement.$universal-space;
+	}
+
+	&__headline {
+		margin-bottom: measurement.$universal-space;
+	}
+
+	&__tel {
+		margin-top: measurement.$universal-space-2;
+		margin-bottom: measurement.$universal-space-half;
+	}
+
+	&__tel, &__email {
+		display: block;
+		width: 100%;
+		text-decoration: underline;
+
+		span {
+			font-weight: bold;
+		}
+	}
+
+	&__button {
+		@include button.default-settings(color.$c-pearl, color.$c-white);
+		margin-top: measurement.$universal-space-2;
+	}
+
+
+	&:nth-child(odd) {
+		background: color.$c-steal;
+	}
+
+}

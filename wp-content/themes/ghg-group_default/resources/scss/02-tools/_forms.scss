@@ -1,0 +1,34 @@
+@use "../01-settings/abstracts" as abstract;
+@use "../01-settings/measurements" as measurement;
+@use "../01-settings/colors" as color;
+@use "./articles" as article;
+@use "./breakpoints" as breakpoint;
+@use "./typography" as typography;
+@use "./positioning" as position;
+@use "./images-and-icons" as image;
+@use "./spacing" as spacing;
+@use "./grid" as grid;
+
+
+@mixin standard-settings {
+	label {
+		@include typography.base-settings;
+		@include typography.font-small;
+		color: color.$c-pearl;
+		font-weight: 800;
+		margin-bottom: measurement.$universal-space-half;
+
+		.optional {
+			font-weight: 300;
+		}
+
+	}
+	input, .wc-stripe-elements-field, select, textarea {
+		@include typography.base-settings;
+		padding: measurement.$universal-space;
+		border: 1px solid color.$c-pearl;
+		border-radius: abstract.$border-radius;
+		background-color: color.$c-white;
+	}
+}
+

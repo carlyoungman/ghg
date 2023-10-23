@@ -1,0 +1,61 @@
+// Center vertically and horizontally using flexbox
+@mixin flex-center($wrap: false) {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	@if $wrap {
+		flex-wrap: wrap;
+	}
+}
+
+// Center vertically and wrap items using flexbox
+@mixin flex-wrap() {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+// Center vertically and horizontal and wrap items using flexbox
+@mixin flex-full() {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+
+@mixin flex-space-between {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+
+// Center block
+@mixin center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// used for full sized elements
+@mixin full-size-element {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+// used for full sized elements after
+@mixin full-size-after {
+	content: "";
+	display: block;
+	@include full-size-element;
+}
+
+@mixin absolute-center {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}

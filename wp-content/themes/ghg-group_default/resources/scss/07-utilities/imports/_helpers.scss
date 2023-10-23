@@ -1,0 +1,63 @@
+@use "../../01-settings/measurements" as measurement;
+
+.padding-top-none {
+	padding-top: 0 !important;
+}
+
+.padding-bottom-none {
+	padding-bottom: 0 !important;
+}
+
+.padding-left-none {
+	padding-left: 0 !important;
+}
+
+.padding-right-none {
+	padding-right: 0 !important;
+}
+
+.margin-top-none {
+	margin-top: 0 !important;
+}
+
+.margin-bottom-none {
+	margin-bottom: 0 !important;
+}
+
+.margin-left-none {
+	margin-left: 0 !important;
+}
+
+.margin-right-none {
+	padding-right: 0 !important;
+}
+
+.section-standard-width {
+	max-width: measurement.$section-standard-max-width;
+}
+
+.section-slim-width {
+	max-width: measurement.$section-slim-max-width;
+}
+
+.article-width {
+	max-width: measurement.$article-max-width;
+}
+
+.address-width {
+	max-width: measurement.$address-max-width;
+}
+
+.align-center {
+	margin: 0 auto;
+}
+
+.bring-to-front {
+	z-index: 3;
+	position: relative;
+}
+
+.send-to-back {
+	z-index: 0;
+	position: relative;
+}

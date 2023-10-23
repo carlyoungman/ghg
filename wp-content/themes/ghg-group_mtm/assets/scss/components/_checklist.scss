@@ -1,0 +1,102 @@
+.checklist {
+}
+
+.checklist__intro {
+	margin-bottom: 7rem;
+	p {
+		margin-bottom: 0;
+	}
+	.checklist--two & {
+		.content__wrap {
+			margin: 0 auto;
+			max-width: 72.8rem;
+		}
+	}
+}
+
+.checklist__inner {
+	text-align: center;
+}
+
+.checklist__inner-wrap {
+	display: inline-block;
+	text-align: left;
+	@include media-breakpoint-down(sm) {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.checklist--two & {
+		.checklist__entry:nth-of-type(n + 2) {
+			min-width: min-content;
+			+ .checklist__break {
+				display: block;
+			}
+		}
+	}
+	.checklist--three & {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+	}
+}
+
+.checklist__break {
+	display: none;
+}
+
+.checklist__entry {
+	display: inline-block;
+	text-align: left;
+	.checklist--two & {
+		margin-right: 3rem;
+		.content__wrap {
+			margin: 0;
+		}
+		@include media-breakpoint-down(sm) {
+			padding-left: 2rem;
+		}
+	}
+	.checklist--three & {
+		display: flex;
+		flex: 0 0 33.33%;
+		box-sizing: content-box;
+		@include media-breakpoint-down(sm) {
+			margin-bottom: 3rem;
+		}
+		.content__wrap {
+			justify-content: center;
+			margin: 0 auto;
+			p {
+				max-width: 23.6rem;
+			}
+		}
+	}
+	@include media-breakpoint-down(sm) {
+		flex: 0 0 100% !important;
+		width: 100% !important;
+		min-width: 0;
+	}
+	.content__wrap {
+		display: inline-flex;
+		margin: 0 auto;
+		p {
+			margin: 0;
+		}
+		&:before {
+			margin-top: 0.75rem;
+			margin-right: 1rem;
+			min-width: 2.2rem;
+			content: "";
+            height: 1.3rem;
+			@include media-breakpoint-up(md) {
+				height: 1.7rem;
+                margin-top: 0.5rem;
+			}
+			display: inline-block;
+			@include icon(
+				$colour-accent,
+				"data:image/svg+xml,%3Csvg width='22' height='17' viewBox='0 0 22 17' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_388_8183)'%3E%3Cpath d='M22 2.83319L19.1664 0L7.8312 11.3336L2.83359 6.33671L0 9.1699L7.83092 17L7.83148 16.9994L7.83176 16.9997L22 2.83319Z' fill='%2300B74F'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_388_8183'%3E%3Crect width='22' height='17' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A"
+			);
+		}
+	}
+}

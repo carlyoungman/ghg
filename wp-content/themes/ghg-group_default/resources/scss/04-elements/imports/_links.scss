@@ -1,0 +1,9 @@
+@use "../../02-tools/links" as link;
+@use "../../02-tools/typography" as typography;
+
+a {
+  @include link.reset;
+  @include typography.base-settings;
+}
+
+

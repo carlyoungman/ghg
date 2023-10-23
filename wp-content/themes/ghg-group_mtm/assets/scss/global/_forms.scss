@@ -1,0 +1,26 @@
+form {
+    .frm_error {
+        display: none;
+    }
+    input:not([type=checkbox]), select, textarea {
+        width: 100%;
+        margin-bottom: 2.5rem;
+        padding: 0 0 1.7rem 0;
+        background-color: transparent;
+        border: 0;
+        border-bottom: 0.1rem solid $colour-dark;
+        line-height: 1;
+        &:focus, &:focus-within {
+            outline: 0;
+        }
+        &[aria-invalid=true] {
+            border-color: red;
+        }
+    }
+    select:hover {
+        cursor: pointer;
+    }
+    .frm_html_container {
+        color: $colour-mid;
+    }
+}

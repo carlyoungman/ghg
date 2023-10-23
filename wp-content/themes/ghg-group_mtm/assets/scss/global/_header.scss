@@ -1,0 +1,212 @@
+header {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 10;
+	padding-top: 2.25rem;
+	padding-bottom: 2.25rem;
+	@include media-breakpoint-up(md) {
+		padding-top: 4.5rem;
+		padding-bottom: 4.5rem;
+	}
+	@include transition(
+		0.2s $ease-default background-color,
+		0.2s $ease-default padding
+	);
+	body.admin-bar & {
+		top: 3.2rem;
+	}
+	.header--active & {
+		box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+		background-color: $colour-light;
+		padding-top: 2.5rem;
+		padding-bottom: 2.5rem;
+		li a {
+			color: $colour-dark;
+		}
+		.btn {
+			background-color: $colour-accent;
+			color: $colour-light;
+			&:hover {
+				background-color: $colour-dark;
+			}
+		}
+	}
+	.mobile--active & {
+		box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0);
+		background-color: transparent;
+		@include transition(0.25s 0.25s);
+	}
+	.mobile--closing & {
+		@include transition(0.25s 0s);
+		background-color: transparent;
+	}
+	.mobile--closing.header--active & {
+		background-color: $colour-white;
+	}
+}
+
+.header__branding {
+	display: flex;
+	align-items: center;
+	a {
+		display: inline-flex;
+		&:after {
+			display: none;
+		}
+		&:hover svg path {
+			fill: $colour-accent;
+			.header--active & {
+				fill: $colour-dark;
+			}
+		}
+	}
+	svg {
+		width: 12.7rem;
+		path {
+			@include media-breakpoint-down(sm) {
+				fill: $colour-light;
+			}
+			.header--active & {
+				fill: $colour-accent;
+				&[stroke] {
+					stroke: $colour-dark;
+				}
+			}
+			.mobile--active & {
+				fill: $colour-white;
+				@include transition(0.25s 0.25s);
+				&[stroke] {
+					stroke: $colour-white;
+					@include transition(0.25s 0.25s);
+				}
+			}
+			.mobile--closing & {
+				fill: $colour-white;
+				@include transition(0.25s 0s !important);
+				&[stroke] {
+					stroke: $colour-white;
+					@include transition(0.25s 0s !important);
+				}
+			}
+			.mobile--closing.header--active & {
+				fill: $colour-accent;
+				@include transition(0.25s 0s !important);
+				&[stroke] {
+					stroke: $colour-accent;
+					@include transition(0.25s 0s !important);
+				}
+			}
+		}
+	}
+}
+
+.header__mobile-toggle {
+	position: relative;
+	outline: 0;
+	border: 0;
+	background-color: transparent;
+	padding: 0;
+	width: 3.3rem;
+	height: 1.6rem;
+	&:focus {
+		outline: 0;
+	}
+	span,
+	&:before,
+	&:after {
+		position: absolute;
+		right: 0;
+		left: 0;
+		background-color: $colour-light;
+		width: 3.3rem;
+		height: 0.2rem;
+		content: "";
+		body.header--active & {
+			background-color: $colour-dark;
+		}
+		body.mobile--active & {
+			background-color: $colour-light;
+		}
+		body.mobile--closing.header--active & {
+			background-color: $colour-dark;
+		}
+	}
+	&:before {
+		top: 0;
+		left: auto;
+		transform-origin: center;
+		body.mobile--active & {
+			top: 11.5%;
+			transform: rotate(-45deg);
+			width: 1.65rem;
+			@include transition(
+				0.25s background-color 0.25s,
+				0.5s width $ease-default 0s,
+				0.4s $ease-default transform 0.1s,
+				0.5s top 0s
+			);
+		}
+		body.mobile--closing & {
+			top: 0;
+			transform: scaleX(1) rotate(0);
+			width: 3.3rem;
+			@include transition(
+				0.25s background-color 0s,
+				0.5s width $ease-default 0s,
+				0.45s transform $ease-default 0s,
+				0.5s top 0s
+			);
+		}
+	}
+	&:after {
+		top: calc(50%);
+		left: auto;
+		transform-origin: center;
+		body.mobile--active & {
+			top: 11.5%;
+			transform: rotate(45deg);
+			width: 1.65rem;
+			@include transition(
+				0.25s background-color 0.25s,
+				0.5s width $ease-default 0s,
+				0.4s $ease-default transform 0.1s,
+				0.5s top 0s
+			);
+		}
+		body.mobile--closing & {
+			transform: rotate(0);
+			width: 3.3rem;
+			top: 50%;
+			@include transition(
+				0.25s background-color 0s,
+				0.5s width $ease-default 0s,
+				0.45s transform $ease-default 0s,
+				0.5s top 0s
+			);
+		}
+	}
+	span {
+		top: 100%;
+		transform: scaleX(0.5);
+		transform-origin: left;
+		.mobile--active & {
+			transform: scaleX(1);
+			@include transition(
+				0.25s background-color 0.25s,
+				0.5s $ease-default transform 0s
+			);
+		}
+		.mobile--closing & {
+			transform: scaleX(0.5);
+			@include transition(
+				0.25s background-color 0s,
+				0.5s transform 0s
+			);
+		}
+	}
+	&:hover {
+		cursor: pointer;
+	}
+}

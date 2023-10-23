@@ -1,0 +1,34 @@
+.btn, button:not(.mobile__toggle) {
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    padding: 1.5rem 2rem;
+    text-decoration: none;
+    color: $colour-light;
+    background-color: $colour-accent;
+    font-family: $font-dm; 
+    outline: 0;
+    border: 0;
+    // &:hover {
+    //     color: $colour-light;
+    //     background-color: $colour-dark;
+    // }
+    @include transition(0.2s $ease-default color, 0.2s $ease-default background-color);
+    &.btn--light {
+        background-color: $colour-light;
+        color: $colour-dark;
+    }
+    &:hover {
+        color: $colour-light;
+        background-color: $colour-dark;
+        cursor: pointer;
+    }
+    .section--dark & {
+        &:hover {
+            background: $colour-mid;
+            color: $colour-dark;
+        }
+    }
+}

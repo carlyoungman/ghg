@@ -1,0 +1,42 @@
+@use "../01-settings/measurements" as measurement;
+@use "../01-settings/colors" as color;
+@use "./buttons" as button;
+@use "./typography" as typography;
+@use "./positioning" as position;
+@use "./articles" as article;
+@use "./breakpoints" as breakpoint;
+
+@mixin content-reset {
+	:first-child {
+		margin-top: 0;
+	}
+	:last-child {
+		margin-bottom: 0;
+	}
+}
+
+@mixin display-settings($padding: true, $center: false) {
+	&__article {
+		@include article.standard-settings(true);
+		@if $center {
+			@include article.standard-settings(true, true);
+			margin: 0 auto;
+		}
+		@include breakpoint.large-screen-min {
+			@if $padding {
+				padding: measurement.$universal-space-3 0;
+			}
+		}
+	}
+	&__button-grid {
+		@include button.button-grid;
+		justify-content: flex-start;
+		@if $center {
+			justify-content: center;
+		}
+	}
+	
+	&__button {
+		@include button.default-settings(color.$c-pearl, color.$c-white);
+	}
+}
