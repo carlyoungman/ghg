@@ -1,0 +1,288 @@
+@use "../../01-settings/colors" as color;
+@use "../../01-settings/measurements" as measurement;
+@use "../../02-tools/container" as container;
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/articles" as article;
+@use "../../02-tools/breakpoints" as breakpoint;
+@use "../../02-tools/buttons" as button;
+@use "../../02-tools/typography" as typography;
+@use "../../02-tools/positioning" as position;
+@use "../../02-tools/content" as content;
+@use "../../02-tools/grid" as grid;
+@use "../../02-tools/images-and-icons" as images;
+
+@mixin common-layout-properties {
+	@include spacing.block-spacing-padding;
+	min-height: 0;
+
+	.hero {
+		&__image {
+			position: relative;
+			max-height: 100dhv;
+		}
+
+		&__inner {
+			display: flex;
+			align-items: center;
+			padding: 0;
+		}
+
+		&__inline__inner {
+			@include container.standard-settings(true);
+			@include grid.standard-settings;
+			grid-template-columns: repeat(1, minmax(0, 1fr));
+			@include breakpoint.large-screen-min {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: measurement.$universal-space-3;
+			}
+		}
+
+		&__article {
+			@include breakpoint.large-screen-min {
+				padding-top: 0;
+			}
+		}
+
+		&__image-wrap {
+			position: relative;
+			@include images.aspect-ratio-16-9;
+			@include breakpoint.large-screen-min {
+				min-height: 50vh;
+			}
+
+			span {
+				position: absolute;
+			}
+		}
+
+		&__image {
+			clip-path: polygon(100% 0, 100% 75%, 75% 100%, 0 100%, 0 0);
+		}
+
+		&__ticker {
+			display: none !important;
+		}
+	}
+	&:after {
+		display: none !important;
+	}
+}
+
+main > .hero:first-child {
+	margin-top: 0;
+
+	&:after {
+		@include position.full-size-after;
+		z-index: 2;
+	}
+}
+
+.hero {
+	@include spacing.section-spacing;
+	@include content.display-settings;
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: flex-end;
+	min-height: 65vh;
+	overflow: hidden;
+	color: var(--c-white);
+
+	@include breakpoint.xxx-large-screen-min {
+		align-items: center;
+	}
+
+	&__button {
+		&:nth-child(2) {
+			@include button.default-settings(
+					var(--c-white),
+					var(--c-white),
+					var(--c-button-background-hover),
+					var(--c-button-color-hover),
+					true
+			);
+		}
+	}
+
+	&__inner {
+		@include container.standard-settings(true);
+	}
+
+	&__video {
+		@include position.full-size-element;
+		object-fit: cover;
+	}
+
+	&__image {
+		@include position.full-size-element;
+		object-fit: cover;
+		background-size: cover;
+		background-repeat: no-repeat;
+
+		&:first-of-type {
+			@include breakpoint.medium-screen-min {
+				display: none;
+			}
+		}
+
+		&:last-of-type {
+			display: none;
+			min-height: auto;
+			@include breakpoint.medium-screen-min {
+				display: unset;
+			}
+		}
+	}
+
+	&__ticker {
+		display: flex;
+		position: relative;
+		align-items: center;
+		z-index: 1;
+		background: var(--c-theme-primary);
+		padding: measurement.$universal-space-2 0;
+		width: 100%;
+		overflow: hidden;
+		@include breakpoint.xxx-large-screen-min {
+			position: absolute;
+			bottom: 0;
+		}
+
+		&__inner {
+			display: flex;
+			position: absolute;
+			align-items: center;
+			gap: measurement.$universal-space-2;
+			animation-duration: 30s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+			animation-name: ticker;
+			padding-left: 100%;
+			white-space: nowrap;
+		}
+
+		&__item {
+			display: flex;
+			flex-wrap: wrap;
+			gap: measurement.$universal-space-2;
+
+			&--line {
+				display: block;
+				background: var(--c-theme-secondary);
+				width: measurement.$universal-space-3;
+				height: 1px;
+
+				&:last-of-type {
+					display: none;
+				}
+			}
+		}
+
+		p {
+			@include typography.font-large;
+			margin: 0;
+			color: var(--c-white);
+		}
+	}
+
+	&--super-size-text {
+		h1 {
+			@include typography.super-size;
+		}
+	}
+
+	&--layout-diagonal-cutoff {
+		min-height: auto;
+		color: var(--c-black) !important;
+		@include breakpoint.large-screen-min {
+			padding: 0;
+			height: 75vh;
+		}
+
+		&:after {
+			@include position.full-size-after;
+			background-color: var(--c-theme-third) !important;
+			@include breakpoint.large-screen-min {
+				clip-path: polygon(0 0, 100% 0%, 40% 100%, 0% 100%);
+			}
+		}
+
+		.hero {
+			&__image {
+				@include breakpoint.large-screen-min {
+					left: auto;
+					width: 60%;
+				}
+			}
+		}
+	}
+
+	&__inline__inner {
+		width: 100%;
+	}
+
+	&--layout-inline-image-left {
+		@include common-layout-properties;
+		background: var(--c-theme-third);
+		color: var(--c-black) !important;
+
+		.hero {
+			&__button {
+				@include button.default-settings(
+						var(--c-theme-primary),
+						var(--c-white)
+				);
+			}
+		}
+	}
+
+	&--layout-inline-image-right {
+		@include common-layout-properties;
+		background: var(--c-theme-third);
+		color: var(--c-black) !important;
+
+		.hero {
+			&__inner {
+				order: 1;
+			}
+
+			&__image-wrap {
+				order: 2;
+			}
+
+			&__image-cut {
+				fill: var(--c-theme-third);
+			}
+		}
+	}
+
+	&--half-height {
+		@include breakpoint.large-screen-min {
+			height: 45vh !important;
+		}
+	}
+}
+
+@-webkit-keyframes ticker {
+	0% {
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+		visibility: visible;
+	}
+	100% {
+		-webkit-transform: translate3d(-100%, 0, 0);
+		transform: translate3d(-100%, 0, 0);
+	}
+}
+
+@keyframes ticker {
+	0% {
+		-webkit-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
+		visibility: visible;
+	}
+	100% {
+		-webkit-transform: translate3d(-100%, 0, 0);
+		transform: translate3d(-100%, 0, 0);
+	}
+}

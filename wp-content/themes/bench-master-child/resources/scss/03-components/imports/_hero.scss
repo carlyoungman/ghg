@@ -1,0 +1,32 @@
+@use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+@use "../../../../../ghg-master/resources/scss/02-tools/buttons" as button;
+
+.hero {
+	color: var(--c-white);
+	@include breakpoint.large-screen-min {
+		padding: 0 !important;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 400;
+	}
+}
+
+main > .hero:first-child {
+	margin-top: 0;
+
+	&:after {
+		background: linear-gradient(
+				90deg,
+				var(--c-theme-secondary) 5%,
+				rgba(0, 0, 0, 0) 50%
+		);
+	}
+}

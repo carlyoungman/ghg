@@ -1,0 +1,86 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/buttons" as button;
+@use "../../../../../ghg-master/resources/scss/02-tools/typography" as
+	typography;
+@use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
+
+.page-template-cart {
+	line-height: 1.3;
+
+	a.checkout-button.button.alt.wc-forward {
+		@include button.default-settings;
+		padding: measurement.$universal-space measurement.$universal-space-2 !important;
+		min-height: 50px;
+		font-weight: 400;
+		line-height: 1.5em !important;
+	}
+
+	dd.variation-Senddate {
+		p {
+			margin: 0;
+		}
+	}
+
+	.coupon {
+		display: none;
+	}
+
+	img.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail,
+	.configuration-image {
+		width: 100% !important;
+		max-width: 150px;
+	}
+
+	td.product-name {
+		> a {
+			@include typography.headline-settings;
+			@include typography.headline-h6;
+			display: block;
+			margin-bottom: measurement.$universal-space;
+			max-width: measurement.$article-hero-max-width;
+		}
+	}
+
+	.variation-Configuration > div span.choice-thumb {
+		display: none;
+	}
+
+	dl.variation {
+		display: flex;
+		flex-wrap: wrap;
+		gap: measurement.$universal-space;
+
+		dt {
+			@include typography.font-small;
+			font-weight: bold;
+		}
+
+		p {
+			margin: 0;
+		}
+
+		> * {
+			margin: 0;
+			min-width: 33%;
+		}
+	}
+}
+
+.woocommerce td.product-name dl.variation dd.variation-Configuration {
+	font-size: 1.6rem !important;
+}
+
+.mkl-pc--edit-configuration {
+	@include spacing.spacing-top;
+	@include button.default-settings;
+	opacity: 0.5;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.woocommerce td.product-name dl.variation dd.variation-Configuration div {
+	margin-bottom: measurement.$universal-space-half !important;
+}

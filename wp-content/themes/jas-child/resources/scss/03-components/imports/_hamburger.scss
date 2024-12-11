@@ -1,0 +1,14 @@
+.hamburger {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30px;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+	background-color: var(--c-black) !important;
+	width: 30px;
+	height: 2px;
+}

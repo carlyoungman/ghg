@@ -1,0 +1,90 @@
+@use "../01-settings/abstracts" as abstract;
+@use "../01-settings/colors" as color;
+@use "../01-settings/measurements" as measurement;
+@use "../01-settings/typography" as typo;
+@use "./positioning" as position;
+@use "./typography" as typography;
+@use "./breakpoints" as breakpoint;
+@use "./spacing" as spacing;
+
+@mixin default-settings(
+	$background: var(--c-button-background),
+	$color: var(--c-button-color),
+	$background-hover: var(--c-button-background-hover),
+	$color-hover: var(--c-button-color-hover),
+	$outline: false
+) {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	appearance: none !important;
+	transition: abstract.$global-transition;
+	cursor: pointer;
+	outline: 0;
+	border: 0;
+	border-radius: var(--button-radius) !important;
+	background: $background;
+	padding: measurement.$universal-space measurement.$universal-space-2 !important;
+	color: $color;
+	font-weight: normal;
+	text-align: center;
+	text-transform: capitalize;
+	box-shadow: abstract.$box-shadow;
+	@include breakpoint.medium-screen-min {
+		width: auto;
+	}
+
+
+	&:hover,
+	&:active,
+	&:focus {
+		outline: 0;
+		border: 0;
+		background: $background-hover;
+		color: $color-hover;
+	}
+
+
+	@if $outline == true {
+		border: 2px solid $background;
+		background-color: transparent;
+		&:hover {
+			border: 2px solid $background-hover;
+			background: $background-hover;
+			color: $color-hover;
+		}
+	}
+
+	svg {
+		margin-right: measurement.$universal-space;
+		width: 24px;
+		height: 24px;
+		fill: var(--c-button-color);
+	}
+}
+
+@mixin button-grid() {
+	display: flex;
+	grid-auto-columns: auto;
+	flex-wrap: wrap;
+	gap: measurement.$universal-space;
+	margin-top: measurement.$universal-space-2;
+	@include breakpoint.large-screen-min {
+		margin-top: measurement.$universal-space-3;
+	}
+}
+
+@mixin link-styling() {
+	margin: 0 !important;
+	background: none !important;
+	padding: 0 !important;
+	color: var(--c-black);
+	text-decoration: underline;
+	&:hover {
+		background: none !important;
+		color: var(--c-theme-primary);
+	}
+}
+
+
+

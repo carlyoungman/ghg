@@ -1,0 +1,32 @@
+//@use "../../../../../ghg-master/resources/scss/01-settings/abstracts" as
+//	abstract;
+//@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+//	measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+//@use "../../../../../ghg-master/resources/scss/02-tools/positioning" as position;
+
+@use "../../../../../ghg-master/resources/scss/02-tools/container" as container;
+@use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
+
+.woocommerce {
+	.woocommerce-breadcrumb {
+		@include container.standard-settings(true);
+		@include spacing.group-spacing;
+		display: none;
+		align-items: center;
+		color: var(--c-theme-primary) !important;
+		@include breakpoint.large-screen-min {
+			display: flex;
+		}
+
+		a {
+			color: var(--c-black) !important;
+
+			&:hover {
+				color: var(--c-theme-primary) !important;
+				text-decoration: underline;
+			}
+		}
+	}
+}

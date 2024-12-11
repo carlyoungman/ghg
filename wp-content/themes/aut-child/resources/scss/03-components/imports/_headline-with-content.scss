@@ -1,0 +1,17 @@
+@use "../../../../../ghg-master/resources/scss/02-tools/typography" as
+	typography;
+
+.headline-with-content {
+	&__grid:after {
+		display: none;
+	}
+
+	&__headline {
+		@include typography.headline-h4;
+		color: var(--c-dark-blue);
+	}
+
+	&__article {
+		padding: 0 !important;
+	}
+}

@@ -1,0 +1,36 @@
+/*
+Theme Name: AUT Child
+Template: ghg-master
+Author: Carl Youngman
+Author URI: me@carlyoungman.com
+Description: This is a child them for the AUT website
+Version: 1.0
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=DM+Sans:opsz@9..40&display=swap");
+
+:root {
+	--c-theme-primary: #ff3232;
+	--c-theme-secondary: #25323d;
+	--c-theme-third: #7b939e;
+	--c-button-background: #ff3232;
+	--c-button-color: #fff;
+	--c-button-background-hover: #25323d;
+	--c-button-color-hover: #fff;
+
+
+	--c-black: #000000;
+	--c-dark-blue: #2e3841;
+	--c-off-white: #f2f2f2;
+	--c-white: #ffffff;
+	--button-radius: 0px;
+	--border-radius: 0px;
+	--font-product: "DM Sans", sans-serif;
+	--font--main: "Archivo", sans-serif;
+	--font-base-size: 1.8rem;
+	--font--base-line-height: 1.65;
+	--font-base-font-weight: 400;
+	--font--headline: "Archivo", sans-serif;
+	--font--headline-line-height: 1.3;
+	--font-headline-weight: 700;
+}

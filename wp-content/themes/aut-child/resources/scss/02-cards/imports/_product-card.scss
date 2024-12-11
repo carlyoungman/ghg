@@ -1,0 +1,50 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+@use "../../../../../ghg-master/resources/scss/01-settings/abstracts" as
+	abstract;
+//@use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+
+.card-product {
+	&__image-wrap {
+		margin: 0;
+		border: 1px solid var(--c-theme-third);
+	}
+
+	&__image {
+		@include breakpoint.large-screen-min {
+			padding: measurement.$universal-space-4;
+		}
+	}
+
+	&__price,
+	&__description {
+		display: none;
+	}
+
+	&__headline {
+		transition: abstract.$link-transition;
+		margin: 0;
+		background: var(--c-off-white);
+
+		padding: measurement.$universal-space-2 measurement.$universal-space;
+		@include breakpoint.large-screen-min {
+			padding: measurement.$universal-space-3
+				measurement.$universal-space-2;
+		}
+	}
+
+	&:hover {
+		.card-product {
+			&__headline {
+				background: var(--c-theme-primary);
+				color: var(--c-white);
+			}
+
+			&__image {
+				transform: scale(1);
+			}
+		}
+	}
+}

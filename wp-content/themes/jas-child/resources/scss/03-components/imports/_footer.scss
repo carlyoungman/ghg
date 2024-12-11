@@ -1,0 +1,41 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/abstracts" as
+	abstract;
+@use "../../../../../ghg-master/resources/scss/01-settings/colors" as color;
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/container" as container;
+@use "../../../../../ghg-master/resources/scss/02-tools/links" as link;
+@use "../../../../../ghg-master/resources/scss/02-tools/lists" as list;
+@use "../../../../../ghg-master/resources/scss/02-tools/images-and-icons" as
+	image;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+@use "../../../../../ghg-master/resources/scss/02-tools/positioning" as position;
+
+.footer {
+	@include image.logo-settings(var(--c-black), "benchmaster");
+
+	&__inner {
+		@include breakpoint.large-screen-min {
+			grid-template-columns: 25% 20% 1fr;
+		}
+	}
+
+	&__menu-title {
+		font-weight: 700;
+	}
+
+	.menu-item {
+		a {
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: underline;
+<<<<<<< HEAD
+				color: var(--c-black);
+=======
+>>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
+			}
+		}
+	}
+}

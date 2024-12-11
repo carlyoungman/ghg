@@ -1,0 +1,62 @@
+@use "../../01-settings/abstracts" as abstract;
+@use "../../01-settings/colors" as color;
+@use "../../01-settings/measurements" as measurement;
+@use "../../02-tools/articles" as article;
+@use "../../02-tools/breakpoints" as breakpoint;
+@use "../../02-tools/images-and-icons" as images;
+
+a.card-grid {
+	&:hover {
+		cursor: pointer;
+
+		svg.image-cut {
+			fill: var(--c-black);
+		}
+
+		article.card-grid__article {
+			background: var(--c-black);
+		}
+	}
+}
+
+.card-grid {
+	display: flex;
+	flex-flow: column;
+	height: 100%;
+
+	&__image-wrap {
+		@include images.aspect-ratio-1-1;
+		position: relative;
+		background: var(--c-theme-third);
+		overflow: hidden;
+	}
+
+	.image-cut {
+		position: absolute;
+		bottom: -2px;
+		left: -2px;
+		z-index: 1;
+		transition: abstract.$link-transition;
+		fill: var(--c-theme-secondary);
+	}
+
+	&__article {
+		flex: 1;
+		transition: abstract.$link-transition;
+		background: var(--c-theme-secondary);
+		padding: measurement.$universal-space-2 measurement.$universal-space-3;
+		color: var(--c-white);
+		@include breakpoint.large-screen-min {
+			padding: measurement.$universal-space-2
+				measurement.$universal-space-4;
+		}
+	}
+
+	&__headline {
+		margin-bottom: measurement.$universal-space;
+	}
+
+	&__supporting {
+		color: var(--c-theme-primary);
+	}
+}

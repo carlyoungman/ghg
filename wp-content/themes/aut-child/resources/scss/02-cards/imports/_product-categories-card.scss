@@ -1,0 +1,29 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+
+.product-categories-card {
+	&__article {
+		max-width: 90%;
+		text-align: left !important;
+	}
+
+	&__headline {
+		margin-top: measurement.$universal-space-2 !important;
+		font-weight: bold;
+	}
+
+	&__description {
+		color: #18243d;
+	}
+
+	&__image {
+		object-fit: cover;
+	}
+
+	&__button {
+		margin: 0 !important;
+	}
+}

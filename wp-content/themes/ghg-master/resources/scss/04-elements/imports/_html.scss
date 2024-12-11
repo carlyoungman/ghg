@@ -1,0 +1,13 @@
+@use "../../01-settings/typography" as typography;
+@use "../../02-tools/breakpoints" as breakpoints;
+
+html {
+	scroll-behavior: smooth;
+	font-size: typography.$font-reset;
+}
+
+main#wrapper {
+	@include breakpoints.medium-screen-max {
+		overflow-x: hidden;
+	}
+}

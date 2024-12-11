@@ -1,0 +1,26 @@
+@use "../../../../resources/scss/01-settings/measurements" as measurement;
+@use "../../../../resources/scss/02-tools/buttons" as button;
+@use "../../../../resources/scss/02-tools/spacing" as spacing;
+@use "../../../../resources/scss/02-tools/positioning" as position;
+
+.load-more-button {
+	@include spacing.spacing-top;
+	@include position.flex-center;
+	position: relative;
+
+	&__button {
+		@include button.default-settings();
+		@include position.flex-center;
+		display: flex !important;
+	}
+
+	span {
+
+	}
+
+	svg {
+		width: measurement.$universal-space-4;
+		height: measurement.$universal-space-4;
+		stroke: var(--c-theme-primary);
+	}
+}

@@ -1,0 +1,106 @@
+@use "../../01-settings/measurements" as measurement;
+@use "../../01-settings/abstracts" as abstract;
+@use "../../02-tools/articles" as article;
+@use "../../02-tools/images-and-icons" as image;
+@use "../../02-tools/typography" as typography;
+@use "../../02-tools/buttons" as button;
+@use "../../02-tools/lists" as list;
+
+.aut-product-card {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	justify-content: space-between;
+
+	&__image-wrap {
+		@include image.aspect-ratio-4-3;
+		display: block;
+		border: 1px solid var(--c-theme-third);
+		overflow: hidden;
+	}
+
+	&__image {
+		transition: abstract.$link-transition;
+		padding: measurement.$universal-space-2;
+		object-fit: contain !important;
+	}
+
+	&__article {
+		@include article.standard-settings;
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		justify-content: space-between;
+		background: var(--c-off-white);
+		padding: measurement.$universal-space-2;
+	}
+
+	&__headline {
+		font-weight: 700;
+	}
+
+	&__tag-line {
+		margin: measurement.$universal-space-2 0 0 0;
+		font-weight: bold;
+	}
+
+	&__title {
+		margin: 0 0 measurement.$universal-space 0;
+	}
+
+	&__description {
+		opacity: 0.8;
+		margin: measurement.$universal-space-2 0;
+	}
+
+	&__tags {
+		@include list.tags;
+		margin-bottom: measurement.$universal-space;
+	}
+
+	&__btn {
+		@include button.default-settings;
+		display: flex !important;
+	}
+
+	&__fixing_type {
+		display: none;
+		flex: 1;
+		flex-wrap: wrap;
+		align-items: center;
+		background: var(--c-off-white);
+		padding: measurement.$universal-space-3 measurement.$universal-space-2;
+		text-wrap: balance;
+
+		&:hover {
+			background: var(--c-theme-primary);
+			color: var(--c-white);
+		}
+	}
+
+	&:hover {
+		.card-product-series__image {
+			transform: scale(1.05);
+		}
+	}
+}
+
+.single-series {
+	article.aut-product-card__article {
+		display: none !important;
+	}
+
+	a.aut-product-card__fixing_type {
+		display: flex;
+
+		p {
+			@include typography.font-small;
+			margin: 0 0 measurement.$universal-space-half 0;
+			width: 100%;
+		}
+
+		h5 {
+			margin: 0;
+		}
+	}
+}

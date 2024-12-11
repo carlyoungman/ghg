@@ -1,0 +1,107 @@
+@use "../../01-settings/measurements" as measurement;
+@use "../../01-settings/colors" as color;
+@use "../../02-tools/content" as content;
+@use "../../02-tools/container" as container;
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/breakpoints" as breakpoint;
+@use "../../02-tools/grid" as grid;
+@use "../../02-tools/positioning" as position;
+@use "../../02-tools/buttons" as button;
+@use "../../02-tools/images-and-icons" as image;
+@use "../../02-tools/typography" as typography;
+@use "../../02-tools/articles" as article;
+
+.key-figure-block {
+	@include spacing.section-spacing;
+
+	&__inner {
+		@include container.standard-settings();
+		background: var(--c-theme-third);
+		padding: 0 !important;
+	}
+
+	&__grid {
+		display: grid;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		@include breakpoint.medium-screen-min {
+			@include grid.standard-settings;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		@include breakpoint.large-screen-min {
+			grid-template-columns: 60% 1fr;
+			gap: measurement.$universal-space-6;
+		}
+	}
+
+	&__content_grid {
+		display: grid;
+		grid-template-columns: 15% 1fr;
+		gap: 0;
+
+		> div {
+			&:first-of-type {
+				@include position.flex-center;
+				background: var(--c-theme-primary);
+				color: var(--c-white);
+			}
+
+			&:nth-child(2) {
+				display: flex;
+				align-items: flex-end;
+				padding: measurement.$universal-space-3
+					measurement.$universal-space;
+				@include breakpoint.medium-screen-min {
+					padding: measurement.$universal-space-3;
+				}
+			}
+
+			&:nth-child(3) {
+				background: var(--c-off-white);
+			}
+
+			&:last-of-type {
+				display: flex;
+				align-items: center;
+				background: var(--c-off-white);
+				padding: measurement.$universal-space-3
+					measurement.$universal-space;
+				@include breakpoint.medium-screen-min {
+					padding: measurement.$universal-space-3;
+				}
+			}
+		}
+	}
+
+	&__image-wrap {
+		@include image.aspect-ratio-1-1;
+	}
+
+	article {
+		@include article.standard-settings(true);
+	}
+
+	&__key_figure {
+		@include typography.super-size;
+		transform: rotate(-90deg);
+		margin: 0;
+		padding: measurement.$universal-space measurement.$universal-space-3;
+		@include breakpoint.x-large-screen-min {
+			font-size: clamp(1.8rem * 4, -0.875rem + 8.333vw, 1.8rem * 5);
+		}
+	}
+
+	&__button-grid {
+		@include button.button-grid;
+		@include spacing.spacing-top;
+	}
+
+	&__button {
+		@include button.default-settings;
+	}
+
+	&__headline {
+		margin: 0;
+		max-width: measurement.$article-max-width;
+		color: var(--c-white);
+	}
+}

@@ -1,0 +1,16 @@
+.hero {
+	&__ticker {
+		p {
+			color: var(--c-button-background);
+		}
+
+		&__item--line {
+			background: var(--c-white);
+		}
+	}
+
+	&--layout-inline-image-left,
+	&--layout-inline-image-right {
+		color: var(--c-theme-primary) !important;
+	}
+}

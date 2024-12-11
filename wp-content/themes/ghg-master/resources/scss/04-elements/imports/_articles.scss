@@ -1,0 +1,8 @@
+@use "../../02-tools/articles" as article;
+@use "../../02-tools/lists" as list;
+@use "../../02-tools/spacing" as spacing;
+
+article {
+	@include article.standard-settings;
+	@include list.styles;
+}

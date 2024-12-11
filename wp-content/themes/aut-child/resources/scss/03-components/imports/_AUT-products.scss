@@ -1,0 +1,92 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/container" as container;
+@use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
+@use "../../../../../ghg-master/resources/scss/02-tools/content" as content;
+@use "../../../../../ghg-master/resources/scss/02-tools/grid" as grid;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+
+.AUT-products {
+	@include content.display-settings(false);
+	@include spacing.section-spacing;
+
+	&__inner {
+		@include container.standard-settings(true);
+	}
+
+	&__article {
+		@include spacing.spacing-bottom;
+	}
+
+	&__grid, .products-grid {
+		@include grid.standard-settings;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		@include breakpoint.medium-screen-min {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		@include breakpoint.large-screen-min {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	#AUTProductsDetails {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		gap: measurement.$universal-space;
+		@include breakpoint.medium-screen-min {
+			gap: measurement.$universal-space-2;
+		}
+		@include breakpoint.large-screen-min {
+			gap: measurement.$universal-space-3;
+		}
+
+		* {
+			margin-bottom: measurement.$universal-space;
+			@include breakpoint.large-screen-min {
+				margin-bottom: measurement.$universal-space-2;
+			}
+		}
+	}
+
+	&--filters {
+		#AUT-products--react {
+			> span {
+				display: block !important;
+			}
+		}
+
+		.AUT-products__grid-master {
+			@include grid.standard-settings;
+			grid-template-columns: repeat(1, minmax(0, 1fr));
+
+			@include breakpoint.large-screen-min {
+				grid-template-columns: 40rem 1fr;
+			}
+
+			.AUT-products__grid, .products-grid {
+				@include breakpoint.large-screen-min {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+			}
+		}
+
+		.loading-animation {
+			margin: 0;
+
+			&--news {
+				@include breakpoint.large-screen-min {
+					grid-template-columns: repeat(2, minmax(0, 1fr));
+				}
+			}
+		}
+	}
+
+	#AUT-products--react {
+		> span {
+			display: none;
+		}
+	}
+}

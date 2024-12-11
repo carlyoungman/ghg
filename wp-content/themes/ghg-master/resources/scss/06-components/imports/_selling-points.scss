@@ -1,0 +1,68 @@
+@use "../../01-settings/abstracts" as abstract;
+@use "../../01-settings/colors" as color;
+@use "../../01-settings/measurements" as measurement;
+@use "../../02-tools/container" as container;
+@use "../../02-tools/typography" as typography;
+@use "../../02-tools/breakpoints" as breakpoint;
+@use "../../02-tools/positioning" as position;
+
+.selling-points {
+	position: relative;
+	z-index: 2;
+	box-shadow: abstract.$box-shadow;
+	border-bottom: 1px solid var(--c-black);
+	background-color: var(--c-white);
+
+	&__inner {
+		@include container.standard-settings();
+	}
+
+	&__grid {
+		display: flex;
+		flex-wrap: wrap;
+		@include breakpoint.large-screen-min {
+			padding: measurement.$universal-space 0;
+		}
+	}
+
+	&__point {
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: center;
+		align-items: center;
+		gap: measurement.$universal-space;
+
+		padding: measurement.$universal-space 0;
+		width: 100%;
+		@include breakpoint.large-screen-min {
+			flex: 1;
+			border-right: 1px solid var(--c-black);
+			border-bottom: none;
+			padding: 0 measurement.$universal-space;
+		}
+
+		&:last-of-type {
+			border-bottom: 1px solid transparent;
+			@include breakpoint.large-screen-min {
+				border-right: 1px solid transparent;
+			}
+		}
+
+		p {
+			@include typography.font-xsmall;
+			margin: 0;
+		}
+	}
+
+	&__track {
+		@include breakpoint.medium-screen-max {
+			max-height: 61px;
+		}
+		overflow: hidden;
+	}
+
+	&__image {
+		width: measurement.$universal-space-2;
+		height: measurement.$universal-space-2;
+	}
+}

@@ -1,0 +1,73 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+@use "../../../../../ghg-master/resources/scss/02-tools/positioning" as position;
+
+@use "../../../../../ghg-master/resources/scss/02-tools/buttons" as button;
+
+.listing-block {
+	ul,
+	ol {
+		li {
+			&:before {
+				content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><g id='Complete'><g id='tick'><polyline points='3.7 14.3 9.6 19 20.3 5' fill='none' stroke='%23FFFFFF' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/></g></g></svg>");
+			}
+		}
+	}
+
+	&__background {
+		clip-path: none;
+		text-align: left;
+		@include breakpoint.large-screen-min {
+			background-image: url('data:image/svg+xml,<svg viewBox="0 0 488 485" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_227_913)"><path d="M407.334 77.9453L488.557 77.9453V-3.44167L407.334 -3.44167V77.9453Z" stroke="%23DCE1DF" stroke-linejoin="round"/><path d="M244.888 240.706L488.544 240.706L488.544 -3.44156L244.888 -3.44156L244.888 240.706Z" stroke="%23DCE1DF" stroke-linejoin="round"/><path d="M82.4561 403.467L488.544 403.467L488.544 -3.44153L82.4561 -3.44153L82.4561 403.467Z" stroke="%23DCE1DF" stroke-linejoin="round"/></g><defs><clipPath id="clip0_227_913"><rect width="488" height="485" fill="white"/></clipPath></defs></svg>');
+			background-position: right top;
+			background-size: 40%;
+			background-repeat: no-repeat;
+			padding: measurement.$universal-space-7 !important;
+		}
+	}
+
+	&__article {
+		max-width: measurement.$article-hero-max-width;
+	}
+
+	&__button-grid {
+		justify-content: flex-start;
+	}
+
+	&__article,
+	&__list {
+		margin-right: auto;
+		margin-left: 0;
+		text-align: left;
+	}
+
+	&__list {
+		@include breakpoint.large-screen-min {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	&__button {
+		@include button.default-settings(
+				var(--c-theme-primary),
+				var(--c-white)
+		);
+	}
+
+	&--background-primary {
+		.listing-block {
+			&__background {
+				background-color: var(--c-theme-third);
+			}
+		}
+
+		.listing-block__button {
+			@include button.default-settings(
+					var(--c-theme-primary),
+					var(--c-white)
+			);
+		}
+	}
+}

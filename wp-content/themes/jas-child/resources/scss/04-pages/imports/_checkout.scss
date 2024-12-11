@@ -1,0 +1,115 @@
+//@use "../../../../../ghg-master/resources/scss/01-settings/abstracts" as
+//	abstract;
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+//@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+//	breakpoint;
+//@use "../../../../../ghg-master/resources/scss/02-tools/positioning" as position;
+//
+//@use "../../../../../ghg-master/resources/scss/02-tools/container" as container;
+//@use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
+
+@use "../../../../../ghg-master/resources/scss/02-tools/typography" as typo;
+
+@use "../../../../../ghg-master/resources/scss/01-settings/typography" as
+	typography;
+
+.page-template-checkout {
+	.cart_item {
+		display: none;
+	}
+
+	.shop_table thead {
+		display: none;
+	}
+
+	.wc_payment_method,
+	.woocommerce-form__label-for-checkbox {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	#add_payment_method #payment div.payment_box,
+	.woocommerce-cart #payment div.payment_box,
+	.woocommerce-checkout #payment div.payment_box {
+		border-radius: var(--border-radius);
+		background: var(--c-white);
+
+		&:before {
+			display: none;
+		}
+	}
+
+	#sagepayform-card-icons,
+	#sagepaydirect-card-icons,
+	#opayopi-card-icons {
+		display: none;
+	}
+}
+
+.woocommerce table.shop_table tbody th,
+.woocommerce table.shop_table tfoot td,
+.woocommerce table.shop_table tfoot th {
+	font-weight: 400;
+}
+
+#sagepaydirect-cc-form .wc-credit-card-form-card-type,
+#sagepaydirect-cc-form .wc-credit-card-form-card-expiry-date,
+#sagepaydirect-cc-form .wc-credit-card-form-card-number,
+#sagepaydirect-cc-form .wc-credit-card-form-card-expiry,
+#sagepaydirect-cc-form .wc-credit-card-form-card-cvc {
+	border: 1px solid var(--c-black) !important;
+	border-radius: var(--border-radius) !important;
+	background-color: var(--c-white) !important;
+	padding: measurement.$universal-space measurement.$universal-space-half !important;
+	height: 5rem !important;
+	color: var(--c-black);
+	font-weight: var(--font-base-font-weight) !important;
+	font-size: var(--font-base-size) !important;
+	line-height: var(--font--base-line-height) !important;
+	font-family: var(--font--main) !important;
+}
+
+#sagepaydirect-cc-form label {
+	margin-bottom: measurement.$universal-space-half;
+	color: var(--c-black);
+}
+
+#add_payment_method #payment ul.payment_methods li input,
+.woocommerce-cart #payment ul.payment_methods li input,
+.woocommerce-checkout #payment ul.payment_methods li input {
+	margin: 0 !important;
+}
+
+.woocommerce-privacy-policy-text p {
+	@include typo.font-small;
+}
+
+#sagepaydirect-card-type {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZXZyb24tZG93biI+PHBhdGggZD0ibTYgOSA2IDYgNi02Ii8+PC9zdmc+");
+	background-position: 98% center !important;
+}
+
+.payment_box p {
+	margin: 0;
+}
+
+#order_comments_field {
+	label {
+		@include typo.headline-h6;
+		@include typo.headline-settings;
+		margin-bottom: measurement.$universal-space;
+	}
+
+	textarea {
+		border: 1px solid var(--c-black) !important;
+		border-radius: var(--border-radius) !important;
+		padding: measurement.$universal-space !important;
+		height: auto !important;
+	}
+}

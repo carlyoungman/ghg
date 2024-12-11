@@ -1,0 +1,88 @@
+{
+	"name": "bench-master",
+	"version": "1.0.0",
+	"description": " Bespoke WordPress Theme",
+	"license": "MIT",
+	"author": "Carl Youngman",
+	"homepage": "me@carlyoungman.com",
+	"private": true,
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"testing": {
+		"urls": {}
+	},
+	"engines": {
+		"node": ">=14"
+	},
+	"dependencies": {
+		"@glidejs/glide": "^3.6.0",
+		"hamburgers": "^1.2.1",
+		"prettier-plugin-css-order": "^1.3.0",
+		"stylelint-config-standard-scss": "^5.0.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"@babel/preset-react": "^7.14.5",
+		"@prettier/plugin-php": "^0.18.9",
+		"@wordpress/babel-preset-default": "^6.0.0",
+		"@wordpress/eslint-plugin": "^9.3.0",
+		"@wordpress/prettier-config": "^1.0.5",
+		"comment-parser": "^1.3.0",
+		"css-reset-and-normalize": "^2.3.5",
+		"eslint": "^7.32.0",
+		"eslint-plugin-jsdoc": "^36.0.8",
+		"eslint-plugin-jsx-a11y": "^6.4.1",
+		"eslint-plugin-prettier": "^3.4.1",
+		"eslint-plugin-react": "^7.18.3",
+		"eslint-webpack-plugin": "^3.1.1",
+		"fs": "^0.0.2",
+		"husky": "^7.0.4",
+		"laravel-mix": "^6.0.19",
+		"lint-staged": "^12.1.4",
+		"normalize.css": "^8.0.1",
+		"postcss": "^8.3.2",
+		"postcss-import": "^14.0.2",
+		"postcss-preset-env": "^7.1.0",
+		"prettier": "2.8.0",
+		"resolve-url-loader": "4.0.0",
+		"sass": "^1.32.13",
+		"sass-loader": "^12.4.0",
+		"stylelint": "^14.15.0",
+		"stylelint-config-prettier": "^9.0.4",
+		"stylelint-order": "^5.0.0",
+		"stylelint-prettier": "^2.0.0"
+	},
+	"scripts": {
+		"build": "npx mix --production",
+		"build_orig": "npx mix --production && npm run lint",
+		"dev": "npx mix && npm run blocks && npm run lint",
+		"watch": "npx mix watch",
+		"lint:css": "stylelint resources/scss/**/**.scss",
+		"lint:js": "eslint resources/js/**/**.js",
+		"lint:php": "composer run lint",
+		"format:js": "eslint --fix blocks/**/**.js",
+		"lint": "npm run lint:css && npm run lint:js && npm run lint:php",
+		"format": "npm run format-js",
+		"blocks": "for dir in blocks/*; do wp-scripts build $dir/src/index.js --output-path=$dir/build/; done"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"prettier": "@wordpress/prettier-config",
+	"lint-staged": {
+		"*.scss": [
+			"stylelint"
+		],
+		"*.js": [
+			"eslint"
+		],
+		"*.php": [
+			"./vendor/bin/phpcs --extensions=php --warning-severity=8 -s"
+		]
+	}
+}

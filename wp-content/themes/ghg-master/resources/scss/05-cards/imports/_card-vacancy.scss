@@ -1,0 +1,44 @@
+//@use "../../01-settings/abstracts" as abstract;
+@use "../../01-settings/colors" as color;
+@use "../../01-settings/measurements" as measurement;
+//@use "../../02-tools/articles" as article;
+@use "../../02-tools/breakpoints" as breakpoint;
+//@use "../../02-tools/images-and-icons" as images;
+@use "../../02-tools/buttons" as button;
+@use "../../02-tools/spacing" as spacing;
+
+.card-vacancy {
+	background: var(--c-theme-third);
+	padding: measurement.$universal-space-3 measurement.$universal-space;
+	clip-path: polygon(100% 0, 100% 75%, 75% 100%, 0 100%, 0 0);
+	@include breakpoint.large-screen-min {
+		padding: measurement.$universal-space-4 measurement.$universal-space-3;
+	}
+
+	&__posted-date {
+		margin-top: measurement.$universal-space-2;
+	}
+
+	&__button {
+		@include button.default-settings;
+		margin-top: measurement.$universal-space-2;
+	}
+}
+
+.current-vacancies {
+	&--background-secondary {
+		.card-vacancy {
+			background: var(--c-theme-primary);
+			color: var(--c-white);
+
+			&__button {
+				@include button.default-settings(var(--c-black), var(--c-white));
+			}
+		}
+
+	}
+}
+
+
+
+

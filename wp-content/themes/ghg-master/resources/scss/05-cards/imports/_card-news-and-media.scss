@@ -1,0 +1,67 @@
+@use "../../01-settings/measurements" as measurement;
+@use "../../01-settings/abstracts" as abstract;
+@use "../../02-tools/articles" as article;
+@use "../../02-tools/images-and-icons" as image;
+@use "../../02-tools/typography" as typography;
+@use "../../02-tools/breakpoints" as breakpoint;
+@use "../../02-tools/buttons" as button;
+
+.news-and-media-card {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	justify-content: space-between;
+
+	&__image-wrap {
+		@include image.aspect-ratio-16-9;
+		margin-bottom: measurement.$universal-space-2;
+		overflow: hidden;
+	}
+
+	&__image {
+		transition: abstract.$link-transition;
+		object-fit: contain;
+	}
+
+	&__article {
+		@include article.standard-settings;
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	&__image-cut {
+		display: none;
+	}
+
+	&__headline {
+		margin-bottom: 0;
+		font-family: var(--font--main);
+		text-transform: capitalize;
+	}
+
+	&__excerpt {
+		display: -webkit-box;
+		width: 100%;
+		overflow: hidden;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		margin-bottom: measurement.$universal-space-2;
+	}
+
+	&__article {
+		position: relative;
+	}
+
+	&__link {
+		@include button.default-settings;
+		max-width: 230px;
+	}
+
+	&:hover {
+		.news-and-media-card__image {
+			transform: scale(1.05);
+		}
+	}
+}

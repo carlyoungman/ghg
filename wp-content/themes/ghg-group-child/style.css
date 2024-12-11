@@ -1,0 +1,61 @@
+/*
+Theme Name: GHG Group Child
+Template: ghg-master
+Author: Carl Youngman
+Author URI: me@carlyoungman.com
+Description: This is a child them for the GHG Group website.
+Version: 1.0
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&display=swap");
+
+@font-face {
+	font-style: normal;
+	font-weight: bold;
+	src: url("./dist/fonts/Britanica-Bold.woff2") format("woff2"),
+	url("./dist/fonts/Britanica-Bold.woff") format("woff");
+	font-family: "Britanica";
+	font-display: swap;
+}
+
+@font-face {
+	font-style: normal;
+	font-weight: normal;
+	src: url("./dist/fonts/Britanica-Regular.woff2") format("woff2"),
+	url("./dist/fonts/Britanica-Regular.woff") format("woff");
+	font-family: "Britanica";
+	font-display: swap;
+}
+
+@font-face {
+	font-style: normal;
+	font-weight: 900;
+	src: url("./dist/fonts/Britanica-Black.woff2") format("woff2"),
+	url("./dist/fonts/Britanica-Black.woff") format("woff");
+	font-family: "Britanica";
+	font-display: swap;
+}
+
+:root {
+	--c-theme-primary: #283741;
+	--c-theme-secondary: #283741;
+	--c-theme-third: #d7dfe2;
+	--c-button-background: #e8af5f;
+	--c-button-color: #283741;
+	--c-button-background-hover: #283741;
+	--c-button-color-hover: #d7dfe2;
+
+
+	--c-black: #000000;
+	--c-white: #ffffff;
+	--c-off-white: #edf0ef;
+	--button-radius: 0px;
+	--border-radius: 0px;
+	--font--main: "DM Sans", "Helvetica", "Arial", sans-serif;
+	--font--headline: "Britanica", sans-serif;
+	--font--base-line-height: 1.6;
+	--font--headline-line-height: 1.05;
+	--font-base-size: 1.8rem;
+	--font-base-font-weight: 400;
+	--font-headline-weight: 400;
+}

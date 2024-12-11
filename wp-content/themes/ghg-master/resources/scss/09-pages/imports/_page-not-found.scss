@@ -1,0 +1,15 @@
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/container" as container;
+@use "../../02-tools/articles" as article;
+
+.page-not-found {
+	@include spacing.section-spacing;
+
+	&__inner {
+		@include container.standard-settings(true);
+	}
+
+	&__article {
+		@include article.standard-settings(true);
+	}
+}

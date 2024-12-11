@@ -1,0 +1,42 @@
+@use "../../../../resources/scss/01-settings/measurements" as measurement;
+@use "../../../../resources/scss/02-tools/breakpoints" as breakpoint;
+
+
+.product-toggle {
+	display: flex;
+	align-items: center;
+	gap: measurement.$universal-space;
+	z-index: 1;
+	margin-bottom: measurement.$universal-space-2;
+
+	.react-toggle {
+		display: flex;
+		align-items: center;
+
+		&--checked {
+			.react-toggle-track {
+				background: var(--c-theme-primary) !important;
+			}
+
+			.react-toggle-thumb {
+				right: 5px;
+				left: auto;
+				background: var(--c-theme-third);
+			}
+		}
+	}
+
+	.react-toggle-track {
+		border-radius: 30px;
+		background: var(--c-theme-third) !important;
+		width: measurement.$universal-space-4;
+		height: measurement.$universal-space-2;
+	}
+
+	.react-toggle-thumb {
+		top: auto;
+		left: 5px;
+		border: none;
+		background: var(--c-theme-primary);
+	}
+}

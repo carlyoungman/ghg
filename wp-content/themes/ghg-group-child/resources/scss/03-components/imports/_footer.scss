@@ -1,0 +1,64 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/container" as container;
+@use "../../../../../ghg-master/resources/scss/02-tools/images-and-icons" as image;
+@use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as breakpoint;
+@use "../../../../../ghg-master/resources/scss/02-tools/grid" as grid;
+@use "../../../../../ghg-master/resources/scss/02-tools/typography" as typography;
+
+
+.footer {
+	@include image.logo-settings(var(--c-theme-primary));
+	@include spacing.section-spacing;
+	background: var(--c-theme-third);
+	overflow: hidden;
+
+	&__inner {
+		@include container.standard-settings(true);
+		@include grid.standard-settings;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		@include breakpoint.large-screen-min {
+			grid-template-columns: 40% 1fr;
+		}
+	}
+
+	&__menu-grid {
+		@include grid.standard-settings;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		@include breakpoint.large-screen-min {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	&__menu-title {
+		margin-top: 0;
+		text-decoration: underline;
+	}
+
+	.menu {
+		ul {
+			display: flex;
+			flex-wrap: wrap;
+			gap: measurement.$universal-space-half;
+
+			li {
+				width: 100%;
+			}
+		}
+
+		a {
+			justify-content: flex-start;
+		}
+
+	}
+
+	.social-icons {
+		margin: measurement.$universal-space-2 0;
+	}
+
+	&__copyright {
+		@include typography.font-small;
+		max-width: measurement.$copyright;
+		margin: 0;
+	}
+}

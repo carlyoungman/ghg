@@ -1,0 +1,14 @@
+@use "../../../../resources/scss/02-tools/grid" as grid;
+@use "../../../../resources/scss/02-tools/breakpoints" as breakpoint;
+
+.products-grid {
+	@include grid.standard-settings;
+	grid-template-columns: repeat(1, minmax(0, 1fr));
+	@include breakpoint.medium-screen-min {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	@include breakpoint.large-screen-min {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+

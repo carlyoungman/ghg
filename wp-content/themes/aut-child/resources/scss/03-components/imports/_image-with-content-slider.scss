@@ -1,0 +1,17 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+@use "../../../../../ghg-master/resources/scss/02-tools/positioning" as position;
+
+.image-with-content-slider {
+	&__grid {
+		background: transparent;
+	}
+
+	&__content {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+}

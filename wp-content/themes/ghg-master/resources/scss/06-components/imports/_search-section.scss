@@ -1,0 +1,37 @@
+@use "../../01-settings/colors" as color;
+@use "../../01-settings/measurements" as measurement;
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/breakpoints" as breakpoint;
+@use "../../02-tools/grid" as grid;
+@use "../../02-tools/typography" as typography;
+@use "../../02-tools/container" as container;
+@use "../../02-tools/articles" as article;
+
+
+.search-section {
+	@include spacing.section-spacing;
+
+	&__inner {
+		@include container.standard-settings(true);
+	}
+
+	&__article {
+		@include article.standard-settings(true);
+		@include spacing.spacing-bottom;
+	}
+
+	&__headline-type {
+		margin: measurement.$universal-space-3 0 measurement.$universal-space-2 0;
+	}
+
+	&__grid {
+		@include grid.standard-settings;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		@include breakpoint.medium-screen-min {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		@include breakpoint.large-screen-min {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+}

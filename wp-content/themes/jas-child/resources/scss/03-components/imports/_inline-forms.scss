@@ -1,0 +1,8 @@
+.inline-forms {
+	&__grid {
+		> div:last-of-type {
+			background: none;
+			padding: 0;
+		}
+	}
+}

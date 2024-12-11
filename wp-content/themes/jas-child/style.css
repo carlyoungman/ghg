@@ -1,0 +1,109 @@
+/*
+Theme Name: JAS Child
+Template: ghg-master
+Author: Carl Youngman
+Author URI: me@carlyoungman.com
+Description: This is a child them for the JAS website
+Version: 1.0
+*/
+
+<<<<<<< HEAD
+@import url('https://fonts.googleapis.com/css2?family=Blinker&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+:root {
+	--c-theme-primary: #EFCA33;
+	--c-theme-secondary: #3F3F3F;
+	--c-theme-third: #E6E6E6;
+
+
+	--c-button-background: #3F3F3F;
+	--c-button-color: #ffffff;
+
+	--c-button-background-hover: #000000;
+	--c-button-color-hover: #fff;
+
+
+	--c-black: #000000;
+	--c-white: #ffffff;
+	--c-off-white: #edf0ef;
+	--button-radius: 10px;
+	--border-radius: 10px;
+
+	--font-base-size: 1.8rem;
+
+	--font--main: "DM Sans", sans-serif;
+	--font--base-line-height: 1.7;
+	--font-base-font-weight: 500;
+
+	--font--headline: "Blinker", sans-serif;
+	--font--headline-line-height: 1.2;
+	--font-headline-weight: 500;
+=======
+@font-face {
+	font-style: normal;
+	font-weight: 300;
+	src: url("./resources/fonts/LoosExtraWide-Light.woff2") format("woff2"),
+		url("./resources/fonts/LoosExtraWide-Light.woff") format("woff");
+	font-family: "Loos ExtraWide";
+	font-display: swap;
+}
+
+@font-face {
+	font-style: normal;
+	font-weight: normal;
+	src: url("./resources/fonts/LoosExtraWide-Regular.woff2") format("woff2"),
+		url("./resources/fonts/LoosExtraWide-Regular.woff") format("woff");
+	font-family: "Loos ExtraWide";
+	font-display: swap;
+}
+
+@font-face {
+	font-style: normal;
+	font-weight: bold;
+	src: url("./resources/fonts/LoosExtraWide-Bold.woff2") format("woff2"),
+		url("./resources/fonts/LoosExtraWide-Bold.woff") format("woff");
+	font-family: "Loos ExtraWide";
+	font-display: swap;
+}
+
+@font-face {
+	font-style: normal;
+	font-weight: normal;
+	src: url("./resources/fonts/LoosNormal-Regular.woff2") format("woff2"),
+		url("./resources/fonts/LoosNormal-Regular.woff") format("woff");
+	font-family: "Loos Normal";
+	font-display: swap;
+}
+
+@font-face {
+	font-style: normal;
+	font-weight: 500;
+	src: url("./resources/fonts/LoosNormal-Medium.woff2") format("woff2"),
+		url("./resources/fonts/LoosNormal-Medium.woff") format("woff");
+	font-family: "Loos Normal";
+	font-display: swap;
+}
+
+:root {
+	--c-theme-primary: #0050ff;
+	--c-theme-secondary: #283741;
+	--c-theme-third: #d7dfe2;
+	--c-button-background: #000000;
+	--c-button-color: #fff;
+	--c-black: #000000;
+	--c-white: #ffffff;
+	--c-off-white: #edf0ef;
+	--button-radius: 8px;
+	--border-radius: 8px;
+
+	--font-base-size: 1.8rem;
+
+	--font--main: "Loos Normal", sans-serif;
+	--font--base-line-height: 1.6;
+	--font-base-font-weight: 400;
+
+	--font--headline: "Loos ExtraWide", sans-serif;
+	--font--headline-line-height: 1.35;
+	--font-headline-weight: 400;
+>>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
+}

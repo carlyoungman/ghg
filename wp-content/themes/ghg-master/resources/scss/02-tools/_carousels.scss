@@ -1,0 +1,90 @@
+@use "../01-settings/abstracts" as abstract;
+@use "../01-settings/colors" as color;
+@use "../01-settings/measurements" as measurement;
+@use "../02-tools/breakpoints" as breakpoint;
+@use "../02-tools/transforms" as transform;
+
+@mixin carousel-settings {
+	&__glide {
+		position: relative;
+		z-index: 1;
+	}
+	&__track {
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+		//justify-content: center;
+	}
+	&__slides {
+		display: flex;
+	}
+	&__arrows {
+		display: flex;
+		position: absolute;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		width: 100%;
+	}
+	&__arrow {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 100%;
+		background-color: color.$c-grape;
+		background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IndoaXRlIiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjQ4Ij48cGF0aCBkPSJNNTYxLTI0MCAzMjAtNDgxbDI0MS0yNDEgNDMgNDMtMTk4IDE5OCAxOTggMTk4LTQzIDQzWiIvPjwvc3ZnPgo=");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: 100%;
+		padding: measurement.$universal-space;
+		width: measurement.$universal-space-3;
+		height: measurement.$universal-space-3;
+		box-shadow: abstract.$box-shadow;
+		appearance: none !important;
+		border: none !important;
+		outline: none !important;
+		transition: abstract.$link-transition;
+
+
+		&--next {
+			@include transform.rotate(180deg);
+		}
+
+		&:hover {
+			cursor: pointer;
+			background-color: var(--c-theme-primary);
+		}
+
+	}
+	&__bullets {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		gap: measurement.$universal-space;
+		margin-top: measurement.$universal-space-2;
+	}
+	&__bullet {
+		appearance: none !important;
+		outline: none !important;
+		box-shadow: none !important;
+		border: none !important;
+		border-radius: 100%;
+		background: #d6b7c9;
+		width: measurement.$universal-space;
+		height: measurement.$universal-space;
+
+		&.glide__bullet--active {
+			background: var(--c-theme-primary);
+		}
+
+		&:hover {
+			cursor: pointer;
+			background: var(--c-theme-primary);
+		}
+	}
+}
+
+.glide__arrow--disabled {
+	opacity: 0 !important;
+	pointer-events: none !important;
+}

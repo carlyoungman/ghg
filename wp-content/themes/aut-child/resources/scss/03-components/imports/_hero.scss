@@ -1,0 +1,83 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+@use "../../../../../ghg-master/resources/scss/02-tools/buttons" as button;
+
+.hero {
+	height: auto;
+	color: var(--c-white);
+	@include breakpoint.large-screen-min {
+		padding: 0 !important;
+		min-height: calc(80vh - 80px - 56px - 61px);
+	}
+
+	&__article {
+		@include breakpoint.large-screen-min {
+			padding: measurement.$universal-space-3 0 !important;
+		}
+	}
+
+	&__button {
+		@include button.default-settings(var(--c-theme-primary), var(--c-white), var(--c-theme-secondary), var(--c-white));
+	}
+
+	&--layout-inline-image-right,
+	&--layout-inline-image-left,
+	&--layout-diagonal-cutoff {
+		background: var(--c-off-white) !important;
+		@include breakpoint.large-screen-min {
+			min-height: calc(70vh - 80px - 56px - 61px);
+		}
+
+		.hero {
+			&__image-wrap {
+				min-height: auto;
+			}
+		}
+	}
+
+	&--layout-diagonal-cutoff {
+		height: auto !important;
+		min-height: calc(60vh) !important;
+
+		.hero {
+			&__image {
+				@include breakpoint.large-screen-min {
+					width: 45%;
+				}
+			}
+
+			&__article {
+				max-width: measurement.$article-hero-max-width;
+				color: var(--c-white);
+				@include breakpoint.large-screen-min {
+					color: var(--c-dark-blue);
+				}
+			}
+		}
+
+		&:after {
+			clip-path: none !important;
+			background-color: transparent !important;
+			@include breakpoint.large-screen-min {
+				background-image: url('data:image/svg+xml,<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 410 408"><defs><clipPath clipPathUnits="userSpaceOnUse" id="cp1"><path d="m0 0h428v444.08h-428z"/></clipPath></defs><style>.a{fill:%23edf0ef}.b{fill:%23ff3232}</style><path class="a" d="m0 197h205v211h-205z"/><g clip-path="url(%23cp1)"><path class="b" d="m205-2c-113.2 0-205 91.8-205 205h205z"/><path class="b" d="m205 203v204.9c113.2 0 204.9-91.7 204.9-204.9z"/></g></svg>') !important;
+				background-position: 60% center !important;
+				background-repeat: no-repeat !important;
+			}
+		}
+	}
+}
+
+main > .hero:first-child {
+	margin-top: 0;
+
+	&:after {
+		background: linear-gradient(
+				90deg,
+				var(--c-theme-secondary) 5%,
+				rgba(0, 0, 0, 0) 50%
+		);
+	}
+}

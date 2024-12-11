@@ -1,0 +1,59 @@
+@use "../../01-settings/measurements" as measurement;
+@use "../../01-settings/abstracts" as abstract;
+@use "../../02-tools/articles" as article;
+@use "../../02-tools/images-and-icons" as image;
+@use "../../02-tools/typography" as typography;
+@use "../../02-tools/buttons" as button;
+@use "../../02-tools/lists" as list;
+
+.card-product-categories {
+	display: flex;
+	position: relative;
+	flex-flow: column;
+	justify-content: space-between;
+
+	&__image-wrap {
+		@include image.aspect-ratio-16-9;
+		margin-bottom: measurement.$universal-space;
+		border: 1px solid var(--c-theme-third);
+		overflow: hidden;
+	}
+
+	&__image {
+		transition: abstract.$link-transition;
+		object-fit: contain;
+	}
+
+	&__article {
+		@include article.standard-settings;
+		display: flex;
+		flex: 1;
+		flex-wrap: wrap;
+		text-align: center;
+	}
+
+	&__description {
+		display: -webkit-box;
+		width: 100%;
+		overflow: hidden;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		margin: 0 0 measurement.$universal-space-2 0;
+	}
+
+	&__headline {
+		width: 100%;
+		text-transform: capitalize;
+	}
+
+	&__button {
+		@include button.default-settings;
+		margin: 0 auto;
+	}
+
+	&:hover {
+		.product-categories-card__image {
+			transform: scale(1.05);
+		}
+	}
+}

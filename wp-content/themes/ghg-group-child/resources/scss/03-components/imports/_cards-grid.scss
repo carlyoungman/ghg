@@ -1,0 +1,15 @@
+.card-grid {
+
+	&__article {
+		p {
+			color: var(--c-button-background);
+		}
+	}
+
+	&:hover {
+		* {
+			color: var(--c-white);
+		}
+	}
+
+}

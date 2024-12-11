@@ -1,0 +1,7 @@
+@use "../../../../../ghg-master/resources/scss/02-tools/buttons" as button;
+
+.key-points {
+	&__button {
+		@include button.default-settings();
+	}
+}

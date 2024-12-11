@@ -1,0 +1,37 @@
+@use "../../01-settings/colors" as color;
+@use "../../01-settings/measurements" as measurement;
+@use "../../02-tools/container" as container;
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/breakpoints" as breakpoint;
+@use "../../02-tools/content" as content;
+@use "../../02-tools/grid" as grid;
+
+.products {
+	@include content.display-settings(false);
+	@include spacing.section-spacing;
+
+	&__inner {
+		@include container.standard-settings(true);
+	}
+
+	&__article {
+		&:after {
+			content: "";
+		}
+	}
+
+	&__line {
+		@include spacing.spacing-bottom;
+		display: block;
+		margin-top: calc(-160px + 4.5rem);
+		background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM0MyIgaGVpZ2h0PSIxNzIiIHZpZXdCb3g9IjAgMCAxMzQzIDE3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAgMTY3SDgyMUw5NTUgNUgxMzQzIiBzdHJva2U9IiMwMDUwRkYiIHN0cm9rZS13aWR0aD0iMTAiLz4KPC9zdmc+Cg==");
+		background-size: cover;
+		background-repeat: no-repeat;
+		width: 100%;
+		height: 200px;
+	}
+
+	div#products--react {
+		position: relative;
+	}
+}

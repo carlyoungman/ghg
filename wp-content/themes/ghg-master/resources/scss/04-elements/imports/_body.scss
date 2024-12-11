@@ -1,0 +1,14 @@
+@use "../../02-tools/typography" as typography;
+
+body {
+	@include typography.base-settings;
+	overflow-x: hidden;
+
+	&.mobile--active {
+		overflow: hidden;
+	}
+
+	> svg {
+		display: none !important;
+	}
+}

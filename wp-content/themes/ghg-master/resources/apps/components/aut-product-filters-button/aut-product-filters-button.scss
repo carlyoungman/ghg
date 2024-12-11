@@ -1,0 +1,22 @@
+@use "../../../../resources/scss/01-settings/measurements" as measurement;
+@use "../../../../resources/scss/02-tools/buttons" as button;
+@use "../../../../resources/scss/02-tools/spacing" as spacing;
+@use "../../../../resources/scss/02-tools/positioning" as position;
+
+.aut-product-filters-button {
+	@include position.flex-center;
+	position: relative;
+	margin-top: measurement.$universal-space-2;
+
+	&__button {
+		@include button.default-settings();
+		@include position.flex-center;
+		display: flex !important;
+	}
+
+	svg {
+		width: measurement.$universal-space-4;
+		height: measurement.$universal-space-4;
+		stroke: var(--c-theme-primary);
+	}
+}

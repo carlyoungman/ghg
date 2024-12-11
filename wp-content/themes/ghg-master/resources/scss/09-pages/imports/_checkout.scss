@@ -1,0 +1,43 @@
+@use "../../01-settings/measurements" as measurement;
+@use "../../02-tools/typography" as typography;
+
+.page-template-checkout {
+	h3 {
+		@include typography.headline-h5;
+	}
+
+	form.checkout.woocommerce-checkout {
+		label {
+			@include typography.font-small;
+		}
+
+		input,
+		.select2-selection {
+			@include typography.base-settings;
+			display: flex;
+			align-items: center;
+			border: 1px solid var(--c-black) !important;
+			border-radius: var(--border-radius) !important;
+			background-color: var(--c-white) !important;
+			padding: measurement.$universal-space
+				measurement.$universal-space-half !important;
+			height: 4rem !important;
+		}
+
+		.select2-container--default
+			.select2-selection--single
+			.select2-selection__arrow {
+			top: auto;
+		}
+	}
+
+	.woocommerce table.shop_table th {
+		font-weight: 400 !important;
+	}
+
+	#add_payment_method #payment,
+	.woocommerce-cart #payment,
+	.woocommerce-checkout #payment {
+		background: var(--c-theme-third) !important;
+	}
+}

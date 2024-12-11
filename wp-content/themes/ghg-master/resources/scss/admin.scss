@@ -1,0 +1,33 @@
+.edit-tags-php {
+	.acf-field-flexible-components-flexible, #acf-term-fields {
+		display: none;
+	}
+}
+
+.term-php {
+	.acf-field-group {
+		width: 100% !important;
+	}
+}
+
+.taxonomy-industry.edit-tags-php {
+	.acf-field-flexible-content {
+		display: none;
+	}
+}
+
+.term-php body.benchmaster {
+	a[data-layout="series"],
+	a[data-layout="series_table"],
+	a[data-layout="AUT_products"],
+	a[data-layout="AUT_products"] {
+		display: none;
+	}
+}
+
+body.aut-wheels-castors {
+	a[data-layout="case_studies"],
+	a[data-layout="products"] {
+		display: none;
+	}
+}

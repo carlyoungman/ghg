@@ -1,0 +1,93 @@
+@use "../../01-settings/colors" as color;
+@use "../../01-settings/measurements" as measurement;
+@use "../../02-tools/container" as container;
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/breakpoints" as breakpoint;
+@use "../../02-tools/buttons" as button;
+////@use "../../02-tools/typography" as typography;
+@use "../../02-tools/positioning" as position;
+@use "../../02-tools/grid" as grid;
+@use "../../02-tools/content" as content;
+@use "../../02-tools/images-and-icons" as image;
+
+.slider-section {
+	@include spacing.section-spacing;
+	@include content.display-settings(false, true);
+	overflow: hidden;
+
+	&__inner {
+		@include container.standard-settings(true);
+	}
+
+	&__track {
+		overflow: hidden;
+	}
+
+	&__controls {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: measurement.$universal-space;
+		margin: measurement.$universal-space-2 auto 0 auto;
+		@include breakpoint.large-screen-min {
+			margin: 0;
+		}
+
+		svg {
+			width: measurement.$universal-space-3;
+			height: measurement.$universal-space-3;
+			stroke: var(--c-theme-primary);
+
+			@include breakpoint.large-screen-min {
+				@include position.absolute-center;
+				position: absolute;
+			}
+
+			&:first-of-type {
+				@include breakpoint.large-screen-min {
+					left: -3rem;
+				}
+			}
+
+			&:last-of-type {
+				@include breakpoint.large-screen-min {
+					right: -3rem;
+				}
+				transform: scaleX(-1);
+			}
+
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
+
+	&__grid {
+		display: flex;
+		@include spacing.spacing-top;
+	}
+
+	&__image-wrap {
+		@include position.flex-center;
+		margin-bottom: measurement.$universal-space-2;
+		background: var(--c-theme-third);
+		padding: measurement.$universal-space-4 measurement.$universal-space-2;
+	}
+
+	&__image {
+		width: 18rem;
+		height: 9rem;
+		object-fit: contain;
+	}
+
+	&__text {
+		padding: 0 measurement.$universal-space;
+		text-align: center;
+	}
+
+	.__button {
+		@include button.link-styling;
+		margin-top: measurement.$universal-space-2;
+		font-weight: bold;
+	}
+}

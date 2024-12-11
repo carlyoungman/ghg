@@ -1,0 +1,37 @@
+@use "../../01-settings/measurements" as measurement;
+@use "../../02-tools/container" as container;
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/content" as content;
+@use "../../02-tools/grid" as grid;
+@use "../../02-tools/breakpoints" as breakpoint;
+
+.news-and-media {
+	@include content.display-settings(false, ture);
+	@include spacing.section-spacing;
+
+	&__inner {
+		@include container.standard-settings(true);
+	}
+
+	&__article {
+		@include spacing.spacing-bottom;
+	}
+
+	&__grid {
+		@include grid.standard-settings;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		@include breakpoint.medium-screen-min {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		@include breakpoint.large-screen-min {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		&--initial {
+			margin-bottom: measurement.$universal-space-2;
+			@include breakpoint.medium-screen-min {
+				margin-bottom: measurement.$universal-space-3;
+			}
+		}
+	}
+}

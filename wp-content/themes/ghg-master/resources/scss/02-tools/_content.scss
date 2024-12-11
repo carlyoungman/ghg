@@ -1,0 +1,85 @@
+@use "../01-settings/measurements" as measurement;
+@use "../01-settings/colors" as color;
+@use "./buttons" as button;
+@use "./typography" as typography;
+@use "./positioning" as position;
+@use "./articles" as article;
+@use "./breakpoints" as breakpoint;
+@use "./spacing" as spacing;
+
+@mixin content-reset {
+	:first-child {
+		margin-top: 0;
+	}
+	:last-child {
+		margin-bottom: 0;
+	}
+}
+
+@mixin display-settings($padding: true, $center: false) {
+	&__article {
+		@include article.standard-settings(true);
+		@if $center {
+			@include article.standard-settings(true, true);
+			margin: 0 auto;
+		}
+
+		@if $padding {
+			padding: measurement.$universal-space-3 0;
+		}
+	}
+	&__button-grid {
+		@include button.button-grid;
+		justify-content: flex-start;
+		@if $center {
+			justify-content: center;
+		}
+	}
+	&__button {
+		@include button.default-settings(
+				var(--c-button-background),
+				var(--c-button-color)
+		);
+	}
+}
+
+@mixin grid-layout {
+	&__article {
+		max-width: 100%;
+
+		h5 {
+			margin: measurement.$universal-space 0;
+		}
+
+		@include breakpoint.medium-screen-min {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			.breadcrumbs {
+				grid-row: 1;
+				grid-column: 1 / span 2;
+				margin-bottom: measurement.$universal-space-2;
+			}
+			h1,
+			p {
+				margin: 0;
+			}
+
+			h1 {
+				grid-row: 2;
+				grid-column: 1;
+				max-width: measurement.$article-hero-max-width;
+			}
+			h5 {
+				grid-row: 2;
+				grid-column: 1;
+				margin: measurement.$universal-space-5 0 0 0;
+				max-width: measurement.$article-hero-max-width;
+			}
+
+			p {
+				grid-row: 2;
+				grid-column: 2;
+			}
+		}
+	}
+}

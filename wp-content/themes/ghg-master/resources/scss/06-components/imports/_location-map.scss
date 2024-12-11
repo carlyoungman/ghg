@@ -1,0 +1,43 @@
+@use "../../01-settings/measurements" as measurement;
+@use "../../01-settings/colors" as color;
+@use "../../02-tools/container" as container;
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/breakpoints" as breakpoint;
+@use "../../02-tools/grid" as grid;
+@use "../../02-tools/content" as content;
+
+
+.location-map {
+	@include spacing.section-spacing;
+	@include content.display-settings(false, true);
+
+	&__inner {
+		@include container.standard-settings(true);
+	}
+
+	&__background {
+		@include spacing.block-spacing-padding;
+		background: var(--c-theme-primary);
+
+		color:color.$c-white
+
+	}
+
+	&__article {
+		padding-left: measurement.$universal-space;
+		padding-left: measurement.$universal-space;
+	}
+
+	&__map-wrap {
+		padding: measurement.$universal-space-3 measurement.$universal-space;
+		@include breakpoint.large-screen-min {
+			padding: measurement.$universal-space-3;
+		}
+	}
+
+	/* Set the width and height of the map container */
+	.map {
+		width: 100%;
+		height: 56.25vh;
+	}
+}

@@ -1,0 +1,95 @@
+@use "../../01-settings/abstracts" as abstract;
+@use "../../01-settings/measurements" as measurement;
+@use "../../01-settings/colors" as color;
+@use "../../02-tools/container" as container;
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/content" as content;
+@use "../../02-tools/grid" as grid;
+@use "../../02-tools/breakpoints" as breakpoint;
+@use "../../02-tools/transforms" as transforms;
+
+.faqs {
+	@include content.display-settings(false, false);
+	@include spacing.section-spacing;
+
+	&--background-off-white {
+		background: var(--c-off-white);
+
+		.faqs {
+			&__faq {
+				&:hover {
+					background: var(--c-white);
+				}
+			}
+		}
+	}
+
+	&__inner {
+		@include container.standard-settings(true);
+	}
+
+	&__grid {
+		@include grid.standard-settings;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		@include breakpoint.large-screen-min {
+			grid-template-columns: 40% 1fr;
+		}
+	}
+
+	&__faq {
+		margin: 0;
+		border-bottom: 1px solid var(--c-theme-secondary);
+
+		&:last-of-type {
+			border-bottom: 1px solid transparent;
+		}
+
+		&:hover {
+			cursor: pointer;
+			background: var(--c-off-white);
+		}
+
+		&__question {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: center;
+			margin: 0;
+			padding: measurement.$universal-space;
+			font-weight: 500;
+			@include breakpoint.large-screen-min {
+				padding: measurement.$universal-space-2
+					measurement.$universal-space;
+			}
+
+			svg {
+				transition: abstract.$link-transition;
+			}
+		}
+
+		&__answer {
+			margin: 0;
+			height: 0;
+			overflow: hidden;
+		}
+
+		&--open {
+			p.faqs__faq__question {
+				svg {
+					@include transforms.rotate(180deg);
+				}
+			}
+
+			p.faqs__faq__answer {
+				padding: 0 measurement.$universal-space
+					measurement.$universal-space measurement.$universal-space;
+				height: auto;
+				@include breakpoint.large-screen-min {
+					padding: 0 measurement.$universal-space
+						measurement.$universal-space-2
+						measurement.$universal-space;
+				}
+			}
+		}
+	}
+}

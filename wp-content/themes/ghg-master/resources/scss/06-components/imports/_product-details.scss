@@ -1,0 +1,81 @@
+@use "../../01-settings/measurements" as measurement;
+@use "../../01-settings/colors" as color;
+@use "../../02-tools/container" as container;
+@use "../../02-tools/spacing" as spacing;
+@use "../../02-tools/buttons" as button;
+@use "../../02-tools/articles" as article;
+@use "../../02-tools/positioning" as position;
+@use "../../02-tools/grid" as grid;
+@use "../../02-tools/breakpoints" as breakpoint;
+
+.product-details {
+	@include spacing.section-spacing;
+	position: relative;
+	clear: both;
+	background: var(--c-theme-third);
+
+	&:after {
+		@include position.full-size-after;
+		left: -150%;
+		background: var(--c-theme-third);
+		width: 300%;
+	}
+
+	&__inner {
+		@include container.standard-settings(true);
+		padding: 0 !important;
+	}
+
+	&__grid {
+		@include grid.standard-settings;
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+		@include breakpoint.medium-screen-min {
+			grid-template-columns: 40% 1fr;
+		}
+		@include breakpoint.large-screen-min {
+			grid-template-columns: 25% 1fr;
+		}
+	}
+
+	&__headline {
+		margin: 0;
+	}
+
+	&__content-headline {
+		font-weight: 500;
+	}
+
+	&__content {
+		column-gap: measurement.$universal-space-3;
+		column-count: 1;
+		@include breakpoint.large-screen-min {
+			column-gap: measurement.$universal-space-4;
+			column-count: 2;
+		}
+	}
+
+	&__article {
+		break-inside: avoid-column;
+		margin-bottom: measurement.$universal-space-2;
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+
+		ul,
+		ol {
+			padding-left: measurement.$universal-space;
+			@include breakpoint.large-screen-min {
+				padding-left: measurement.$universal-space-2;
+			}
+			list-style-type: disc;
+
+			li {
+				@include breakpoint.large-screen-max {
+					flex-wrap: wrap;
+				}
+				margin-bottom: measurement.$universal-space-half;
+			}
+		}
+	}
+}

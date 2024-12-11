@@ -1,0 +1,19 @@
+{
+    "name": "AUT",
+    "short_name": "AUT",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ff3232",
+    "background_color": "#ff3232",
+    "display": "standalone"
+}

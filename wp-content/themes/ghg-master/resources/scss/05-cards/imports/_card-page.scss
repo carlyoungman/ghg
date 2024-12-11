@@ -1,0 +1,19 @@
+@use "../../01-settings/measurements" as measurement;
+@use "../../02-tools/articles" as article;
+@use "../../02-tools/images-and-icons" as image;
+@use "../../02-tools/typography" as typography;
+
+.card-page {
+	position: relative;
+
+	&__image-wrap {
+		@include image.aspect-ratio-16-9;
+	}
+
+	&__article {
+		@include article.standard-settings;
+		background: var(--c-theme-third);
+		padding: measurement.$universal-space;
+	}
+	
+}

@@ -1,0 +1,31 @@
+@use "../../01-settings/colors" as color;
+@use "../../01-settings/measurements" as measurement;
+
+
+.product-toggle {
+	position: absolute;
+	right: measurement.$universal-space-2;
+	top: 0;
+	display: flex;
+	align-items: center;
+	gap: measurement.$universal-space-half;
+
+	.react-toggle-track {
+		background: var(--c-theme-third)
+	}
+
+	.react-toggle-thumb {
+		background: var(--c-theme-primary)
+	}
+
+	.react-toggle--checked {
+		.react-toggle-track {
+			background: var(--c-theme-primary)
+		}
+
+		.react-toggle-thumb {
+			background: var(--c-white);
+		}
+	}
+
+}

@@ -1,0 +1,21 @@
+@use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
+@use "../../../../../ghg-master/resources/scss/02-tools/content" as content;
+@use "../../../../../ghg-master/resources/scss/02-tools/container" as container;
+
+.tax-product-cat {
+	@include spacing.section-spacing;
+	@include content.display-settings(false, false);
+
+	&__inner {
+		@include container.standard-settings(true);
+
+		&:after {
+			@include spacing.spacing-top;
+			display: block;
+			background: var(---c-theme-third);
+			width: 100%;
+			height: 1px;
+			content: "";
+		}
+	}
+}

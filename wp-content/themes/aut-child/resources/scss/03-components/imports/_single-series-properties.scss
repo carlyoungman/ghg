@@ -1,0 +1,71 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+@use "../../../../../ghg-master/resources/scss/02-tools/positioning" as position;
+@use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
+@use "../../../../../ghg-master/resources/scss/02-tools/content" as content;
+@use "../../../../../ghg-master/resources/scss/02-tools/container" as container;
+@use "../../../../../ghg-master/resources/scss/02-tools/grid" as grid;
+
+.single-series-properties {
+	@include content.display-settings(false, ture);
+
+	margin: measurement.$universal-space-3 0;
+	@include breakpoint.large-screen-min {
+		margin: -4.5rem 0 measurement.$universal-space-7 0;
+	}
+
+	&__inner {
+		@include container.standard-settings(true);
+
+		&:after {
+			@include spacing.spacing-top;
+			display: block;
+			background: var(--c-theme-third);
+			width: 100%;
+			height: 1px;
+			content: "";
+		}
+	}
+
+	&__article {
+		@include spacing.spacing-bottom;
+	}
+
+	&__grid {
+		@include grid.standard-settings;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		@include breakpoint.medium-screen-min {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+		@include breakpoint.large-screen-min {
+			grid-template-columns: repeat(5, minmax(0, 1fr));
+		}
+	}
+
+	&__item {
+		@include position.flex-center;
+		flex-wrap: wrap;
+
+		&__icon {
+			max-height: measurement.$universal-space-6;
+		}
+
+		&__label,
+		&__data {
+			width: 100%;
+			text-align: center;
+		}
+
+		&__label {
+			margin: measurement.$universal-space-2 0
+				measurement.$universal-space 0;
+			font-weight: 700;
+		}
+
+		&__data {
+			margin: 0;
+		}
+	}
+}

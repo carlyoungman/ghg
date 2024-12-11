@@ -1,0 +1,47 @@
+@use "../../01-settings/colors" as color;
+@use "../../01-settings/measurements" as measurement;
+@use "../../02-tools/articles" as article;
+@use "../../02-tools/breakpoints" as breakpoint;
+
+
+.card-key-point {
+	padding: measurement.$universal-space-3 measurement.$universal-space;
+	border-bottom: 1px solid var(--c-theme-third);
+	@include breakpoint.medium-screen-min {
+		padding: measurement.$universal-space-3;
+		border-bottom: none;
+		border-right: 1px solid var(--c-theme-third);
+	}
+
+	&:last-of-type {
+		border-bottom: 1px solid transparent;
+		@include breakpoint.medium-screen-min {
+			border-right: 1px solid transparent;
+		}
+	}
+
+	&__icon-wrap {
+		width: 10rem;
+		height: 10rem;
+		margin: 0 auto;
+	}
+
+	&__image {
+		object-fit: contain;
+		height: 100%;
+	}
+
+	&__article {
+		@include article.standard-settings;
+		margin: measurement.$universal-space-2 auto 0 auto;
+		max-width: measurement.$card-content-max-width;
+		text-align: center;
+
+		h1, h2, h3, h4, h5, h6 {
+			margin-bottom: measurement.$universal-space-2;
+		}
+
+	}
+
+
+}

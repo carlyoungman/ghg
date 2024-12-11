@@ -1,0 +1,46 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+@use "../../../../../ghg-master/resources/scss/02-tools/positioning" as position;
+
+.image-with-content-slider {
+	&__grid {
+		> div:last-of-type {
+			position: relative;
+
+			&:after {
+				@include position.full-size-after;
+				top: auto;
+				right: -30%;
+				bottom: 0;
+				left: auto;
+				background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIwIDYxNy41MSI+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogI2ZmZjsKICAgICAgfQoKICAgICAgLmNscy0xLCAuY2xzLTIgewogICAgICAgIHN0cm9rZS13aWR0aDogMHB4OwogICAgICB9CgogICAgICAuY2xzLTIgewogICAgICAgIGZpbGw6ICMwMDUwZmY7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxwb2x5bGluZSBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMTA0NS45OSAzMDkuNTYgNzg2LjI4IDYxNy40NSAwIDYxNy40NSAxMTMuODEgMzA5LjU2IDk4Mi45OSAzMDkuNTYgMTI0MS4wNSAwIDE5MTkuODQgLjA2IDE5MTkuODQgMzA5LjU2Ii8+CiAgPHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjEwNDYuMDEgMzA5LjU2IDc4Ni4yOCA2MTcuNDUgMTkyMCA2MTguMyAxOTIwIDMwOS41NiAxMDQ2LjAxIDMwOS41NiIvPgo8L3N2Zz4=");
+				background-position: bottom;
+				background-size: inherit;
+				background-repeat: no-repeat;
+			}
+		}
+	}
+
+	&__article {
+		position: relative;
+		z-index: 1;
+		padding-bottom: measurement.$universal-space-9 !important;
+		@include breakpoint.large-screen-min {
+			padding-bottom: measurement.$universal-space-12 !important;
+		}
+	}
+
+	&__controls {
+		bottom: 15px;
+		@include breakpoint.medium-screen-min {
+			bottom: 45px;
+			left: measurement.$universal-space-3;
+		}
+		@include breakpoint.large-screen-min {
+			bottom: 120px;
+			left: measurement.$universal-space-6;
+		}
+	}
+}

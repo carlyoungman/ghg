@@ -1,0 +1,89 @@
+@use "../01-settings/abstracts" as abstract;
+@use "../01-settings/measurements" as measurement;
+@use "./spacing" as spacing;
+@use "./typography" as typography;
+@use "./breakpoints" as breakpoint;
+
+@mixin reset {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	li {
+		margin: 0;
+		padding: 0;
+	}
+	a {
+		color: inherit;
+		text-decoration: underline;
+
+		&:hover {
+			color: var(--active);
+		}
+	}
+}
+
+$tick-icon: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><g id='Complete'><g id='tick'><polyline points='3.7 14.3 9.6 19 20.3 5' fill='none' stroke='%23E8AF5F' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/></g></g></svg>");
+
+@mixin styles {
+	ul {
+		list-style: none;
+	}
+	ol {
+		list-style: none;
+	}
+	ul,
+	ol {
+		li {
+			@include spacing.list-spacing;
+			display: flex;
+			position: relative;
+			align-items: flex-start;
+			padding-left: measurement.$universal-space;
+			@include breakpoint.large-screen-min {
+				padding-left: measurement.$universal-space-3;
+			}
+
+			&::before {
+				display: inline-block;
+				position: absolute;
+				left: -1.5rem;
+				width: measurement.$universal-space;
+				height: measurement.$universal-space;
+				@include breakpoint.large-screen-min {
+					left: 0;
+					width: measurement.$universal-space-2;
+					height: measurement.$universal-space-2;
+				}
+				content: $tick-icon;
+			}
+		}
+	}
+}
+
+@mixin tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: measurement.$universal-space-half;
+	list-style: none;
+
+	li {
+		margin: 0;
+		padding: 0;
+
+		a {
+			@include typography.font-xsmall;
+			background: var(--c-dark-blue);
+			padding: measurement.$universal-space-half;
+			color: var(--c-white);
+			text-decoration: none;
+
+			&:hover {
+				background: var(--c-theme-primary);
+			}
+		}
+
+		&:before {
+			display: none;
+		}
+	}
+}

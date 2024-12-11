@@ -1,0 +1,24 @@
+@use "../02-tools/typography" as typography;
+@use "../01-settings/measurements" as measurement;
+@use "../01-settings/colors" as color;
+@use "../01-settings/abstracts" as abstract;
+
+@mixin display-settings {
+	&__categories {
+		@include typography.font-small;
+		display: flex;
+		flex-wrap: wrap;
+		gap: measurement.$universal-space;
+		z-index: 1;
+		top: measurement.$universal-space;
+		left: measurement.$universal-space;
+	}
+
+	&__category {
+		background-color: var(--c-theme-primary);
+		padding: measurement.$universal-space-half;
+		border-radius: abstract.$border-radius;
+		margin: 0;
+
+	}
+}

@@ -1,0 +1,18 @@
+.testimonials {
+	&__grid {
+		background: var(--c-theme-third);
+		color: var(--c-black);
+	}
+
+	&__after {
+		background: var(--c-theme-secondary);
+	}
+
+	&__button {
+		color: var(--c-black) !important;
+
+		&:hover {
+			color: var(--c-theme-primary) !important;
+		}
+	}
+}

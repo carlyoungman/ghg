@@ -1,0 +1,85 @@
+@use "../../01-settings/measurements" as measurement;
+@use "../../01-settings/abstracts" as abstract;
+@use "../../02-tools/articles" as article;
+@use "../../02-tools/images-and-icons" as image;
+@use "../../02-tools/typography" as typography;
+
+.card-product {
+	position: relative;
+
+	&__image-wrap {
+		@include image.aspect-ratio-1-1;
+		margin-bottom: measurement.$universal-space-2;
+		border: 1px solid var(--c-theme-third);
+	}
+
+	&__image {
+		transition: abstract.$link-transition;
+		padding: measurement.$universal-space-2;
+		object-fit: contain !important;
+	}
+
+	&__article {
+		@include article.standard-settings;
+	}
+
+	&__headline {
+		@include typography.headline-settings;
+		margin-bottom: measurement.$universal-space;
+		text-transform: capitalize;
+	}
+
+	&__price {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		margin: measurement.$universal-space 0;
+		color: var(--c-theme-primary);
+		font-weight: 600;
+		text-transform: uppercase;
+
+		> span:last-child {
+			display: none;
+		}
+
+
+		bdi {
+			font-size: 1.8rem;
+		}
+	}
+
+	&__vat {
+		margin-left: measurement.$universal-space-half;
+		color: var(--c-black);
+		font-size: 1.6rem !important;
+	}
+
+	&__description {
+		@include typography.font-small;
+		display: -webkit-box;
+		width: 100%;
+		overflow: hidden;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		margin-bottom: measurement.$universal-space-2;
+	}
+
+	&:hover {
+		.card-product__image {
+			transform: scale(1.05);
+		}
+	}
+}
+
+.price-with-vat {
+	.card-product__price, .price-container {
+		> span:last-child, .priceWithTax {
+			display: block !important;
+		}
+
+		> span:first-child, .priceWithoutTax {
+			display: none !important;
+		}
+	}
+}
+

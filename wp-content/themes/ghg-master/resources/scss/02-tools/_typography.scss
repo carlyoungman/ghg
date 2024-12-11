@@ -1,0 +1,75 @@
+@use "../01-settings/typography" as typography;
+@use "../01-settings/colors" as color;
+@use "../01-settings/measurements" as measurement;
+@use "../01-settings/colors" as *;
+@use "../02-tools/breakpoints" as *;
+
+@mixin font-size($min-size-multiplier, $max-size-multiplier) {
+	font-size: calc(var(--font-base-size) * #{$min-size-multiplier});
+	font-size: max(
+		min(
+			calc(var(--font-base-size) * #{$max-size-multiplier}),
+			8.333vw - 0.875em
+		),
+		calc(var(--font-base-size) * #{$min-size-multiplier})
+	);
+}
+
+@mixin headline-settings {
+	font-weight: var(--font-headline-weight);
+	line-height: var(--font--headline-line-height);
+	font-family: var(--font--headline);
+	letter-spacing: -0.02em;
+	text-wrap: balance;
+}
+
+@mixin base-settings {
+	@include font-size(0.8, 1);
+	font-weight: var(--font-base-font-weight);
+	line-height: var(--font--base-line-height);
+	font-family: var(--font--main);
+}
+
+@mixin super-size {
+	@include font-size(1.8, 4);
+}
+
+@mixin headline-h1 {
+	@include font-size(1.8, 3.5);
+}
+
+@mixin headline-h2 {
+	@include font-size(1.7, 3);
+}
+
+@mixin headline-h3 {
+	@include font-size(1.6, 2.5);
+}
+
+@mixin headline-h4 {
+	@include font-size(1.4, 1.8);
+}
+
+@mixin headline-h5 {
+	@include font-size(1.2, 1.4);
+}
+
+@mixin headline-h6 {
+	@include font-size(1, 1.1);
+}
+
+@mixin font-large {
+	@include font-size(1, 1.1);
+}
+
+@mixin font-small {
+	@include font-size(0.8, 0.9);
+}
+
+@mixin font-xsmall {
+	@include font-size(0.7, 0.8);
+}
+
+@mixin paragraph-settings {
+	@include base-settings;
+}

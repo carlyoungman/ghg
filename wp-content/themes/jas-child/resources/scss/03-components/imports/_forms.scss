@@ -1,0 +1,102 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/abstracts" as
+	abstract;
+@use "../../../../../ghg-master/resources/scss/01-settings/colors" as color;
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+@use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
+@use "../../../../../ghg-master/resources/scss/02-tools/buttons" as button;
+@use "../../../../../ghg-master/resources/scss/02-tools/typography" as
+	typography;
+
+.frm_forms {
+	input[type="text"],
+	input[type="email"],
+	input[type="url"],
+	input[type="password"],
+	input[type="search"],
+	input[type="number"],
+	input[type="tel"],
+	input[type="range"],
+	input[type="date"],
+	input[type="month"],
+	input[type="week"],
+	input[type="time"],
+	input[type="datetime"],
+	input[type="datetime-local"],
+	input[type="color"],
+	select {
+		@include typography.base-settings;
+		//position: absolute;
+		top: 0;
+		left: 0;
+		box-shadow: none !important;
+		border: none !important;
+		background: none !important;
+		padding: measurement.$universal-space;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		color: var(--c-black) !important;
+	}
+
+	label {
+		display: none !important;
+		width: 100% !important;
+	}
+}
+
+#frm_field_16_container {
+	height: auto;
+}
+
+textarea {
+	@include typography.base-settings;
+	display: flex;
+	position: relative;
+	align-items: center;
+	box-shadow: none !important;
+	border: none !important;
+	border-bottom: 1px solid var(--c-theme-primary);
+	background: none !important;
+	padding: measurement.$universal-space !important;
+	width: 100%;
+	font-size: 1.6rem !important;
+}
+
+.frm_form_field:not(.frm_html_container) {
+	display: flex;
+	position: relative;
+	align-items: center;
+	margin: 0 !important;
+	border-bottom: 1px solid var(--c-black) !important;
+	background: var(--c-white) !important;
+	width: 100%;
+}
+
+#frm_field_5_container {
+	height: auto !important;
+}
+
+.frm_html_container p {
+	@include typography.font-small;
+}
+
+.frm_error {
+	position: absolute;
+	top: -20px;
+}
+
+.frm_button_submit {
+	@include button.default-settings;
+}
+
+::-webkit-input-placeholder {
+	@include typography.base-settings;
+	color: var(--c-black) !important;
+}
+
+.paypal-buttons-context-iframe {
+	margin-top: measurement.$universal-space-2;
+}

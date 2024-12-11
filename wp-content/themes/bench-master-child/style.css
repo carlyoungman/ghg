@@ -1,0 +1,63 @@
+/*
+Theme Name: Bench Master Child
+Template: ghg-master
+Author: Carl Youngman
+Author URI: me@carlyoungman.com
+Description: This is a child them for the Bench Master website
+Version: 1.0
+*/
+
+
+/*@font-face {*/
+/*	font-style: normal;*/
+/*	font-weight: bold;*/
+/*	src: url("./resources/fonts/LoosExtraWide-Bold.woff2") format("woff2"),*/
+/*	url("./resources/fonts/LoosExtraWide-Bold.woff") format("woff");*/
+/*	font-family: "Loos ExtraWide";*/
+/*	font-display: swap;*/
+/*}*/
+
+@font-face {
+	font-style: normal;
+	font-weight: normal;
+	src: url("./resources/fonts/LoosNormal-Regular.woff2") format("woff2"),
+	url("./resources/fonts/LoosNormal-Regular.woff") format("woff");
+	font-family: "Loos Normal";
+	font-display: swap;
+}
+
+/*@font-face {*/
+/*	font-style: normal;*/
+/*	font-weight: 500;*/
+/*	src: url("./resources/fonts/LoosNormal-Medium.woff2") format("woff2"),*/
+/*	url("./resources/fonts/LoosNormal-Medium.woff") format("woff");*/
+/*	font-family: "Loos Normal";*/
+/*	font-display: swap;*/
+/*}*/
+
+:root {
+	--c-theme-primary: #0050ff;
+	--c-theme-secondary: #283741;
+	--c-theme-third: #d7dfe2;
+	--c-button-background: #0050ff;
+	--c-button-color: #fff;
+	--c-button-background-hover: #000000;
+	--c-button-color-hover: #fff;
+
+
+	--c-black: #000000;
+	--c-white: #ffffff;
+	--c-off-white: #edf0ef;
+	--button-radius: 8px;
+	--border-radius: 8px;
+
+	--font-base-size: 1.8rem;
+
+	--font--main: "Loos Normal", sans-serif;
+	--font--base-line-height: 1.6;
+	--font-base-font-weight: 400;
+
+	--font--headline: "Loos ExtraWide", sans-serif;
+	--font--headline-line-height: 1.35;
+	--font-headline-weight: 400;
+}

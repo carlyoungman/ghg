@@ -1,0 +1,57 @@
+@use "../../../../../ghg-master/resources/scss/01-settings/abstracts" as
+	abstract;
+@use "../../../../../ghg-master/resources/scss/01-settings/measurements" as
+	measurement;
+@use "../../../../../ghg-master/resources/scss/02-tools/breakpoints" as
+	breakpoint;
+@use "../../../../../ghg-master/resources/scss/02-tools/positioning" as position;
+
+.search-bar {
+	display: none;
+	position: relative;
+	border-radius: abstract.$border-radius-full;
+	background-color: var(--c-white);
+	width: 50rem;
+	overflow: hidden;
+
+	&:hover,
+	&:active,
+	&:focus {
+		background-color: var(--c-off-white);
+	}
+
+	@include breakpoint.large-screen-min {
+		display: unset;
+	}
+
+	&__input-wrap {
+		@include position.flex-space-between;
+		position: relative;
+		padding: 2rem measurement.$universal-space-2;
+		height: 5rem;
+	}
+
+	&__input {
+		@include position.full-size-element;
+		outline: none;
+		border: none;
+		background: none;
+		padding: measurement.$universal-space;
+	}
+
+	&__icon {
+		width: 18px;
+		height: 18px;
+	}
+
+	&__button {
+		display: flex;
+		position: absolute;
+		right: measurement.$universal-space;
+		justify-content: center;
+		align-items: center;
+		outline: none !important;
+		border: none !important;
+		background: none !important;
+	}
+}

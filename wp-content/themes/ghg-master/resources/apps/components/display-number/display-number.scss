@@ -1,0 +1,10 @@
+@use "../../../../resources/scss/01-settings/measurements" as measurement;
+@use "../../../../resources/scss/02-tools/breakpoints" as breakpoint;
+
+.display-number {
+	margin-top: 0;
+
+	* {
+		margin: 0;
+	}
+}
