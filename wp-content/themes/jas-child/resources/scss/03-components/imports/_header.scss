@@ -91,21 +91,14 @@
 	}
 
 	&__phone {
-<<<<<<< HEAD
 		@include typography.headline-h6;
-=======
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 		display: none;
 		@include breakpoint.medium-screen-min {
 			display: block;
 		}
 
 		&:hover {
-<<<<<<< HEAD
 			text-decoration: underline;
-=======
-			color: var(--c-theme-primary);
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 		}
 	}
 
@@ -134,22 +127,14 @@
 			padding: measurement.$universal-space measurement.$universal-space-3;
 
 			&:hover {
-<<<<<<< HEAD
 				background: var(--c-theme-secondary);
-=======
-				background: var(--c-theme-primary);
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 				color: var(--c-white);
 			}
 		}
 
 		.current-menu-item {
 			a {
-<<<<<<< HEAD
 				background: var(--c-theme-secondary);
-=======
-				background: var(--c-theme-primary);
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 				color: var(--c-white);
 			}
 		}

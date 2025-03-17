@@ -10,7 +10,6 @@
 	}
 
 	&__button {
-<<<<<<< HEAD
 		@include button.default-settings(
 				var(--c-theme-primary),
 				var(--c-theme-secondary)
@@ -27,25 +26,6 @@
 
 	}
 
-=======
-		&:nth-child(2) {
-			@include button.default-settings(
-				var(--c-white),
-				var(--c-white),
-				true
-			);
-		}
-	}
-
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		font-weight: 400;
-	}
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 }
 
 main > .hero:first-child {
@@ -53,15 +33,9 @@ main > .hero:first-child {
 
 	&:after {
 		background: linear-gradient(
-<<<<<<< HEAD
 				90deg,
 				var(--c-theme-secondary) 0%,
 				rgba(0, 0, 0, 0) 100%
-=======
-			90deg,
-			var(--c-theme-secondary) 5%,
-			rgba(0, 0, 0, 0) 50%
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 		);
 	}
 }

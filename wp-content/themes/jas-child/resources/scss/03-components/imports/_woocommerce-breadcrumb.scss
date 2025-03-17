@@ -15,11 +15,7 @@
 		@include spacing.group-spacing;
 		display: none;
 		align-items: center;
-<<<<<<< HEAD
 		color: var(--c-theme-secondary) !important;
-=======
-		color: var(--c-theme-primary) !important;
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 		@include breakpoint.large-screen-min {
 			display: flex;
 		}
@@ -28,11 +24,7 @@
 			color: var(--c-black) !important;
 
 			&:hover {
-<<<<<<< HEAD
 				color: var(--c-theme-secondary) !important;
-=======
-				color: var(--c-theme-primary) !important;
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 				text-decoration: underline;
 			}
 		}

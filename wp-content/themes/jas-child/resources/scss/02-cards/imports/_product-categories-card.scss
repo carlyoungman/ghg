@@ -1,5 +1,14 @@
+@use "../../../../../ghg-master/resources/scss/02-tools/buttons" as button;
+
 .product-categories-card {
 	&__image {
 		object-fit: contain !important;
+	}
+
+	&__button {
+		@include button.default-settings(
+				var(--c-button-background),
+				var(--c-button-color)
+		);
 	}
 }

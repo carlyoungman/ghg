@@ -49,10 +49,6 @@
 			@include breakpoint.large-screen-min {
 				min-height: 50vh;
 			}
-
-			span {
-				position: absolute;
-			}
 		}
 
 		&__image {

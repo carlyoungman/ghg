@@ -1,6 +1,5 @@
 {
     "/dist/js/scripts.js": "/dist/js/scripts.js",
-<<<<<<< HEAD
     "/dist/css/style.css": "/dist/css/style.css",
     "/dist/favicons/android-chrome-192x192.png": "/dist/favicons/android-chrome-192x192.png",
     "/dist/favicons/android-chrome-512x512.png": "/dist/favicons/android-chrome-512x512.png",
@@ -29,7 +28,4 @@
     "/dist/fonts/LoosNormal-Regular.woff": "/dist/fonts/LoosNormal-Regular.woff",
     "/dist/fonts/LoosNormal-Regular.woff2": "/dist/fonts/LoosNormal-Regular.woff2",
     "/dist/fonts/transfonter.org-20231121-122357.zip": "/dist/fonts/transfonter.org-20231121-122357.zip"
-=======
-    "/dist/css/style.css": "/dist/css/style.css"
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 }

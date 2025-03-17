@@ -1,24 +1,24 @@
 <?php use BOILERPLATE_THEME\Core\Module\Template;
 
-get_template_part('/template-parts/get-in-touch');
+get_template_part( '/template-parts/get-in-touch' );
 ?>
 </main>
 <?php
-$base = 'footer';
-$copyright = get_field('copyright', 'options');
+$base      = 'footer';
+$copyright = get_field( 'copyright', 'options' );
 ?>
-<footer class="<?php echo esc_attr($base); ?> has-background">
-	<div class="<?php echo esc_attr($base); ?>__inner">
-		<div class="<?php echo esc_attr($base); ?>__logo-and-social">
-			<?php Template::display_logo($base, true, 'bench-logo'); ?>
-			<?php get_template_part('/template-parts/social-icons'); ?>
-			<?php if (!empty($copyright)): ?>
+<footer class="<?php echo esc_attr( $base ); ?> has-background">
+	<div class="<?php echo esc_attr( $base ); ?>__inner">
+		<div class="<?php echo esc_attr( $base ); ?>__logo-and-social">
+			<?php Template::display_logo( $base, true, 'bench-logo' ); ?>
+			<?php get_template_part( '/template-parts/social-icons' ); ?>
+			<?php if ( ! empty( $copyright ) ): ?>
 				<p class="<?php echo esc_attr(
-    	$base
-    ); ?>__copyright"><?php echo $copyright; ?></p>
+					$base
+				); ?>__copyright"><?php echo $copyright; ?></p>
 			<?php endif; ?>
 		</div>
-		<div class="<?php echo esc_attr($base); ?>__payment-icons">
+		<div class="<?php echo esc_attr( $base ); ?>__payment-icons">
 			<svg width="201" height="80" viewBox="0 0 201 80" fill="none" xmlns="http://www.w3.org/2000/svg"
 				 xmlns:xlink="http://www.w3.org/1999/xlink">
 				<rect width="50" height="31" rx="3" fill="white"/>
@@ -69,23 +69,36 @@ $copyright = get_field('copyright', 'options');
 				</defs>
 			</svg>
 		</div>
-		<div class="<?php echo esc_attr($base); ?>__menu-grid">
+		<div class="<?php echo esc_attr( $base ); ?>__menu-grid">
 			<div>
-				<p class="<?php echo esc_attr($base); ?>__menu-title">Products</p>
-				<?= wp_nav_menu(['theme_location' => 'products', 'container' => false]) ?>
+				<p class="<?php echo esc_attr( $base ); ?>__menu-title">Products</p>
+				<?= wp_nav_menu( [ 'theme_location' => 'products', 'container' => false ] ) ?>
 			</div>
 			<div>
-				<p class="<?php echo esc_attr($base); ?>__menu-title">Company</p>
-				<?= wp_nav_menu(['theme_location' => 'our-company', 'container' => false]) ?>
+				<p class="<?php echo esc_attr( $base ); ?>__menu-title">Company</p>
+				<?= wp_nav_menu( [ 'theme_location' => 'our-company', 'container' => false ] ) ?>
 			</div>
 			<div>
-				<p class="<?php echo esc_attr($base); ?>__menu-title">Legal</p>
-				<?= wp_nav_menu(['theme_location' => 'legal', 'container' => false]) ?>
+				<p class="<?php echo esc_attr( $base ); ?>__menu-title">Legal</p>
+				<?= wp_nav_menu( [ 'theme_location' => 'legal', 'container' => false ] ) ?>
 			</div>
 		</div>
 	</div>
 
 </footer>
 <?php wp_footer(); ?>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+	var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+	(function () {
+		var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+		s1.async = true;
+		s1.src = 'https://embed.tawk.to/67cade9bcf22da190d639e11/1ilo7b3k9';
+		s1.charset = 'UTF-8';
+		s1.setAttribute('crossorigin', '*');
+		s0.parentNode.insertBefore(s1, s0);
+	})();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>

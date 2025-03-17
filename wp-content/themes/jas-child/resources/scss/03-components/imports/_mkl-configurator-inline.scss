@@ -78,12 +78,7 @@
 	}
 
 	span.layer-item {
-<<<<<<< HEAD
 		margin: measurement.$universal-space 0 measurement.$universal-space-half 0 !important;
-=======
-		margin: measurement.$universal-space 0 measurement.$universal-space-half
-			0 !important;
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 		padding: 0 !important;
 		font-size: 14px !important;
 	}
@@ -133,11 +128,7 @@
 					display: grid !important;
 					grid-template-columns: repeat(
 						#{$columns},
-<<<<<<< HEAD
 							minmax(0, 1fr)
-=======
-						minmax(0, 1fr)
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 					) !important;
 					gap: 0.6em !important;
 
@@ -154,11 +145,7 @@
 .choice.active {
 	> button {
 		box-shadow: abstract.$box-shadow;
-<<<<<<< HEAD
 		border: 1px solid var(--c-black) !important;
-=======
-		border: 1px solid var(--c-theme-primary) !important;
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 		background: var(--c-off-white) !important;
 	}
 }

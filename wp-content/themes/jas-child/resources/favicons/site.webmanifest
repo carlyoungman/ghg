@@ -1,11 +1,6 @@
 {
-<<<<<<< HEAD
     "name": "JAS",
     "short_name": "JAS",
-=======
-    "name": "Benchmaster",
-    "short_name": "Benchmaster",
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -18,12 +13,7 @@
             "type": "image/png"
         }
     ],
-<<<<<<< HEAD
     "theme_color": "#3f3f3f",
     "background_color": "#3f3f3f",
-=======
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
     "display": "standalone"
 }

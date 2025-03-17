@@ -10,11 +10,8 @@
 @use "../../../../../ghg-master/resources/scss/02-tools/spacing" as spacing;
 @use "../../../../../ghg-master/resources/scss/02-tools/typography" as
 	typography;
-<<<<<<< HEAD
 @use "../../../../../ghg-master/resources/scss/02-tools/buttons" as button;
 @use "../../../../../ghg-master/resources/scss/02-tools/lists" as list;
-=======
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 
 .single-product {
 	> svg {
@@ -147,20 +144,12 @@
 				padding: measurement.$universal-space !important;
 
 				&.selected {
-<<<<<<< HEAD
 					border: 1px solid var(--c-black) !important;
-=======
-					border: 1px solid var(--c-theme-primary) !important;
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 					background: #edf0ef;
 				}
 
 				&:hover {
-<<<<<<< HEAD
 					border: 1px solid var(--c-black) !important;
-=======
-					border: 1px solid var(--c-theme-primary) !important;
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7
 					background: #edf0ef;
 				}
 
@@ -262,7 +251,6 @@
 		align-items: center;
 	}
 }
-<<<<<<< HEAD
 
 .single_add_to_cart_button {
 	display: none !important;
@@ -283,5 +271,3 @@
 		@include list.styles;
 	}
 }
-=======
->>>>>>> b565221dabeccbfde4cfee4c9e9078917c9d72f7

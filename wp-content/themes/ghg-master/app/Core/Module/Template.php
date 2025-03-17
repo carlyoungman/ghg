@@ -44,7 +44,7 @@ class Template {
 				'key_points',
 				'listing_block',
 				'location_map',
-				'news_&_media',
+				'news_and_media',
 				'product_categories',
 				'product_innovation',
 				'products',

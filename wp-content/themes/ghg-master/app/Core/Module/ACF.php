@@ -25,12 +25,12 @@ class ACF {
 	 */
 	public static function flexible_components(): void {
 		global $wpdb;
-		// Get the current site ID in a Multisite environment
+		// Get the current site ID in a Multisite environment.
 		$site_id = get_current_blog_id();
-		// Use the correct prefix for the current site
+		// Use the correct prefix for the current site.
 		$table_name = $wpdb->prefix . 'frm_forms';
 
-		// Query the database for the forms of the current site
+		// Query the database for the forms of the current site.
 		$forms = $wpdb->get_results( "SELECT * FROM $table_name" );
 
 		if ( $forms ) {
@@ -45,21 +45,143 @@ class ACF {
 
 		$flexible
 			->addFlexibleContent( 'flexible' )
-			// Card grid
-			->addLayout( 'cards_grid' )
-			->addTab( 'content' )
+			// Begin blocks (alphabetically ordered):
+			// 1. AUT_products
+			->addLayout( 'AUT_products' )
 			->addGroup( 'content', [
 				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter a headline and supporting content for the block',
+				'instructions' => 'Provide the headline and supporting content for this block.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
 				'min'          => 0,
 				'max'          => 2,
 				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
+				'instructions' => 'Add up to 2 buttons that will appear below this block.',
+			] )
+			->addLink( 'button' )
+			->endRepeater()
+			->endGroup()
+			->addGroup( 'options', [
+				'wrapper' => [ 'width' => '50' ],
+			] )
+			->addTab( 'Options' )
+			->addTrueFalse( 'display_filters', [
+				'instructions'  => 'Enable this option to display the filters sidebar, page header, and load more functionality.',
+				'ui'            => 1,
+				'default_value' => 0,
+			] )
+			->addSelect( 'product_number', [
+				'instructions'      => 'Choose the number of products to display. Select "All" to enable pagination with a load more button.',
+				'choices'           => [
+					3     => '3',
+					6     => '6',
+					9     => '9',
+					12    => '12',
+					'all' => 'All',
+				],
+				'conditional_logic' => [
+					[
+						[
+							'field'    => 'display_filters',
+							'operator' => '==',
+							'value'    => '0',
+						],
+					],
+				],
+				'ui'                => 1,
+				'allow_null'        => 0,
+			] )
+			->addTrueFalse( 'select_products', [
+				'instructions' => 'Enable this option to manually select individual products.',
+				'ui'           => 1,
+			] )
+			->addPostObject( 'individual_products', [
+				'instructions'      => 'Manually select the specific products to display when enabled.',
+				'post_type'         => [
+					0 => 'product',
+				],
+				'return_format'     => 'id',
+				'field_type'        => 'multi_select',
+				'allow_null'        => 1,
+				'multiple'          => 1,
+				'conditional_logic' => [
+					[
+						[
+							'field'    => 'select_products',
+							'operator' => '==',
+							'value'    => '1',
+						],
+					],
+				],
+			] )
+			->addTab( 'Filters' )
+			->addTaxonomy( 'categories', [
+				'instructions'      => 'Choose the product categories to filter the displayed products.',
+				'taxonomy'          => 'product_cat',
+				'field_type'        => 'multi_select',
+				'conditional_logic' => [
+					[
+						[
+							'field'    => 'select_products',
+							'operator' => '==',
+							'value'    => '0',
+						],
+					],
+				],
+			] )
+			->addPostObject( 'series', [
+				'instructions'      => 'Select the product series to filter the displayed products.',
+				'post_type'         => [
+					0 => 'series',
+				],
+				'return_format'     => 'id',
+				'field_type'        => 'multi_select',
+				'allow_null'        => 1,
+				'multiple'          => 1,
+				'conditional_logic' => [
+					[
+						[
+							'field'    => 'select_products',
+							'operator' => '==',
+							'value'    => '0',
+						],
+					],
+				],
+			] )
+			->addSelect( 'woocommerce_filter', [
+				'instructions'      => 'Choose a Woocommerce filter to apply (e.g. On sale, Best Selling, Top rated).',
+				'choices'           => [
+					'on_sale'      => 'On sale',
+					'best_selling' => 'Best Selling',
+					'top_rated'    => 'Top rated',
+				],
+				'ui'                => 1,
+				'allow_null'        => 1,
+				'conditional_logic' => [
+					[
+						[
+							'field'    => 'select_products',
+							'operator' => '==',
+							'value'    => '0',
+						],
+					],
+				],
+			] )
+			->endGroup()
+			// 2. cards_grid
+			->addLayout( 'cards_grid' )
+			->addTab( 'content' )
+			->addGroup( 'content', [
+				'wrapper'      => [ 'width' => '50' ],
+				'instructions' => 'Provide a headline and supporting content for this block.',
+			] )
+			->addWysiwyg( 'content' )
+			->addRepeater( 'buttons', [
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons that will be displayed below the grid.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
@@ -72,37 +194,38 @@ class ACF {
 			] )
 			->addImage( 'image', [
 				'preview_size' => 'small',
-				'instructions' => 'Upload a suitable image or icon',
+				'instructions' => 'Upload an image or icon to represent this card.',
 				'wrapper'      => [ 'width' => '30' ],
 			] )
 			->addGroup( 'Details', [
 				'wrapper' => [ 'width' => '70' ],
 			] )
 			->addText( 'headline', [
-				'instructions' => 'Enter a headline for the card',
+				'instructions' => 'Enter a headline for this card.',
 			] )
 			->addText( 'Supporting_content', [
-				'instructions' =>
-					'Enter some supporting content for the card. This text will be highlighted',
+				'instructions' => 'Enter supporting content for this card. This text will be emphasized.',
 			] )
 			->addTextarea( 'additional_content', [
-				'instructions' => 'Enter some additional  content',
+				'instructions' => 'Provide any additional content for this card.',
 			] )
 			->addLink( 'link', [
-				'instructions' => 'Link the card to a webpage',
+				'instructions' => 'Provide a URL to link this card to a webpage.',
 			] )
 			->endGroup()
 			->endRepeater()
-			// Case Studies
+			// 3. case_studies
 			->addLayout( 'case_studies' )
 			->addGroup( 'content', [
-				'wrapper' => [ 'width' => '50' ],
+				'wrapper'      => [ 'width' => '50' ],
+				'instructions' => 'Enter the content for this case study section.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons to appear below the content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
@@ -111,8 +234,7 @@ class ACF {
 				'wrapper' => [ 'width' => '50' ],
 			] )
 			->addSelect( 'number_of_case_studies', [
-				'instructions' =>
-					'Select the number of case studies you want to display.',
+				'instructions' => 'Choose the number of case studies to display.',
 				'choices'      => [
 					3   => '3',
 					6   => '6',
@@ -122,11 +244,11 @@ class ACF {
 				],
 			] )
 			->addTrueFalse( 'select_case_studies', [
-				'instructions' => 'Enable to select individual case studies.',
+				'instructions' => 'Enable this option to manually select individual case studies.',
 				'ui'           => 1,
 			] )
 			->addPostObject( 'filter_by_sector', [
-				'instructions'      => 'Select which sector to filter by.',
+				'instructions'      => 'Choose a sector to filter the case studies.',
 				'post_type'         => [ 'sectors' ],
 				'return_format'     => 'id',
 				'field_type'        => 'multi_select',
@@ -143,8 +265,7 @@ class ACF {
 				],
 			] )
 			->addPostObject( 'individual_case_studies', [
-				'instructions'      =>
-					'Select which individual case studies you want to display.',
+				'instructions'      => 'Manually select the specific case studies to display when enabled.',
 				'post_type'         => [
 					0 => 'case_studies',
 				],
@@ -163,72 +284,39 @@ class ACF {
 				],
 			] )
 			->endGroup()
-			// Content block
+			// 4. content_block
 			->addLayout( 'content_block' )
 			->addGroup( 'content', [
-				'wrapper' => [ 'width' => '50' ],
+				'wrapper'      => [ 'width' => '50' ],
+				'instructions' => 'Provide a headline and supporting content for this content block.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons that will be displayed beneath the content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
 			->endGroup()
-			->addGroup( 'options', [ 'wrapper' => [ 'width' => '50' ] ] )
+			->addGroup( 'options', [
+				'wrapper' => [ 'width' => '50' ]
+			] )
 			->addTrueFalse( 'max_width', [
-				'instructions' =>
-					'Enable if you want to apply a max width to the content',
+				'instructions' => 'Enable this option to restrict the content width.',
 				'ui'           => 1,
 			] )
 			->addTrueFalse( 'center_align', [
-				'instructions' =>
-					'Enable if you want to center align the content',
+				'instructions' => 'Enable this option to center-align the content.',
 				'ui'           => 1,
 			] )
 			->endGroup()
-			// Listing block
-			->addLayout( 'listing_block' )
-			->addGroup( 'options' )
-			->addTrueFalse( 'background', [
-				'instructions' => 'Select the background colour of the block',
-				'ui'           => 1,
-				'ui_on_text'   => 'Primary',
-				'ui_off_text'  => 'Secondary',
-			] )
-			->endGroup()
-			->addTab( 'list' )
-			->addRepeater( 'list', [
-				'min'          => 0,
-				'layout'       => 'block',
-				'instructions' =>
-					'List items will automatically be arranged into blocks of three',
-			] )
-			->addText( 'list_item' )
-			->endRepeater()
-			->addTab( 'content' )
-			->addGroup( 'content', [
-				'wrapper'      => [ 'width' => '50' ],
-				'instructions' => 'Specify list item text',
-			] )
-			->addWysiwyg( 'content' )
-			->addRepeater( 'buttons', [
-				'min'          => 0,
-				'max'          => 2,
-				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
-			] )
-			->addLink( 'button' )
-			->endRepeater()
-			->endGroup()
-			// Current Vacancies
+			// 5. current_vacancies
 			->addLayout( 'current_vacancies' )
 			->addGroup( 'options' )
 			->addTrueFalse( 'background', [
-				'instructions' => 'Select the background colour of the block',
+				'instructions' => 'Choose the background color for the vacancies block (Primary or Secondary).',
 				'ui'           => 1,
 				'ui_on_text'   => 'Primary',
 				'ui_off_text'  => 'Secondary',
@@ -237,16 +325,14 @@ class ACF {
 			->addTab( 'content' )
 			->addGroup( 'content', [
 				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter a headline and supporting content for the block',
+				'instructions' => 'Provide a headline and supporting content for the vacancies section.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
 				'min'          => 0,
 				'max'          => 2,
 				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
+				'instructions' => 'Add up to 2 buttons to appear below the vacancies content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
@@ -261,32 +347,65 @@ class ACF {
 				'wrapper' => [ 'width' => '70' ],
 			] )
 			->addText( 'job_title', [
-				'instructions' => 'Enter the job title',
+				'instructions' => 'Enter the job title for the vacancy.',
 			] )
 			->addTextarea( 'job_description', [
-				'instructions' => 'Enter a job description',
+				'instructions' => 'Provide a detailed job description.',
 			] )
 			->addText( 'posted_date' )
 			->addLink( 'link', [
-				'instructions' => 'Link the card to a webpage',
+				'instructions' => 'Provide a URL to link this vacancy card to a webpage.',
 			] )
 			->endGroup()
 			->endRepeater()
-			// Group listing
-			->addLayout( 'group_listing' )
-			->addTab( 'content' )
+			// 6. FAQs
+			->addLayout( 'FAQs' )
+			->addGroup( 'options' )
+			->addTrueFalse( 'background', [
+				'instructions' => 'Choose the background color for the FAQs block (Off white or White).',
+				'ui'           => 1,
+				'ui_on_text'   => 'Off white',
+				'ui_off_text'  => 'White',
+			] )
+			->endGroup()
 			->addGroup( 'content', [
 				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter a headline and supporting content for the block',
+				'instructions' => 'Provide a headline and supporting content for the FAQs section.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
 				'min'          => 0,
 				'max'          => 2,
 				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
+				'instructions' => 'Add up to 2 buttons that will be displayed below the FAQs content.',
+			] )
+			->addLink( 'button' )
+			->endRepeater()
+			->endGroup()
+			->addRepeater( 'FAQs', [
+				'layout'  => 'block',
+				'wrapper' => [ 'width' => '50' ],
+			] )
+			->addText( 'Question', [
+				'instructions' => 'Enter the FAQ question.',
+			] )
+			->addTextarea( 'Answer', [
+				'instructions' => 'Enter the answer for this FAQ.',
+			] )
+			->endRepeater()
+			// 7. group_listing
+			->addLayout( 'group_listing' )
+			->addTab( 'content' )
+			->addGroup( 'content', [
+				'wrapper'      => [ 'width' => '50' ],
+				'instructions' => 'Provide a headline and supporting content for this group listing block.',
+			] )
+			->addWysiwyg( 'content' )
+			->addRepeater( 'buttons', [
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons that will appear below the group listing content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
@@ -299,115 +418,61 @@ class ACF {
 			] )
 			->addImage( 'image', [
 				'preview_size' => 'small',
-				'instructions' => 'Upload a suitable image or icon',
+				'instructions' => 'Upload an image or icon to represent this group item.',
 				'wrapper'      => [ 'width' => '30' ],
 			] )
 			->addGroup( 'Details', [
 				'wrapper' => [ 'width' => '70' ],
 			] )
 			->addText( 'headline', [
-				'instructions' => 'Enter a headline for the card',
+				'instructions' => 'Enter a headline for this group card.',
 			] )
 			->addTextarea( 'Supporting_content', [
-				'instructions' => 'Enter some supporting content for the card',
+				'instructions' => 'Provide additional supporting content for this group card.',
 			] )
 			->addText( 'Telephone' )
 			->addEmail( 'Email' )
 			->addLink( 'link', [
-				'instructions' => 'Link the card to a webpage',
+				'instructions' => 'Provide a URL to link this group card to a webpage.',
 			] )
 			->endGroup()
 			->endRepeater()
-			//Headline with content
+			// 8. headline_with_content
 			->addLayout( 'headline_with_content' )
 			->addGroup( 'options', [
 				'wrapper' => [ 'width' => '100' ],
 			] )
 			->endGroup()
 			->addText( 'headline', [
-				'instructions' =>
-					'Enter the headline text that will be displayed on the left of the component',
+				'instructions' => 'Enter the headline text to be displayed on the left side of the component.',
 				'wrapper'      => [ 'width' => '50' ],
 			] )
 			->addGroup( 'content', [
 				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter the supporting content that will be displayed on the right of the component',
+				'instructions' => 'Provide the supporting content to be displayed on the right side of the component.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons that will appear below the component content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
 			->endGroup()
-			//Image with content
-			->addLayout( 'image_with_content' )
-			->addGroup( 'options', [
-				'wrapper' => [ 'width' => '100' ],
-			] )
-			->addSelect( 'image_effect', [
-				'instructions' => 'Select a cut out effect for the imagek',
-				'choices'      => [
-					'top_left_bottom_right' => 'Top left, Bottom right',
-					'top_right_bottom_left' => 'Top right, Bottom left',
-					'bottom_left'           => 'Bottom left',
-					'bottom_right '         => 'Bottom right',
-				],
-				'ui'           => 1,
-				'allow_null'   => 1,
-				'wrapper'      => [ 'width' => '33' ],
-			] )
-			->addSelect( 'layout', [
-				'instructions' => 'Select an alternative layout for the block',
-				'choices'      => [
-					'image_offset'       => 'Image offset left',
-					'image_offset_right' => 'Image offset right',
-					'simple-image-right' => 'Simple, image right',
-					'Simple_image_left'  => 'Simple, image left',
-					'product'            => 'Product',
-				],
-				'ui'           => 1,
-				'allow_null'   => 1,
-				'wrapper'      => [ 'width' => '33' ],
-			] )
-			->endGroup()
-			->addImage( 'image', [
-				'preview_size' => 'small',
-				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Upload a suitable image. The cut off effect will be applied automatically',
-			] )
-			->addGroup( 'content', [
-				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter the supporting content that will be displayed on the right of the component',
-			] )
-			->addWysiwyg( 'content' )
-			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
-			] )
-			->addLink( 'button' )
-			->endRepeater()
-			->endGroup()
-			//Hero component
+			// 9. hero
 			->addLayout( 'hero' )
 			->addGroup( 'options', [
 				'wrapper' => [ 'width' => '100' ],
 			] )
 			->addTrueFalse( 'super_size', [
-				'instructions' =>
-					'Enable to super size the text. Only applies to h1 tags',
+				'instructions' => 'Enable this option to enlarge the text (applies only to H1 elements).',
 				'ui'           => 1,
 				'wrapper'      => [ 'width' => '33' ],
 			] )
 			->addTrueFalse( 'half_height', [
-				'instructions'      =>
-					'Force the component to be half height. Only available for the default layout',
+				'instructions'      => 'Enable to set the component to half height (available only with the default layout).',
 				'ui'                => 1,
 				'wrapper'           => [ 'width' => '33' ],
 				'conditional_logic' => [
@@ -431,7 +496,7 @@ class ACF {
 				],
 			] )
 			->addSelect( 'layout', [
-				'instructions' => 'Select an alternative layout for the block',
+				'instructions' => 'Choose an alternative layout for the hero component.',
 				'choices'      => [
 					'diagonal_cutoff'    => 'Diagonal cutoff',
 					'inline_image_left'  => 'Inline, image left',
@@ -442,13 +507,12 @@ class ACF {
 				'wrapper'      => [ 'width' => '33' ],
 			] )
 			->addTrueFalse( 'display_breadcrumbs', [
-				'instructions' => 'Enable to display a Yoast breadcrumbs. ',
+				'instructions' => 'Enable this option to display Yoast breadcrumbs.',
 				'ui'           => 1,
 				'wrapper'      => [ 'width' => '33' ],
 			] )
 			->addTrueFalse( 'display_ticker', [
-				'instructions'      =>
-					'Enable to display a text ticker along the bottom of the component',
+				'instructions'      => 'Enable to show a text ticker at the bottom of the hero section.',
 				'ui'                => 1,
 				'wrapper'           => [ 'width' => '33' ],
 				'conditional_logic' => [
@@ -467,7 +531,7 @@ class ACF {
 				],
 			] )
 			->addText( 'ticker-text', [
-				'instructions'      => 'Enter the text you want to display',
+				'instructions'      => 'Enter the ticker text to display (only visible if enabled).',
 				'conditional_logic' => [
 					[
 						[
@@ -481,8 +545,7 @@ class ACF {
 			->endGroup()
 			->addTab( 'Media' )
 			->addSelect( 'media_type', [
-				'instructions' =>
-					'Select which kind of media you want to use for the background',
+				'instructions' => 'Choose the type of background media: Image or Video.',
 				'choices'      => [
 					'image' => 'Image',
 					'video' => 'Video',
@@ -494,8 +557,7 @@ class ACF {
 			->addImage( 'desktop_image', [
 				'preview_size'      => 'medium',
 				'wrapper'           => [ 'width' => '50' ],
-				'instructions'      =>
-					'Please provide a suitable image for desktop users to be displayed.',
+				'instructions'      => 'Upload the desktop version of the background image.',
 				'conditional_logic' => [
 					[
 						[
@@ -509,8 +571,7 @@ class ACF {
 			->addImage( 'mobile_image', [
 				'preview_size'      => 'medium',
 				'wrapper'           => [ 'width' => '50' ],
-				'instructions'      =>
-					'Please provide a suitable image for mobile users to be displayed.',
+				'instructions'      => 'Upload the mobile version of the background image.',
 				'conditional_logic' => [
 					[
 						[
@@ -524,8 +585,7 @@ class ACF {
 			->addGallery( 'video', [
 				'preview_size'      => 'medium',
 				'wrapper'           => [ 'width' => '50' ],
-				'instructions'      =>
-					'Please select a suitable video. Try yo keep the file size as small as possible and under 50mb',
+				'instructions'      => 'Select a video for the background (recommended file size under 50MB).',
 				'mime_types'        => 'MP4, MOV, AVI, WMV, WebM',
 				'conditional_logic' => [
 					[
@@ -539,18 +599,20 @@ class ACF {
 			] )
 			->addTab( 'Content' )
 			->addGroup( 'content', [
-				'wrapper' => [ 'width' => '100' ],
+				'wrapper'      => [ 'width' => '100' ],
+				'instructions' => 'Provide a headline and supporting content for the hero section.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons that will appear below the hero content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
 			->endGroup()
-			// Image with content slider
+			// 10. image_with_content_slider
 			->addLayout( 'image_with_content_slider' )
 			->addRepeater( 'sliders', [
 				'min'    => 0,
@@ -559,79 +621,76 @@ class ACF {
 			] )
 			->addImage( 'Image', [
 				'preview_size' => 'large',
-				'instructions' =>
-					'Upload a suitable image that is related to the content',
+				'instructions' => 'Upload an image related to this slider item.',
 				'wrapper'      => [ 'width' => '50' ],
 			] )
 			->addGroup( 'content', [
 				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter a headline and supporting content for the block',
+				'instructions' => 'Provide a headline and supporting content for this slider item.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
 				'min'          => 0,
 				'max'          => 2,
 				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
+				'instructions' => 'Add up to 2 buttons that will appear below the slider content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
 			->endGroup()
 			->endRepeater()
+			// 11. key_figure_block
 			->addLayout( 'key_figure_block' )
 			->addGroup( 'content', [
 				'wrapper' => [ 'width' => '50' ],
 			] )
 			->addText( 'key_figure', [
-				'instructions' => 'Figure you wish to highlight',
+				'instructions' => 'Enter the key figure you wish to emphasize.',
 				'wrapper'      => [ 'width' => '30' ],
 			] )
 			->addText( 'Headline', [
-				'instructions' => 'Enter a suitable headline for the content',
+				'instructions' => 'Enter a headline for the key figure block.',
 				'wrapper'      => [ 'width' => '70' ],
 			] )
 			->addWysiwyg( 'content', [
-				'instructions' => 'Enter supporting content',
+				'instructions' => 'Provide additional supporting content for the key figure.',
 			] )
 			->addRepeater( 'buttons', [
 				'min'          => 0,
 				'max'          => 2,
 				'layout'       => 'block',
-				'instructions' => 'You can add upto two buttons',
+				'instructions' => 'Add up to 2 call-to-action buttons (optional).',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
 			->endGroup()
 			->addImage( 'Image', [
 				'preview_size' => 'large',
-				'instructions' =>
-					'Upload a suitable image that is related to the content',
+				'instructions' => 'Upload an image associated with the key figure block.',
 				'wrapper'      => [ 'width' => '50' ],
 			] )
-
-			// Key Points
+			// 12. key_points
 			->addLayout( 'key_points' )
 			->addGroup( 'options', [
 				'wrapper' => [ 'width' => '100%' ],
 			] )
 			->addTrueFalse( 'secondary_layout', [
-				'instructions' =>
-					'Enable if you want to display the content in an alternate layout',
+				'instructions' => 'Enable an alternate layout for the key points section.',
 				'ui'           => 1,
 				'width'        => '100',
 			] )
 			->endGroup()
 			->addTab( 'Content' )
 			->addGroup( 'content', [
-				'wrapper' => [ 'width' => '100' ],
+				'wrapper'      => [ 'width' => '100' ],
+				'instructions' => 'Provide a headline and supporting content for the key points section.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons to appear below the key points content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
@@ -644,29 +703,87 @@ class ACF {
 			] )
 			->addImage( 'icon', [
 				'preview_size' => 'small',
-				'instructions' => 'Upload a suitable SVG icon.',
+				'instructions' => 'Upload an SVG icon for this key point.',
 				'wrapper'      => [ 'width' => '30' ],
 			] )
 			->addGroup( 'content', [
 				'wrapper' => [ 'width' => '70' ],
 			] )
 			->addText( 'headline', [
-				'instructions' => 'Enter the headline of the point',
+				'instructions' => 'Enter the headline for this key point.',
 			] )
 			->addTextarea( 'supporting_content', [
-				'instructions' => 'Enter some supporting content',
+				'instructions' => 'Provide supporting content for this key point.',
 			] )
 			->endGroup()
 			->endRepeater()
-			->addLayout( 'news_&_media' )
+			// 13. listing_block
+			->addLayout( 'listing_block' )
+			->addGroup( 'options' )
+			->addTrueFalse( 'background', [
+				'instructions' => 'Choose the background color for the listing block (Primary or Secondary).',
+				'ui'           => 1,
+				'ui_on_text'   => 'Primary',
+				'ui_off_text'  => 'Secondary',
+			] )
+			->endGroup()
+			->addTab( 'list' )
+			->addRepeater( 'list', [
+				'min'          => 0,
+				'layout'       => 'block',
+				'instructions' => 'Enter list items; they will be arranged in rows of three automatically.',
+			] )
+			->addText( 'list_item' )
+			->endRepeater()
+			->addTab( 'content' )
 			->addGroup( 'content', [
-				'wrapper' => [ 'width' => '50' ],
+				'wrapper'      => [ 'width' => '50' ],
+				'instructions' => 'Provide the text for the list items.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons that will appear below the list content.',
+			] )
+			->addLink( 'button' )
+			->endRepeater()
+			->endGroup()
+			// 14. location_map
+			->addLayout( 'location_map' )
+			->addGroup( 'content', [
+				'wrapper'      => [ 'width' => '50' ],
+				'instructions' => 'Provide a headline and supporting content for the location map.',
+			] )
+			->addWysiwyg( 'content' )
+			->addRepeater( 'buttons', [
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons that will appear below the location map content.',
+			] )
+			->addLink( 'button' )
+			->endRepeater()
+			->endGroup()
+			->addGoogleMap( 'location_map', [
+				'instructions' => 'Search for a location using the map interface.',
+				'center_lat'   => '53.5110736',
+				'center_lng'   => '-2.0421617',
+				'wrapper'      => [ 'width' => '50' ],
+			] )
+			// 15. news_&_media
+			->addLayout( 'news_and_media' )
+			->addGroup( 'content', [
+				'wrapper'      => [ 'width' => '50' ],
+				'instructions' => 'Provide a headline and supporting content for the News & Media section.',
+			] )
+			->addWysiwyg( 'content' )
+			->addRepeater( 'buttons', [
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons that will appear below the News & Media content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
@@ -675,24 +792,30 @@ class ACF {
 				'wrapper' => [ 'width' => '50' ],
 			] )
 			->addSelect( 'number_of_posts', [
-				'instructions' =>
-					'Select the number of posts to display. Select All if you want to enable load more functionality',
-				'choices'      => [
+				'instructions'      => 'Choose the number of posts to display. Select "All" to enable load more functionality.',
+				'choices'           => [
 					3    => '3',
 					6    => '6',
 					9    => '9',
 					12   => '12',
 					1000 => 'All',
 				],
+				'conditional_logic' => [
+					[
+						[
+							'field'    => 'select_posts',
+							'operator' => '==',
+							'value'    => '0',
+						],
+					],
+				],
 			] )
 			->addTrueFalse( 'select_posts', [
-				'instructions' =>
-					'Enable if you want to select individual posts to display',
+				'instructions' => 'Enable this option to manually select individual posts.',
 				'ui'           => 1,
 			] )
 			->addPostObject( 'filter_by_category', [
-				'instructions'      =>
-					'Select which category to filter by. Leave empty to use all categories.',
+				'instructions'      => 'Choose a category to filter posts (leave empty to display all).',
 				'type'              => 'taxonomy',
 				'taxonomy'          => 'category',
 				'return_format'     => 'id',
@@ -709,12 +832,12 @@ class ACF {
 				],
 			] )
 			->addPostObject( 'individual_posts', [
-				'instructions'      => 'Select which posts you want to display',
+				'instructions'      => 'Manually select the specific posts to display when enabled.',
 				'post_type'         => [
-					0 => 'post',
+					0 => 'product',
 				],
 				'return_format'     => 'id',
-				'field_type'        => 'multi_select',
+				'ui'                => 1,
 				'allow_null'        => 1,
 				'multiple'          => 1,
 				'conditional_logic' => [
@@ -728,491 +851,43 @@ class ACF {
 				],
 			] )
 			->endGroup()
-			// Product innovation
-			->addLayout( 'product_innovation' )
-			->addGroup( 'content', [
-				'wrapper' => [ 'width' => '50' ],
-			] )
-			->addWysiwyg( 'content' )
-			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
-			] )
-			->addLink( 'button' )
-			->endRepeater()
-			->endGroup()
-			->addGroup( 'options', [
-				'wrapper' => [ 'width' => '50' ],
-			] )
-			->addSelect( 'number_of_posts', [
-				'instructions' =>
-					'Select the number of innovations to display. Select All if you want to enable load more functionality',
-				'choices'      => [
-					3   => '3',
-					6   => '6',
-					9   => '9',
-					12  => '12',
-					- 1 => 'All',
-				],
-			] )
-			->addTrueFalse( 'select_posts', [
-				'instructions' =>
-					'Enable if you want to select individual innovation to display',
-				'ui'           => 1,
-			] )
-			->addPostObject( 'filter_by_category', [
-				'instructions'      =>
-					'Select which category to filter by. Leave empty to use all categories.',
-				'type'              => 'taxonomy',
-				'taxonomy'          => 'categories',
-				'return_format'     => 'id',
-				'field_type'        => 'multi_select',
-				'allow_null'        => 1,
-				'conditional_logic' => [
-					[
-						[
-							'field'    => 'select_posts',
-							'operator' => '==',
-							'value'    => '0',
-						],
-					],
-				],
-			] )
-			->addPostObject( 'individual_posts', [
-				'instructions'      => 'Select which innovation you want to display',
-				'post_type'         => [
-					0 => 'product_innovation',
-				],
-				'return_format'     => 'id',
-				'field_type'        => 'multi_select',
-				'allow_null'        => 1,
-				'multiple'          => 1,
-				'conditional_logic' => [
-					[
-						[
-							'field'    => 'select_posts',
-							'operator' => '==',
-							'value'    => '1',
-						],
-					],
-				],
-			] )
-			->endGroup()
-
-			// Slider Section
-			->addLayout( 'slider_section' )
-			->addTab( 'Content' )
-			->addGroup( 'content', [
-				'wrapper' => [ 'width' => '50' ],
-			] )
-			->addWysiwyg( 'content' )
-			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
-			] )
-			->addLink( 'button' )
-			->endRepeater()
-			->endGroup()
-			->addTab( 'Slider' )
-			->addRepeater( 'Entries', [
-				'min'    => 1,
-				'max'    => 10,
-				'layout' => 'block',
-			] )
-			->addImage( 'image', [
-				'preview_size' => 'small',
-				'instructions' =>
-					'Upload a suitable image or icon. SVG icon recommended',
-				'wrapper'      => [ 'width' => '30' ],
-			] )
-			->addTextarea( 'Text', [
-				'instructions' => 'Specify short text',
-				'wrapper'      => [ 'width' => '70' ],
-			] )
-			->addLink( 'link', [
-				'instructions' => 'Add an optional link',
-			] )
-			->endRepeater()
-			// Slider Section
-			->addLayout( 'testimonials' )
-			->addGroup( 'testimonial', [
-				'wrapper' => [ 'width' => '50' ],
-			] )
-			->addImage( 'icon', [
-				'preview_size' => 'thumbnail',
-				'instructions' => 'Upload a suitable logo. SVG  recommended',
-			] )
-			->addText( 'title', [
-				'instructions' => 'Specify a title',
-			] )
-			->endGroup()
-			->addGroup( 'quote', [
-				'instructions' => 'Specify quote text',
-				'wrapper'      => [ 'width' => '50' ],
-			] )
-			->addWysiwyg( 'content' )
-			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
-			] )
-			->addLink( 'button' )
-			->endRepeater()
-			->endGroup()
-
-			// Inline Forms
-			->addLayout( 'inline_forms' )
-			->addGroup( 'content', [
-				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter a headline and supporting content for the block',
-			] )
-			->addWysiwyg( 'content' )
-			->addRepeater( 'buttons', [
-				'min'          => 0,
-				'max'          => 2,
-				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
-			] )
-			->addLink( 'button' )
-			->endRepeater()
-			->endGroup()
-			->addSelect( 'form', [
-				'instructions'  =>
-					'Select which form you want to display. Forms can be managed from the Formable tab',
-				'choices'       => $formOpts,
-				'ui'            => 1,
-				'allow_null'    => 0,
-				'wrapper'       => [ 'width' => '50' ],
-				'return_format' => 'array',
-			] )
-			// Maps
-			->addLayout( 'location_map' )
-			->addGroup( 'content', [
-				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter a headline and supporting content for the block',
-			] )
-			->addWysiwyg( 'content' )
-			->addRepeater( 'buttons', [
-				'min'          => 0,
-				'max'          => 2,
-				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
-			] )
-			->addLink( 'button' )
-			->endRepeater()
-			->endGroup()
-			->addGoogleMap( 'location_map', [
-				'instructions' => 'Search for a location',
-				'center_lat'   => '53.5110736',
-				'center_lng'   => '-2.0421617',
-				'wrapper'      => [ 'width' => '50' ],
-			] )
-
-			// Product categories grid
+			// 16. product_categories
 			->addLayout( 'product_categories' )
 			->addGroup( 'content', [
 				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter a headline and supporting content for the block',
+				'instructions' => 'Provide a headline and supporting content for the product categories grid.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
 				'min'          => 0,
 				'max'          => 2,
 				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
+				'instructions' => 'Add up to 2 buttons to be displayed below the product categories content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
 			->endGroup()
 			->addGroup( 'options', [
 				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Select which categories you want to display. Categories will be displayed within a 3 grid layout',
+				'instructions' => 'Choose the product categories to display in a three-column grid layout.',
 			] )
 			->addTaxonomy( 'product_categories', [
 				'taxonomy'   => 'product_cat',
 				'field_type' => 'multi_select',
 			] )
 			->endGroup()
-			// * AUT Products
-			->addLayout( 'AUT_products' )
-			->addGroup( 'content', [
-				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter a headline and supporting content for the block',
-			] )
-			->addWysiwyg( 'content' )
-			->addRepeater( 'buttons', [
-				'min'          => 0,
-				'max'          => 2,
-				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
-			] )
-			->addLink( 'button' )
-			->endRepeater()
-			->endGroup()
-			->addGroup( 'options', [
-				'wrapper' => [ 'width' => '50' ],
-			] )
-			->addTab( 'Options' )
-			->addTrueFalse( 'display_filters', [
-				'instructions'  =>
-					'Enable if you want to display the filters sidebar,  page header and enable load more functionality.',
-				'ui'            => 1,
-				'default_value' => 0,
-			] )
-			->addSelect( 'product_number', [
-				'instructions'      =>
-					'Select how many products you want to display. Select all if you want to use pagination and display a load more button.',
-				'choices'           => [
-					3     => '3',
-					6     => '6',
-					9     => '9',
-					12    => '12',
-					15    => '15',
-					'all' => 'All',
-				],
-				'conditional_logic' => [
-					[
-						[
-							'field'    => 'display_filters',
-							'operator' => '==',
-							'value'    => '0',
-						],
-					],
-				],
-				'ui'                => 1,
-				'allow_null'        => 0,
-			] )
-			->addTrueFalse( 'select_products', [
-				'instructions'      =>
-					'Enable if you want to select individual products',
-				'ui'                => 1,
-				'conditional_logic' => [
-					[
-						[
-							'field'    => 'display_filters',
-							'operator' => '==',
-							'value'    => '0',
-						],
-					],
-				],
-			] )
-			->addPostObject( 'individual_products', [
-				'instructions'      => 'Select which products you want to display',
-				'post_type'         => [
-					0 => 'product',
-				],
-				'return_format'     => 'id',
-				'field_type'        => 'multi_select',
-				'allow_null'        => 1,
-				'multiple'          => 1,
-				'conditional_logic' => [
-					[
-						[
-							'field'    => 'select_products',
-							'operator' => '==',
-							'value'    => '1',
-						],
-					],
-				],
-			] )
-			->addTab( 'Filters' )
-			->addTaxonomy( 'categories', [
-				'instructions'      =>
-					'Select which series categories you want to filter by.',
-				'taxonomy'          => 'categories',
-				'field_type'        => 'multi_select',
-				'conditional_logic' => [
-					[
-						[
-							'field'    => 'select_products',
-							'operator' => '==',
-							'value'    => '0',
-						],
-					],
-				],
-			] )
-			->addTaxonomy( 'industry', [
-				'instructions'      =>
-					'Select which series industry you want to filter by.',
-				'taxonomy'          => 'industry',
-				'field_type'        => 'multi_select',
-				'conditional_logic' => [
-					[
-						[
-							'field'    => 'select_products',
-							'operator' => '==',
-							'value'    => '0',
-						],
-					],
-				],
-			] )
-			->endGroup()
-			->addLayout( 'series' )
-			->addGroup( 'content', [
-				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter a headline and supporting content for the block',
-			] )
-			->addWysiwyg( 'content' )
-			->addRepeater( 'buttons', [
-				'min'          => 0,
-				'max'          => 2,
-				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
-			] )
-			->addLink( 'button' )
-			->endRepeater()
-			->endGroup()
-			->addGroup( 'options', [
-				'wrapper' => [ 'width' => '50' ],
-			] )
-			->addTab( 'Options' )
-			->addSelect( 'series_number', [
-				'instructions'      =>
-					'Select how many series you want to display. Select all if you want to use pagination and display a load more button.',
-				'choices'           => [
-					3     => '3',
-					6     => '6',
-					9     => '9',
-					12    => '12',
-					15    => '15',
-					'all' => 'All',
-				],
-				'conditional_logic' => [
-					[
-						[
-							'field'    => 'show_load_more',
-							'operator' => '==',
-							'value'    => '0',
-						],
-					],
-				],
-				'ui'                => 1,
-				'allow_null'        => 0,
-			] )
-			->addTrueFalse( 'select_series', [
-				'instructions'      =>
-					'Enable if you want to select individual series',
-				'ui'                => 1,
-				'conditional_logic' => [
-					[
-						[
-							'field'    => 'display_filters',
-							'operator' => '==',
-							'value'    => '0',
-						],
-					],
-				],
-			] )
-			->addPostObject( 'individual_series', [
-				'instructions'      => 'Select which series you want to display',
-				'post_type'         => [
-					0 => 'series',
-				],
-				'return_format'     => 'id',
-				'field_type'        => 'multi_select',
-				'allow_null'        => 1,
-				'multiple'          => 1,
-				'conditional_logic' => [
-					[
-						[
-							'field'    => 'select_series',
-							'operator' => '==',
-							'value'    => '1',
-						],
-					],
-				],
-			] )
-			->addTab( 'Filters' )
-			->addTaxonomy( 'categories', [
-				'instructions'      =>
-					'Select which series categories you want to filter by.',
-				'taxonomy'          => 'categories',
-				'field_type'        => 'multi_select',
-				'conditional_logic' => [
-					[
-						[
-							'field'    => 'select_series',
-							'operator' => '==',
-							'value'    => '0',
-						],
-					],
-				],
-			] )
-			->addTaxonomy( 'industry', [
-				'instructions'      =>
-					'Select which series industry you want to filter by.',
-				'taxonomy'          => 'industry',
-				'field_type'        => 'multi_select',
-				'conditional_logic' => [
-					[
-						[
-							'field'    => 'select_series',
-							'operator' => '==',
-							'value'    => '0',
-						],
-					],
-				],
-			] )
-			->endGroup()
-			// Series categories
-			->addLayout( 'series_categories' )
-			->addGroup( 'content', [
-				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter a headline and supporting content for the block',
-			] )
-			->addWysiwyg( 'content' )
-			->addRepeater( 'buttons', [
-				'min'          => 0,
-				'max'          => 2,
-				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
-			] )
-			->addLink( 'button' )
-			->endRepeater()
-			->endGroup()
-			->addGroup( 'options', [
-				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Select which categories or industries you want to display. Cards will be displayed within a 3 grid layout',
-			] )
-			->addTaxonomy( 'series_categories', [
-				'taxonomy'   => 'categories',
-				'field_type' => 'multi_select',
-			] )
-			->addTaxonomy( 'series_industry', [
-				'taxonomy'   => 'industry',
-				'field_type' => 'multi_select',
-			] )
-			->endGroup()
-			// Products
+			// 17. products
 			->addLayout( 'products' )
 			->addGroup( 'content', [
 				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter a headline and supporting content for the block',
+				'instructions' => 'Provide a headline and supporting content for the products block.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
 				'min'          => 0,
 				'max'          => 2,
 				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
+				'instructions' => 'Add up to 2 buttons that will appear below the products content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
@@ -1222,13 +897,12 @@ class ACF {
 			] )
 			->addTab( 'Options' )
 			->addTrueFalse( 'Detailed', [
-				'instructions'  => 'Show a detailed or simple product card',
+				'instructions'  => 'Choose whether to display a detailed or simplified product card.',
 				'ui'            => 1,
 				'default_value' => 1,
 			] )
 			->addTrueFalse( 'show_load_more', [
-				'instructions'      =>
-					'Enable if you want to use pagination and display a load more button.',
+				'instructions'      => 'Enable pagination to display a load more button for products.',
 				'ui'                => 1,
 				'default_value'     => 1,
 				'conditional_logic' => [
@@ -1242,8 +916,7 @@ class ACF {
 				],
 			] )
 			->addSelect( 'product_number', [
-				'instructions'      =>
-					'Select how many products you want to display.',
+				'instructions'      => 'Choose the number of products to display.',
 				'choices'           => [
 					3  => '3',
 					6  => '6',
@@ -1265,12 +938,11 @@ class ACF {
 				'allow_null'        => 0,
 			] )
 			->addTrueFalse( 'select_products', [
-				'instructions' =>
-					'Enable if you want to select individual products',
+				'instructions' => 'Enable this option to manually select individual products.',
 				'ui'           => 1,
 			] )
 			->addPostObject( 'individual_products', [
-				'instructions'      => 'Select which products you want to display',
+				'instructions'      => 'Manually select the specific products to display when enabled.',
 				'post_type'         => [
 					0 => 'product',
 				],
@@ -1290,8 +962,7 @@ class ACF {
 			] )
 			->addTab( 'Filters' )
 			->addTaxonomy( 'categories', [
-				'instructions'      =>
-					'Select which product categories you want to filter by.',
+				'instructions'      => 'Choose the product categories to filter the products.',
 				'taxonomy'          => 'product_cat',
 				'field_type'        => 'multi_select',
 				'conditional_logic' => [
@@ -1305,8 +976,7 @@ class ACF {
 				],
 			] )
 			->addPostObject( 'series', [
-				'instructions'      =>
-					'Select which product series you want to filter by.',
+				'instructions'      => 'Select the product series to filter the products.',
 				'post_type'         => [
 					0 => 'series',
 				],
@@ -1325,7 +995,7 @@ class ACF {
 				],
 			] )
 			->addSelect( 'woocommerce_filter', [
-				'instructions'      => 'Filter products using a Woocommerce filter.',
+				'instructions'      => 'Choose a Woocommerce filter (On sale, Best Selling, or Top rated) to apply.',
 				'choices'           => [
 					'on_sale'      => 'On sale',
 					'best_selling' => 'Best Selling',
@@ -1344,23 +1014,23 @@ class ACF {
 				],
 			] )
 			->endGroup()
-			// Section anchor
+			// 18. section_anchor
 			->addLayout( 'section_anchor' )
 			->addText( 'section_anchor', [
-				'instructions' =>
-					'Enter a section ID that you can link to via a button',
+				'instructions' => 'Enter a unique section ID to enable linking via a button.',
 			] )
-
-			// Sectors
+			// 19. sectors
 			->addLayout( 'sectors' )
 			->addGroup( 'content', [
-				'wrapper' => [ 'width' => '50' ],
+				'wrapper'      => [ 'width' => '50' ],
+				'instructions' => 'Provide a headline and supporting content for the sectors section.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons that will appear below the sectors content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
@@ -1369,8 +1039,7 @@ class ACF {
 				'wrapper' => [ 'width' => '50' ],
 			] )
 			->addSelect( 'number_of_sectors', [
-				'instructions' =>
-					'Select the number of sectors to display. Select All if you want to enable load more functionality',
+				'instructions' => 'Choose the number of sectors to display. Select "All" to enable load more functionality.',
 				'choices'      => [
 					3   => '3',
 					6   => '6',
@@ -1380,12 +1049,11 @@ class ACF {
 				],
 			] )
 			->addTrueFalse( 'select_sectors', [
-				'instructions' =>
-					'Enable if you want to select individual sectors to display',
+				'instructions' => 'Enable this option to manually select specific sectors.',
 				'ui'           => 1,
 			] )
 			->addPostObject( 'individual_sectors', [
-				'instructions'      => 'Select which sectors you want to display',
+				'instructions'      => 'Manually select the specific sectors to display when enabled.',
 				'post_type'         => [
 					0 => 'sector',
 				],
@@ -1404,36 +1072,140 @@ class ACF {
 				],
 			] )
 			->endGroup()
-			// Sectors
-			->addLayout( 'FAQs' )
-			->addGroup( 'options' )
-			->addTrueFalse( 'background', [
-				'instructions' => 'Select the background colour of the block',
-				'ui'           => 1,
-				'ui_on_text'   => 'Off white',
-				'ui_off_text'  => 'White',
-			] )
-			->endGroup()
+			// 20. series
+			->addLayout( 'series' )
 			->addGroup( 'content', [
-				'wrapper' => [ 'width' => '50' ],
+				'wrapper'      => [ 'width' => '50' ],
+				'instructions' => 'Provide a headline and supporting content for the series section.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons that will appear below the series content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
 			->endGroup()
-			->addRepeater( 'FAQs', [
-				'layout'  => 'block',
+			->addGroup( 'options', [
 				'wrapper' => [ 'width' => '50' ],
 			] )
-			->addText( 'Question' )
-			->addTextarea( 'Answer' )
+			->addTab( 'Options' )
+			->addSelect( 'series_number', [
+				'instructions'      => 'Choose the number of series to display. Select "All" to enable pagination with a load more button.',
+				'choices'           => [
+					3     => '3',
+					6     => '6',
+					9     => '9',
+					12    => '12',
+					15    => '15',
+					'all' => 'All',
+				],
+				'conditional_logic' => [
+					[
+						[
+							'field'    => 'show_load_more',
+							'operator' => '==',
+							'value'    => '0',
+						],
+					],
+				],
+				'ui'                => 1,
+				'allow_null'        => 0,
+			] )
+			->addTrueFalse( 'select_series', [
+				'instructions'      => 'Enable this option to manually select specific series.',
+				'ui'                => 1,
+				'conditional_logic' => [
+					[
+						[
+							'field'    => 'display_filters',
+							'operator' => '==',
+							'value'    => '0',
+						],
+					],
+				],
+			] )
+			->addPostObject( 'individual_series', [
+				'instructions'      => 'Manually select the specific series to display when enabled.',
+				'post_type'         => [
+					0 => 'series',
+				],
+				'return_format'     => 'id',
+				'field_type'        => 'multi_select',
+				'allow_null'        => 1,
+				'multiple'          => 1,
+				'conditional_logic' => [
+					[
+						[
+							'field'    => 'select_series',
+							'operator' => '==',
+							'value'    => '1',
+						],
+					],
+				],
+			] )
+			->addTab( 'Filters' )
+			->addTaxonomy( 'categories', [
+				'instructions'      => 'Choose the series categories to filter the series.',
+				'taxonomy'          => 'categories',
+				'field_type'        => 'multi_select',
+				'conditional_logic' => [
+					[
+						[
+							'field'    => 'select_series',
+							'operator' => '==',
+							'value'    => '0',
+						],
+					],
+				],
+			] )
+			->addTaxonomy( 'industry', [
+				'instructions'      => 'Select the series industry to filter the series.',
+				'taxonomy'          => 'industry',
+				'field_type'        => 'multi_select',
+				'conditional_logic' => [
+					[
+						[
+							'field'    => 'select_series',
+							'operator' => '==',
+							'value'    => '0',
+						],
+					],
+				],
+			] )
+			->endGroup()
+			// 21. series_categories
+			->addLayout( 'series_categories' )
+			->addGroup( 'content', [
+				'wrapper'      => [ 'width' => '50' ],
+				'instructions' => 'Provide a headline and supporting content for the series categories section.',
+			] )
+			->addWysiwyg( 'content' )
+			->addRepeater( 'buttons', [
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons that will appear below the series categories content.',
+			] )
+			->addLink( 'button' )
 			->endRepeater()
-			// Table
+			->endGroup()
+			->addGroup( 'options', [
+				'wrapper'      => [ 'width' => '50' ],
+				'instructions' => 'Choose the categories or industries to display in a three-column card grid layout.',
+			] )
+			->addTaxonomy( 'series_categories', [
+				'taxonomy'   => 'categories',
+				'field_type' => 'multi_select',
+			] )
+			->addTaxonomy( 'series_industry', [
+				'taxonomy'   => 'industry',
+				'field_type' => 'multi_select',
+			] )
+			->endGroup()
+			// 22. series_table
 			->addLayout( 'series_table' )
 			->addTab( 'Table' )
 			->addRepeater( 'rows', [
@@ -1443,8 +1215,7 @@ class ACF {
 			->addRepeater( 'columns', [
 				'min'          => 1,
 				'layout'       => 'block',
-				'instructions' =>
-					'Please ensure each row has the same number of columns. Even if they are empty',
+				'instructions' => 'Ensure each row has the same number of columns, even if some are left empty.',
 			] )
 			->addPostObject( 'series', [
 				'label'         => 'Select a series to link to',
@@ -1459,20 +1230,19 @@ class ACF {
 			->addTab( 'Content' )
 			->addGroup( 'content', [
 				'wrapper'      => [ 'width' => '50' ],
-				'instructions' =>
-					'Enter a headline and supporting content for the block',
+				'instructions' => 'Provide a headline and supporting content for the table.',
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
 				'min'          => 0,
 				'max'          => 2,
 				'layout'       => 'block',
-				'instructions' =>
-					'The buttons for this block will display underneath the grid',
+				'instructions' => 'Add up to 2 buttons that will appear below the table content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
 			->endGroup()
+			// End blocks.
 			->setLocation( 'post_type', '==', 'page' )
 			->or( 'post_type', '==', 'sectors' )
 			->or( 'post_type', '==', 'case_studies' )
@@ -1491,12 +1261,12 @@ class ACF {
 
 	public static function theme_settings(): void {
 		global $wpdb;
-		// Get the current site ID in a Multisite environment
+		// Get the current site ID in a Multisite environment.
 		$site_id = get_current_blog_id();
-		// Use the correct prefix for the current site
+		// Use the correct prefix for the current site.
 		$table_name = $wpdb->prefix . 'frm_forms';
 
-		// Query the database for the forms of the current site
+		// Query the database for the forms of the current site.
 		$forms = $wpdb->get_results( "SELECT * FROM $table_name" );
 
 		if ( $forms ) {
@@ -1511,21 +1281,22 @@ class ACF {
 		$settings
 			->addTab( 'Get in touch' )
 			->addGroup( 'get_in_touch_content', [
-				'wrapper' => [ 'width' => '50%' ],
+				'wrapper'      => [ 'width' => '50%' ],
+				'instructions' => 'Provide a headline and supporting content for the "Get in Touch" section.',
 			] )
 			->addText( 'headline' )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons that will appear below the contact content.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
 			->endGroup()
 			->addSelect( 'form', [
-				'instructions'  =>
-					'Select which form you want to display. Forms can be managed from the Formable tab',
+				'instructions'  => 'Choose the form to display (manage forms from the Formable tab).',
 				'choices'       => $formOpts,
 				'ui'            => 1,
 				'allow_null'    => 0,
@@ -1546,73 +1317,65 @@ class ACF {
 				'min'          => 0,
 				'max'          => 4,
 				'layout'       => 'block',
-				'instructions' =>
-					'Add a selling point that will be displayed underneath the header',
+				'instructions' => 'Add a selling point to be displayed beneath the header.',
 			] )
 			->addImage( 'icon', [
 				'preview_size' => 'small',
-				'instructions' => 'Upload a suitable SVG icon',
+				'instructions' => 'Upload an appropriate SVG icon.',
 				'wrapper'      => [ 'width' => '30' ],
 			] )
 			->addText( 'Text', [
-				'instructions' => 'Short and to the point',
+				'instructions' => 'Enter concise promotional text.',
 				'wrapper'      => [ 'width' => '70' ],
 			] )
 			->endRepeater()
 			->addTab( 'Copyright' )
 			->addText( 'copyright', [
-				'instructions' => 'Update load a suitable copyright notice',
+				'instructions' => 'Enter the appropriate copyright notice.',
 			] )
 			->addTab( 'Media' )
 			->addImage( 'fallback_image', [
 				'preview_size' => 'small',
-				'instructions' =>
-					'Upload a suitable fallback image that will be displayed when an image isnt found',
+				'instructions' => 'Upload a fallback image to use if the primary image is missing.',
 				'wrapper'      => [ 'width' => '30' ],
 			] )
 			->addTab( 'contact_information' )
 			->addText( 'phone_number', [
-				'instructions' =>
-					'Enter a phone number to be used throughout the theme',
+				'instructions' => 'Provide the phone number to be used throughout the theme.',
 			] )
 			->addText( 'mobile_number', [
-				'instructions' =>
-					'Enter a mobile number to be used throughout the theme',
+				'instructions' => 'Provide the mobile number to be used throughout the theme.',
 			] )
 			->addText( 'email_address', [
-				'instructions' =>
-					'Enter an email address to be used throughout the theme',
+				'instructions' => 'Provide the email address to be used throughout the theme.',
 			] )
 			->addTextarea( 'address', [
-				'instructions' =>
-					'Enter an address to appear throughout the theme',
+				'instructions' => 'Enter the address to appear across the theme.',
 			] )
 			->addTab( 'Series Promos' )
 			->addGroup( 'categories', [
-				'instructions' => 'Series categories promo information',
+				'instructions' => 'Enter promo details for the series categories.',
 			] )
 			->addImage( 'categories_image', [
 				'preview_size' => 'large',
-				'instructions' =>
-					'Upload a suitable image for the categories promos',
+				'instructions' => 'Upload an image for the series categories promo.',
 				'wrapper'      => [ 'width' => '50' ],
 			] )
 			->addTextarea( 'categories_content', [
-				'instructions' => 'Categories supporting content',
+				'instructions' => 'Enter supporting content for the series categories promo.',
 				'wrapper'      => [ 'width' => '50' ],
 			] )
 			->endGroup()
 			->addGroup( 'Industry', [
-				'instructions' => 'Series industry promo information',
+				'instructions' => 'Enter promo details for the series industry.',
 			] )
 			->addImage( 'industry_image', [
 				'preview_size' => 'large',
-				'instructions' =>
-					'Upload a suitable image for the industry promos',
+				'instructions' => 'Upload an image for the series industry promo.',
 				'wrapper'      => [ 'width' => '50' ],
 			] )
 			->addTextarea( 'industry_content', [
-				'instructions' => 'Industry supporting content',
+				'instructions' => 'Enter supporting content for the series industry promo.',
 				'wrapper'      => [ 'width' => '50' ],
 			] )
 			->endGroup()
@@ -1627,40 +1390,40 @@ class ACF {
 		$settings
 			->addTab( 'Product information' )
 			->addWysiwyg( 'product_information', [
-				'instructions' => 'Write a brief description of the product',
+				'instructions' => 'Enter a brief description of the product.',
 			] )
 			->addTab( 'Dimensions' )
 			->addWysiwyg( 'dimensions', [
-				'instructions' =>
-					'List information regarding the products dimensions',
+				'instructions' => 'Provide detailed information about the product’s dimensions.',
 			] )
 			->addTab( 'Key features' )
 			->addWysiwyg( 'key_features', [
-				'instructions' =>
-					'List all the key information for the product',
+				'instructions' => 'List all the key features and specifications of the product.',
 			] )
 			->addTab( 'Testimonials' )
 			->addRepeater( 'testimonials' )
 			->addGroup( 'testimonial', [
-				'wrapper' => [ 'width' => '50' ],
+				'wrapper'      => [ 'width' => '50' ],
+				'instructions' => 'Upload a testimonial logo (SVG recommended).',
 			] )
 			->addImage( 'icon', [
 				'preview_size' => 'thumbnail',
-				'instructions' => 'Upload a suitable logo. SVG  recommended',
+				'instructions' => 'Upload a logo for the testimonial (SVG recommended).',
 			] )
 			->addText( 'title', [
-				'instructions' => 'Specify a title',
+				'instructions' => 'Enter a title for the testimonial.',
 			] )
 			->endGroup()
 			->addGroup( 'quote', [
-				'instructions' => 'Specify quote text',
+				'instructions' => 'Enter the testimonial quote text.',
 				'wrapper'      => [ 'width' => '50' ],
 			] )
 			->addWysiwyg( 'content' )
 			->addRepeater( 'buttons', [
-				'min'    => 0,
-				'max'    => 2,
-				'layout' => 'block',
+				'min'          => 0,
+				'max'          => 2,
+				'layout'       => 'block',
+				'instructions' => 'Add up to 2 buttons for the testimonial (optional).',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
@@ -1679,8 +1442,8 @@ class ACF {
 		$settings = new FieldsBuilder( 'assigned_sector', [] );
 		$settings
 			->addPostObject( 'assigned_sector', [
-				'label'         =>
-					'Select which section(s) this case study is related to',
+				'label'         => 'Select which section(s) this case study is related to',
+				'instructions'  => 'Select the section(s) that relate to this case study.',
 				'post_type'     => [ 'sectors' ],
 				'field_type'    => 'multi_select',
 				'multiple'      => 1,
@@ -1700,6 +1463,7 @@ class ACF {
 		$settings
 			->addPostObject( 'series', [
 				'label'         => 'Select which series(s) this product is related to',
+				'instructions'  => 'Select the series that relate to this product.',
 				'post_type'     => [ 'series' ],
 				'field_type'    => 'multi_select',
 				'multiple'      => 1,
@@ -1725,10 +1489,10 @@ class ACF {
 			->addImage( 'image', [
 				'preview_size'  => 'small',
 				'return_format' => 'array',
-				'instructions'  => 'Upload a suitable image',
+				'instructions'  => 'Upload an appropriate image.',
 			] )
 			->addTextarea( 'summary', [
-				'instructions' => 'A brief description of the term',
+				'instructions' => 'Enter a brief description for this term.',
 			] )
 			->setLocation( 'taxonomy', '==', 'categories' )
 			->or( 'taxonomy', '==', 'industry' );
@@ -1744,16 +1508,14 @@ class ACF {
 		$settings
 			->addGroup( 'content' )
 			->addText( 'tag_line', [
-				'instructions' =>
-					'This content will be displayed under the series title',
+				'instructions' => 'Enter content to be displayed under the series title.',
 			] )
 			->addTextarea( 'summery', [
-				'instructions' => 'A brief description of the series',
+				'instructions' => 'Provide a brief description of the series.',
 				'wrapper'      => [ 'width' => '50' ],
 			] )
 			->addTextarea( 'card_content', [
-				'instructions' =>
-					'This content will be displayed on the series card',
+				'instructions' => 'Enter content to be displayed on the series card.',
 				'wrapper'      => [ 'width' => '50' ],
 			] )
 			->endGroup()
@@ -1825,12 +1587,12 @@ class ACF {
 		] );
 		$settings
 			->addFile( 'data_sheet', [
-				'instructions'  => 'Upload a data sheet',
+				'instructions'  => 'Upload the product data sheet.',
 				'return_format' => 'array',
 			] )
 			->addLink( '3d_cad_model', [
 				'label'        => 'Link Field',
-				'instructions' => 'Enter a link to a 3D CAD model',
+				'instructions' => 'Provide a URL to the 3D CAD model.',
 			] )
 			->setLocation( 'post_type', '==', 'product' )
 			->or( 'post_type', '==', 'series' );
@@ -1848,7 +1610,7 @@ class ACF {
 		$settings = new FieldsBuilder( 'product_specification' );
 		$settings
 			->addRepeater( 'product_specification', [
-				'instructions' => 'Add detailed product information',
+				'instructions' => 'Enter detailed product specifications.',
 			] )
 			->addText( 'part_number' )
 			->addText( 'wheel_diameter' )
@@ -1883,8 +1645,7 @@ class ACF {
 				'min'          => 0,
 				'max'          => 2,
 				'layout'       => 'block',
-				'instructions' =>
-					'Generate a maximum of 2 call-to-action buttons and incorporate them into the header',
+				'instructions' => 'Add up to 2 call-to-action buttons to include in the header.',
 			] )
 			->addLink( 'button' )
 			->endRepeater()
@@ -1910,8 +1671,7 @@ class ACF {
 		] );
 		$settings
 			->addTrueFalse( 'display_page_header', [
-				'instructions' =>
-					'Enable to display a basic page header block with breadcrumbs and page title.',
+				'instructions' => 'Enable this option to display a page header block with breadcrumbs and the page title.',
 				'ui'           => 1,
 			] )
 			->setLocation( 'post_type', '==', 'page' );
@@ -1928,13 +1688,11 @@ class ACF {
 		] );
 		$settings
 			->addTrueFalse( 'overlay', [
-				'instructions' =>
-					'Enable if you want to display the header as an overlay',
+				'instructions' => 'Enable this option to display the header as an overlay.',
 				'ui'           => 1,
 			] )
 			->addTrueFalse( 'background', [
-				'instructions' =>
-					'Enable if you want to change the header background to steal',
+				'instructions' => 'Enable this option to modify the header background style.',
 				'ui'           => 1,
 			] )
 			->setLocation( 'post_type', '==', 'page' );
@@ -1949,7 +1707,7 @@ class ACF {
 		$settings
 			->addImage( 'menu_icon', [
 				'preview_size' => 'small',
-				'instructions' => 'Upload a suitable menu icon',
+				'instructions' => 'Upload an appropriate menu icon.',
 			] )
 			->setLocation( 'nav_menu_item', '==', '17' );
 		if ( class_exists( 'ACF' ) ) {
@@ -1966,7 +1724,7 @@ class ACF {
 		$categorySettings
 			->addTextarea( 'short_description', [
 				'label'        => 'Short Description',
-				'instructions' => 'Add a short description for this product category',
+				'instructions' => 'Enter a short description for this product category.',
 				'required'     => 0,
 				'maxlength'    => '',
 				'placeholder'  => '',
@@ -1980,7 +1738,6 @@ class ACF {
 	}
 
 	public static function hide_editor(): void {
-
 
 		$editor = new FieldsBuilder( 'editor', [
 			'hide_on_screen' => [ 'the_content' ],
@@ -2005,7 +1762,6 @@ class ACF {
 
 
 	public static function hide_editor_benchmaster(): void {
-
 
 		$editor = new FieldsBuilder( 'editor', [
 			'hide_on_screen' => [ 'the_content' ],
